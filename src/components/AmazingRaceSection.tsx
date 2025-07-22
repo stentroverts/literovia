@@ -25,7 +25,7 @@ const AmazingRaceSection = () => {
                   The <span className="text-crimson">Amazing Race</span>
                 </h2>
                 <p className="font-source text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">
-                  Gear up for a thrilling literary scavenger hunt! Solve riddles, crack clues, and sprint through your imagination in the most exciting chapter of Literovia.
+                  aagam race
                 </p>
               </div>
 

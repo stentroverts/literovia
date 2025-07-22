@@ -40,7 +40,7 @@ const RegisterSection = () => {
                 <Button
                   variant="outline"
                   size="xl"
-                  className="min-w-[200px] text-crimson border-crimson hover:bg-crimson/10"
+                  className="min-w-[200px] bg-crimson text-white hover:bg-crimson-dark"
                 >
                   Learn More
                 </Button>
