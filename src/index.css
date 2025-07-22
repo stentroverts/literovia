@@ -1,0 +1,165 @@
+/* ========== CUSTOM FONTS (must go before all @import or @tailwind) ========== */
+@font-face {
+  font-family: 'Sunday';
+  src: url('/src/assets/fonts/Sunday-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Homemade Apple';
+  src: url('/src/assets/fonts/HomemadeApple-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Playwrite US Trad';
+  src: url('/src/assets/fonts/PlaywriteUSTradGuides-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap'); */
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    /* Crimson & Ink Color Palette */
+    --background: 222 47% 4%;               /* Near-black background */
+    --surface: 220 39% 8%;                  /* Dark charcoal for cards/surfaces */
+    --foreground: 210 20% 95%;              /* Off-white text */
+
+    
+    /* Core Theme Colors */
+    --crimson: 348 83% 47%;                 /* Deep crimson/scarlet accent */
+    --crimson-bright: 348 100% 55%;         /* Brighter crimson for hovers */
+    --crimson-dark: 348 100% 35%;           /* Darker crimson variant */
+    --secondary-text: 215 15% 65%;          /* Light gray for secondary text */
+    
+    /* UI Component Colors */
+    --card: 220 39% 8%;                     /* Dark charcoal cards */
+    --card-foreground: 210 20% 95%;         /* Off-white text on cards */
+    
+    --popover: 220 39% 8%;
+    --popover-foreground: 210 20% 95%;
+    
+    --primary: 348 83% 47%;                 /* Crimson primary */
+    --primary-foreground: 210 20% 95%;     /* Off-white on crimson */
+    
+    --secondary: 220 39% 12%;              /* Slightly lighter charcoal */
+    --secondary-foreground: 210 20% 95%;
+    
+    --muted: 220 39% 15%;                  /* Muted background elements */
+    --muted-foreground: 215 15% 65%;       /* Light gray text */
+    
+    --accent: 348 83% 47%;                 /* Crimson accent */
+    --accent-foreground: 210 20% 95%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 20% 95%;
+    
+    --border: 220 39% 15%;                 /* Subtle borders */
+    --input: 220 39% 12%;                  /* Input backgrounds */
+    --ring: 348 83% 47%;                   /* Focus rings in crimson */
+    
+    /* Festival Specific Colors */
+    --star-glow: 45 100% 85%;              /* Golden star color */
+    --particle-trail: 348 83% 47%;         /* Crimson particle effects */
+    
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Festival Gradients & Effects */
+  .gradient-crimson {
+    background: linear-gradient(135deg, hsl(var(--crimson)), hsl(var(--crimson-bright)));
+  }
+  
+  .gradient-crimson-glow {
+    background: linear-gradient(135deg, hsl(var(--crimson)), hsl(var(--crimson-bright)));
+    box-shadow: 0 0 30px hsl(var(--crimson) / 0.3);
+  }
+  
+  .text-gradient-crimson {
+    background: linear-gradient(135deg, hsl(var(--crimson)), hsl(var(--crimson-bright)));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@layer base {
+  /* * {
+    @apply border;
+  } */
+
+  body {
+    @apply bg-background text-foreground;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23dc2626' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 4V2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v2'/%3E%3Cpath d='M15 4h4l-7 7-7-7h4'/%3E%3Cpath d='M8 11v10'/%3E%3Cpath d='M16 11v10'/%3E%3C/svg%3E") 12 12, auto;
+  }
+}
+
+/* Paperback Background */
+.paperback-bg {
+  background-image: 
+    linear-gradient(135deg, 
+      transparent 0%, 
+      transparent 25%, 
+      rgba(139, 69, 19, 0.1) 25%, 
+      rgba(139, 69, 19, 0.1) 50%, 
+      transparent 50%, 
+      transparent 75%, 
+      rgba(139, 69, 19, 0.1) 75%
+    ),
+    radial-gradient(circle at 20% 80%, rgba(160, 82, 45, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(210, 180, 140, 0.3) 0%, transparent 50%),
+    linear-gradient(180deg, #f4e4bc 0%, #d2b48c 100%);
+  background-size: 40px 40px, 200px 200px, 150px 150px, 100% 100%;
+  background-position: 0 0, 0 0, 100% 100%, 0 0;
+}
+
+/* Wave Animation */
+.wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.wave::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 200%;
+  height: 100px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23f4e4bc'/%3E%3C/svg%3E") repeat-x;
+  animation: wave-move 20s ease-in-out infinite;
+}
+
+@keyframes wave-move {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-50%); }
+}
+
+
