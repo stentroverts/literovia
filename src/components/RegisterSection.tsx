@@ -25,8 +25,7 @@ const RegisterSection = () => {
                   Join the <span className="text-crimson">Odyssey</span>
                 </h2>
                 <p className="font-source text-base md:text-lg text-gray-700 leading-relaxed">
-                  Don't miss your chance to be part of this extraordinary literary journey.
-                  Register now and secure your place in the first edition of Literovia.
+                 Lorem Ipsum
                 </p>
               </div>
 
@@ -49,7 +48,7 @@ const RegisterSection = () => {
 
               <div className="text-center">
                 <p className="font-source text-sm md:text-base text-gray-600">
-                  Limited spots available • Early bird discounts apply
+                  Limited spots available ?? • Early bird discounts apply ??
                 </p>
               </div>
             </CardContent>

@@ -35,10 +35,10 @@ const ScheduleSection = () => {
               <br /> Literary Spectacle
             </h2>
             <div className="font-spartan font-bold text-xl md:text-2xl text-gray-700 mb-6">
-              October 26th &amp; 27th, 2024
+              Dates TBA
             </div>
             <p className="font-source text-base md:text-lg text-gray-700 mx-auto max-w-3xl">
-              Two full days of literary excellence featuring competitions, workshops, performances, and discussions that will ignite your passion for literature and storytelling.
+              Two full days of literary excellence featuring competitions, workshops, performances, and discussions.
             </p>
           </div>
         </ScrollReveal>
@@ -50,7 +50,7 @@ const ScheduleSection = () => {
                 <CardTitle className="font-spartan font-bold text-2xl md:text-3xl uppercase text-gray-800">
                   Literovia Day 1
                 </CardTitle>
-                <p className="font-source text-gray-600">October 26th, 2024</p>
+                <p className="font-source text-gray-600">Date TBA</p>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
@@ -75,7 +75,7 @@ const ScheduleSection = () => {
                 <CardTitle className="font-spartan font-bold text-2xl md:text-3xl uppercase text-gray-800">
                   Literovia Day 2
                 </CardTitle>
-                <p className="font-source text-gray-600">October 27th, 2024</p>
+                <p className="font-source text-gray-600">Date TBA</p>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-2 gap-4">
