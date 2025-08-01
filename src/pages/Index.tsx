@@ -1,16 +1,14 @@
-import StarField from '@/components/StarField';
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
 import AmazingRaceSection from '@/components/AmazingRaceSection';
 import ScheduleSection from '@/components/ScheduleSection';
+import SponsorsSection from '@/components/SponsorsSection';
 import RegisterSection from '@/components/RegisterSection';
+import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      {/* Animated Star Background */}
-      <StarField />
-      
       {/* Navigation */}
       <Navigation />
       
@@ -21,7 +19,9 @@ const Index = () => {
           <div className="paperback-bg">
             <AmazingRaceSection />
             <ScheduleSection />
+            <SponsorsSection />
             <RegisterSection />
+            <ContactSection />
           </div>
         </div>
       </main>
