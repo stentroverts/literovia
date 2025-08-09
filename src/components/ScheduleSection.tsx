@@ -4,25 +4,25 @@ import TiltedCard from './ui/TiltedCard';
 import { Calendar, Clock } from 'lucide-react';
 
 const day1Events = [
-  { name: 'Slam Poetry', time: '10:00 AM', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=faces', alt: 'Slam Poetry Event' },
-  { name: 'Literary Auction', time: '11:30 AM', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&h=600&fit=crop', alt: 'Literary Auction Event' },
-  { name: 'Workshop', time: '1:00 PM', image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=600&fit=crop', alt: 'Writing Workshop Event' },
-  { name: 'BangJam', time: '2:30 PM', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop', alt: 'BangJam Music Event' },
-  { name: 'Paperback Partners', time: '4:00 PM', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&h=600&fit=crop', alt: 'Paperback Partners Event' },
-  { name: 'Performance', time: '5:30 PM', image: 'https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=600&h=600&fit=crop', alt: 'Performance Event' },
-  { name: 'GeoGuesser', time: '7:00 PM', image: 'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=600&h=600&fit=crop', alt: 'GeoGuesser Game Event' },
-  { name: 'NY Times Mini Games', time: '8:30 PM', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=600&fit=crop', alt: 'NY Times Mini Games Event' }
+  { name: 'Slam Poetry', time: '10:00 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Slam Poetry Event' },
+  { name: 'Literary Auction', time: '11:30 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Literary Auction Event' },
+  { name: 'Workshop', time: '1:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Writing Workshop Event' },
+  { name: 'BangJam', time: '2:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'BangJam Music Event' },
+  { name: 'Paperback Partners', time: '4:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Paperback Partners Event' },
+  { name: 'Performance', time: '5:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Performance Event' },
+  { name: 'GeoGuesser', time: '7:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'GeoGuesser Game Event' },
+  { name: 'NY Times Mini Games', time: '8:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'NY Times Mini Games Event' }
 ];
 
 const day2Events = [
-  { name: 'Poem Interpretation', time: '10:00 AM', image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&h=600&fit=crop', alt: 'Poem Interpretation Event' },
-  { name: 'LoreWars', time: '11:30 AM', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=600&fit=crop', alt: 'LoreWars Battle Event' },
-  { name: 'Spockle', time: '1:00 PM', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=600&fit=crop', alt: 'Spockle Game Event' },
-  { name: 'Theatre', time: '2:30 PM', image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&h=600&fit=crop', alt: 'Theatre Performance Event' },
-  { name: 'Solo Speaking', time: '4:00 PM', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&h=600&fit=crop', alt: 'Solo Speaking Event' },
-  { name: 'Panel Discussion', time: '5:30 PM', image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop', alt: 'Panel Discussion Event' },
-  { name: 'Change My Mind', time: '7:00 PM', image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&h=600&fit=crop', alt: 'Change My Mind Debate Event' },
-  { name: 'Hot Takes Arena', time: '8:30 PM', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop', alt: 'Hot Takes Arena Event' }
+  { name: 'Poem Interpretation', time: '10:00 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Poem Interpretation Event' },
+  { name: 'LoreWars', time: '11:30 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'LoreWars Battle Event' },
+  { name: 'Spockle', time: '1:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Spockle Game Event' },
+  { name: 'Theatre', time: '2:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Theatre Performance Event' },
+  { name: 'Solo Speaking', time: '4:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Solo Speaking Event' },
+  { name: 'Panel Discussion', time: '5:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Panel Discussion Event' },
+  { name: 'Change My Mind', time: '7:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Change My Mind Debate Event' },
+  { name: 'Hot Takes Arena', time: '8:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Hot Takes Arena Event' }
 ];
 
 const ScheduleSection = () => {
@@ -194,21 +194,18 @@ const ScheduleSection = () => {
                     showTooltip={false}
                     displayOverlayContent={true}
                     overlayContent={
-                      <div className="w-full h-full rounded-[15px] flex flex-col justify-end p-6 relative">
-                        {/* Dark overlay background */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent rounded-[15px]"></div>
-                        
-                        {/* Content */}
-                        <div className="relative z-10">
-                          <div className="bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 mb-2 inline-block">
-                            <h3 className="font-spartan font-bold text-white text-base">
-                              {event.name}
-                            </h3>
-                          </div>
-                          <div className="flex items-center text-gray-200 text-sm">
-                            <Clock className="w-4 h-4 mr-2" />
-                            <span className="font-mono">{event.time}</span>
-                          </div>
+                      <div className="w-full h-full rounded-[15px] flex flex-col justify-start p-4 relative">
+                        {/* Top overlay - using TiltedCard color scheme swapped */}
+                        <div 
+                          className="rounded-2xl px-5 py-3 inline-block self-start"
+                          style={{ 
+                            backgroundColor: '#0006',
+                            boxShadow: '0 5px 30px #06001059' 
+                          }}
+                        >
+                          <h3 className="font-spartan font-bold text-white text-sm tracking-wide">
+                            {event.name}
+                          </h3>
                         </div>
                       </div>
                     }
