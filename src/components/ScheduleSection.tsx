@@ -4,25 +4,25 @@ import TiltedCard from './ui/TiltedCard';
 import { Calendar, Clock } from 'lucide-react';
 
 const day1Events = [
-  { name: 'Slam Poetry', time: '10:00 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Slam Poetry Event' },
-  { name: 'Literary Auction', time: '11:30 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Literary Auction Event' },
-  { name: 'Workshop', time: '1:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Writing Workshop Event' },
-  { name: 'BangJam', time: '2:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'BangJam Music Event' },
-  { name: 'Paperback Partners', time: '4:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Paperback Partners Event' },
-  { name: 'Performance', time: '5:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Performance Event' },
-  { name: 'GeoGuesser', time: '7:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'GeoGuesser Game Event' },
-  { name: 'NY Times Mini Games', time: '8:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'NY Times Mini Games Event' }
+  { name: 'Slam Poetry', time: '10:00 AM', image: '/events/slam-poetry.jpeg', alt: 'Slam Poetry Event' },
+  { name: 'Literary Auction', time: '11:30 AM', image: '/events/slam-poetry.jpeg', alt: 'Literary Auction Event' },
+  { name: 'Workshop', time: '1:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Writing Workshop Event' },
+  { name: 'BangJam', time: '2:30 PM', image: '/events/slam-poetry.jpeg', alt: 'BangJam Music Event' },
+  { name: 'Paperback Partners', time: '4:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Paperback Partners Event' },
+  { name: 'Performance', time: '5:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Performance Event' },
+  { name: 'GeoGuesser', time: '7:00 PM', image: '/events/slam-poetry.jpeg', alt: 'GeoGuesser Game Event' },
+  { name: 'NY Times Mini Games', time: '8:30 PM', image: '/events/slam-poetry.jpeg', alt: 'NY Times Mini Games Event' }
 ];
 
 const day2Events = [
-  { name: 'Poem Interpretation', time: '10:00 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Poem Interpretation Event' },
-  { name: 'LoreWars', time: '11:30 AM', image: '/src/assets/events/slam poetry.jpeg', alt: 'LoreWars Battle Event' },
-  { name: 'Spockle', time: '1:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Spockle Game Event' },
-  { name: 'Theatre', time: '2:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Theatre Performance Event' },
-  { name: 'Solo Speaking', time: '4:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Solo Speaking Event' },
-  { name: 'Panel Discussion', time: '5:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Panel Discussion Event' },
-  { name: 'Change My Mind', time: '7:00 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Change My Mind Debate Event' },
-  { name: 'Hot Takes Arena', time: '8:30 PM', image: '/src/assets/events/slam poetry.jpeg', alt: 'Hot Takes Arena Event' }
+  { name: 'Poem Interpretation', time: '10:00 AM', image: '/events/slam-poetry.jpeg', alt: 'Poem Interpretation Event' },
+  { name: 'LoreWars', time: '11:30 AM', image: '/events/slam-poetry.jpeg', alt: 'LoreWars Battle Event' },
+  { name: 'Spockle', time: '1:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Spockle Game Event' },
+  { name: 'Theatre', time: '2:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Theatre Performance Event' },
+  { name: 'Solo Speaking', time: '4:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Solo Speaking Event' },
+  { name: 'Panel Discussion', time: '5:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Panel Discussion Event' },
+  { name: 'Change My Mind', time: '7:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Change My Mind Debate Event' },
+  { name: 'Hot Takes Arena', time: '8:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Hot Takes Arena Event' }
 ];
 
 const ScheduleSection = () => {
