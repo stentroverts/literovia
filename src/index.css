@@ -31,9 +31,9 @@
 
 @layer base {
   :root {
-    /* Crimson & Ink Color Palette */
-    --background: 222 47% 4%;               /* Near-black background */
-    --surface: 220 39% 8%;                  /* Dark charcoal for cards/surfaces */
+    /* Crimson & Ink Color Palette with Deep Black Background */
+    --background: 0 0% 4%;                  /* Deep black background rgb(10,10,10) */
+    --surface: 0 0% 6%;                     /* Slightly lighter for cards/surfaces */
     --foreground: 210 20% 95%;              /* Off-white text */
 
     
@@ -44,19 +44,19 @@
     --secondary-text: 215 15% 65%;          /* Light gray for secondary text */
     
     /* UI Component Colors */
-    --card: 220 39% 8%;                     /* Dark charcoal cards */
+    --card: 0 0% 6%;                        /* Dark cards */
     --card-foreground: 210 20% 95%;         /* Off-white text on cards */
     
-    --popover: 220 39% 8%;
+    --popover: 0 0% 6%;
     --popover-foreground: 210 20% 95%;
     
     --primary: 348 83% 47%;                 /* Crimson primary */
     --primary-foreground: 210 20% 95%;     /* Off-white on crimson */
     
-    --secondary: 220 39% 12%;              /* Slightly lighter charcoal */
+    --secondary: 0 0% 8%;                   /* Slightly lighter black */
     --secondary-foreground: 210 20% 95%;
     
-    --muted: 220 39% 15%;                  /* Muted background elements */
+    --muted: 0 0% 10%;                      /* Muted background elements */
     --muted-foreground: 215 15% 65%;       /* Light gray text */
     
     --accent: 348 83% 47%;                 /* Crimson accent */
@@ -65,8 +65,8 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 20% 95%;
     
-    --border: 220 39% 15%;                 /* Subtle borders */
-    --input: 220 39% 12%;                  /* Input backgrounds */
+    --border: 0 0% 12%;                     /* Subtle borders */
+    --input: 0 0% 8%;                       /* Input backgrounds */
     --ring: 348 83% 47%;                   /* Focus rings in crimson */
     
     /* Festival Specific Colors */
@@ -121,29 +121,16 @@
   }
 }
 
-/* Paperback Background */
+/* Paperback Background - Updated for dark theme */
 .paperback-bg {
-  background-image: 
-    linear-gradient(135deg, 
-      transparent 0%, 
-      transparent 25%, 
-      rgba(139, 69, 19, 0.1) 25%, 
-      rgba(139, 69, 19, 0.1) 50%, 
-      transparent 50%, 
-      transparent 75%, 
-      rgba(139, 69, 19, 0.1) 75%
-    ),
-    radial-gradient(circle at 20% 80%, rgba(160, 82, 45, 0.2) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(210, 180, 140, 0.3) 0%, transparent 50%),
-    linear-gradient(180deg, #f4e4bc 0%, #d2b48c 100%);
-  background-size: 40px 40px, 200px 200px, 150px 150px, 100% 100%;
-  background-position: 0 0, 0 0, 100% 100%, 0 0;
+  background: rgb(10,10,10);
 }
 
-/* Wave Animation */
+/* Wave Animation - Updated for dark theme */
 .wave {
   position: relative;
   overflow: hidden;
+  background: rgb(10,10,10);
 }
 
 .wave::before {
@@ -153,7 +140,8 @@
   left: 0;
   width: 200%;
   height: 100px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23f4e4bc'/%3E%3C/svg%3E") repeat-x;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23000000'/%3E%3C/svg%3E") repeat-x;
+  opacity: 0.1;
   animation: wave-move 20s ease-in-out infinite;
 }
 

@@ -6,7 +6,8 @@ const ContactSection = () => {
   return (
     <section
       id="contact"
-      className="relative py-20 px-6 min-h-screen flex items-center justify-center bg-black"
+      className="relative py-20 px-6 min-h-screen flex items-center justify-center"
+      style={{backgroundColor: 'rgb(10,10,10)'}}
     >
       {/* Background Logo */}
       <div

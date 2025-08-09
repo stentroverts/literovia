@@ -122,6 +122,10 @@ const config: Config = {
           "66%": { transform: "translateY(5px) translateX(-3px)" },
           "100%": { transform: "translateY(0px) translateX(0px)" },
         },
+        shine: {
+          '0%': { 'background-position': '100%' },
+          '100%': { 'background-position': '-100%' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -130,6 +134,7 @@ const config: Config = {
         "float-up": "float-up 0.6s ease-out forwards",
         twinkle: "twinkle 3s ease-in-out infinite",
         drift: "drift 8s ease-in-out infinite",
+        shine: 'shine 5s linear infinite',
       },
     },
   },

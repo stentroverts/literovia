@@ -108,7 +108,7 @@ const RegistrationPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4" style={{backgroundColor: 'rgb(10,10,10)'}}>
       {/* Confetti Animation */}
       <Confetti active={showConfetti} duration={3500} particleCount={200} />
       
@@ -123,7 +123,7 @@ const RegistrationPage = () => {
         </div>
 
         {/* Registration Form */}
-        <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm">
+        <Card className="border-gray-800 backdrop-blur-sm" style={{backgroundColor: 'rgba(15,15,15,0.8)'}}>
           <div className="p-8">
             {/* Message */}
             {message.content && (

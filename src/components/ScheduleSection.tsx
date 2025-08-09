@@ -1,225 +1,223 @@
 import React, { useState } from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import ScrollReveal from './ScrollReveal';
-import { Calendar, Clock, Star, Feather, Crown } from 'lucide-react';
+import TiltedCard from './ui/TiltedCard';
+import { Calendar, Clock } from 'lucide-react';
 
 const day1Events = [
-  { name: 'Slam Poetry', icon: '🎭', time: '10:00 AM', color: 'from-purple-500 to-pink-500' },
-  { name: 'Literary Auction', icon: '📚', time: '11:30 AM', color: 'from-emerald-500 to-teal-500' },
-  { name: 'Workshop', icon: '✍️', time: '1:00 PM', color: 'from-blue-500 to-indigo-500' },
-  { name: 'BangJam', icon: '🎵', time: '2:30 PM', color: 'from-red-500 to-orange-500' },
-  { name: 'Paperback Partners', icon: '👥', time: '4:00 PM', color: 'from-yellow-500 to-orange-500' },
-  { name: 'Performance', icon: '🎪', time: '5:30 PM', color: 'from-pink-500 to-rose-500' },
-  { name: 'GeoGuesser', icon: '🗺️', time: '7:00 PM', color: 'from-green-500 to-lime-500' },
-  { name: 'NY Times Mini Games', icon: '🧩', time: '8:30 PM', color: 'from-violet-500 to-purple-500' }
+  { name: 'Slam Poetry', time: '10:00 AM', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=600&fit=crop&crop=faces', alt: 'Slam Poetry Event' },
+  { name: 'Literary Auction', time: '11:30 AM', image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&h=600&fit=crop', alt: 'Literary Auction Event' },
+  { name: 'Workshop', time: '1:00 PM', image: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=600&fit=crop', alt: 'Writing Workshop Event' },
+  { name: 'BangJam', time: '2:30 PM', image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop', alt: 'BangJam Music Event' },
+  { name: 'Paperback Partners', time: '4:00 PM', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&h=600&fit=crop', alt: 'Paperback Partners Event' },
+  { name: 'Performance', time: '5:30 PM', image: 'https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=600&h=600&fit=crop', alt: 'Performance Event' },
+  { name: 'GeoGuesser', time: '7:00 PM', image: 'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?w=600&h=600&fit=crop', alt: 'GeoGuesser Game Event' },
+  { name: 'NY Times Mini Games', time: '8:30 PM', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=600&fit=crop', alt: 'NY Times Mini Games Event' }
 ];
 
 const day2Events = [
-  { name: 'Poem Interpretation', icon: '📜', time: '10:00 AM', color: 'from-cyan-500 to-blue-500' },
-  { name: 'LoreWars', icon: '⚔️', time: '11:30 AM', color: 'from-red-600 to-pink-600' },
-  { name: 'Spockle', icon: '🎯', time: '1:00 PM', color: 'from-indigo-500 to-purple-500' },
-  { name: 'Theatre', icon: '🎭', time: '2:30 PM', color: 'from-amber-500 to-yellow-500' },
-  { name: 'Solo Speaking', icon: '🎤', time: '4:00 PM', color: 'from-teal-500 to-cyan-500' },
-  { name: 'Panel Discussion', icon: '💬', time: '5:30 PM', color: 'from-rose-500 to-pink-500' },
-  { name: 'Change My Mind', icon: '🧠', time: '7:00 PM', color: 'from-lime-500 to-green-500' },
-  { name: 'Hot Takes Arena', icon: '🔥', time: '8:30 PM', color: 'from-orange-500 to-red-500' }
+  { name: 'Poem Interpretation', time: '10:00 AM', image: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=600&h=600&fit=crop', alt: 'Poem Interpretation Event' },
+  { name: 'LoreWars', time: '11:30 AM', image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=600&fit=crop', alt: 'LoreWars Battle Event' },
+  { name: 'Spockle', time: '1:00 PM', image: 'https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=600&h=600&fit=crop', alt: 'Spockle Game Event' },
+  { name: 'Theatre', time: '2:30 PM', image: 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=600&h=600&fit=crop', alt: 'Theatre Performance Event' },
+  { name: 'Solo Speaking', time: '4:00 PM', image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=600&h=600&fit=crop', alt: 'Solo Speaking Event' },
+  { name: 'Panel Discussion', time: '5:30 PM', image: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&h=600&fit=crop', alt: 'Panel Discussion Event' },
+  { name: 'Change My Mind', time: '7:00 PM', image: 'https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&h=600&fit=crop', alt: 'Change My Mind Debate Event' },
+  { name: 'Hot Takes Arena', time: '8:30 PM', image: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop', alt: 'Hot Takes Arena Event' }
 ];
 
 const ScheduleSection = () => {
   const [activeDay, setActiveDay] = useState(1);
-  const [hoveredEvent, setHoveredEvent] = useState<string | null>(null);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const currentEvents = activeDay === 1 ? day1Events : day2Events;
+
+  const handleDayChange = (day: number) => {
+    if (day === activeDay) return;
+    
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveDay(day);
+      setIsTransitioning(false);
+    }, 150);
+  };
 
   return (
     <section
       id="schedule"
-      className="relative py-24 px-6 overflow-hidden"
+      className="relative py-24 px-6"
       style={{
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%)',
+        backgroundColor: 'rgb(10,10,10)',
       }}
     >
+      {/* Enhanced CSS for smooth transitions */}
       <style>{`
-        @keyframes bookFlip {
-          0% { transform: rotateY(0deg); }
-          50% { transform: rotateY(180deg); }
-          100% { transform: rotateY(0deg); }
+        .day-toggle {
+          position: relative;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 50px;
+          padding: 6px;
+          box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
         
-        @keyframes magicSparkle {
-          0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
-          50% { transform: scale(1) rotate(180deg); opacity: 1; }
+        .day-button {
+          position: relative;
+          z-index: 2;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          border-radius: 40px;
+          padding: 16px 32px;
+          font-weight: 700;
+          backdrop-filter: blur(10px);
         }
         
-        @keyframes floatingQuill {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          25% { transform: translateY(-10px) rotate(-5deg); }
-          50% { transform: translateY(-5px) rotate(5deg); }
-          75% { transform: translateY(-15px) rotate(-3deg); }
+        .day-button.active {
+          color: white;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
         
-        .book-flip {
-          animation: bookFlip 6s ease-in-out infinite;
+        .day-button.inactive {
+          color: rgb(156, 163, 175);
         }
         
-        .magic-sparkle {
-          animation: magicSparkle 2s ease-in-out infinite;
+        .day-button.inactive:hover {
+          color: rgb(209, 213, 219);
+          background: rgba(255, 255, 255, 0.1);
+          transform: translateY(-1px);
         }
         
-        .floating-quill {
-          animation: floatingQuill 4s ease-in-out infinite;
+        .day-slider {
+          position: absolute;
+          top: 6px;
+          height: calc(100% - 12px);
+          width: calc(50% - 6px);
+          background: linear-gradient(135deg, hsl(348, 83%, 47%) 0%, hsl(348, 100%, 55%) 100%);
+          border-radius: 40px;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 
+            0 4px 16px rgba(220, 38, 38, 0.3),
+            0 2px 8px rgba(220, 38, 38, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          z-index: 1;
         }
         
-        .event-card {
-          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .day-slider.slide-right {
+          transform: translateX(calc(100% + 6px));
         }
         
-        .event-card:hover {
-          transform: translateY(-20px) scale(1.05) rotateX(10deg);
-          box-shadow: 0 30px 60px rgba(0,0,0,0.3), 0 0 50px rgba(220, 38, 38, 0.2);
+        .events-container {
+          transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .day-selector {
-          transition: all 0.3s ease;
+        .events-fade-in {
+          opacity: 1;
+          transform: translateY(0);
         }
         
-        .day-selector.active {
-          transform: scale(1.1);
-          box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+        .events-fade-out {
+          opacity: 0;
+          transform: translateY(20px);
         }
       `}</style>
-
-      {/* Magical Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating books */}
-        <div className="book-flip absolute top-20 left-10 text-6xl opacity-10 text-gray-600">📖</div>
-        <div className="book-flip absolute bottom-32 right-20 text-4xl opacity-8 text-gray-500" style={{ animationDelay: '2s' }}>📚</div>
-        <div className="book-flip absolute top-1/2 left-1/4 text-5xl opacity-6 text-gray-400" style={{ animationDelay: '4s' }}>📜</div>
-        
-        {/* Floating quills */}
-        <Feather className="floating-quill absolute top-40 right-32 w-8 h-8 text-crimson/20" style={{ animationDelay: '1s' }} />
-        <Feather className="floating-quill absolute bottom-40 left-32 w-6 h-6 text-purple-400/20" style={{ animationDelay: '3s' }} />
-        
-        {/* Magic sparkles */}
-        <Star className="magic-sparkle absolute top-60 right-10 w-6 h-6 text-crimson/30" style={{ animationDelay: '0s' }} />
-        <Star className="magic-sparkle absolute bottom-60 left-20 w-4 h-4 text-blue-400/30" style={{ animationDelay: '1s' }} />
-        <Star className="magic-sparkle absolute top-1/3 right-1/3 w-5 h-5 text-yellow-500/30" style={{ animationDelay: '2s' }} />
-      </div>
-
+      
       <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Epic Title */}
+        {/* Title */}
         <ScrollReveal>
           <div className="text-center mb-20">
-            <div className="relative inline-block mb-8">
-              <h2 className="font-spartan font-bold text-4xl sm:text-5xl md:text-6xl tracking-wide uppercase text-gray-800">
-                EVENT SCHEDULE
-              </h2>
-              <div className="absolute -top-4 -right-4">
-                <Crown className="w-12 h-12 text-yellow-500 animate-pulse" />
-              </div>
-            </div>
-            <p className="font-source text-xl text-gray-700 max-w-4xl mx-auto leading-relaxed mb-8">
+            <h2 className="font-spartan font-bold text-4xl sm:text-5xl md:text-6xl tracking-wide uppercase text-white mb-8">
+              EVENT SCHEDULE
+            </h2>
+            <p className="font-source text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
               full masti • September 8-9, 2025
             </p>
           </div>
         </ScrollReveal>
 
-        {/* Interactive Day Selector */}
+        {/* Enhanced Day Selector */}
         <ScrollReveal delay={200}>
           <div className="flex justify-center mb-16">
-            <div className="bg-white/80 backdrop-blur-md border border-gray-300 rounded-full p-2 flex space-x-2 shadow-lg">
-              {[1, 2].map((day) => (
+            <div className="day-toggle relative">
+              {/* Sliding background */}
+              <div className={`day-slider ${activeDay === 2 ? 'slide-right' : ''}`}></div>
+              
+              {/* Day buttons */}
+              <div className="flex relative z-10">
                 <button
-                  key={day}
-                  onClick={() => setActiveDay(day)}
-                  className={`day-selector px-8 py-4 rounded-full font-spartan font-bold text-lg transition-all duration-300 ${
-                    activeDay === day
-                      ? 'active bg-gradient-to-r from-crimson to-pink-500 text-white'
-                      : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
-                  }`}
+                  onClick={() => handleDayChange(1)}
+                  className={`day-button ${activeDay === 1 ? 'active' : 'inactive'}`}
                 >
-                  <Calendar className="w-5 h-5 inline mr-2" />
-                  Day {day}
-                  <span className="block text-xs mt-1">
-                    Sept {day === 1 ? '8' : '9'}
-                  </span>
+                  <div className="flex items-center justify-center">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    <div>
+                      <div className="text-base sm:text-lg font-spartan font-bold">Day 1</div>
+                      <div className="text-xs mt-1 opacity-90">Sept 8</div>
+                    </div>
+                  </div>
                 </button>
-              ))}
+                
+                <button
+                  onClick={() => handleDayChange(2)}
+                  className={`day-button ${activeDay === 2 ? 'active' : 'inactive'}`}
+                >
+                  <div className="flex items-center justify-center">
+                    <Calendar className="w-5 h-5 mr-2" />
+                    <div>
+                      <div className="text-base sm:text-lg font-spartan font-bold">Day 2</div>
+                      <div className="text-xs mt-1 opacity-90">Sept 9</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* Events Grid with Creative Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {currentEvents.map((event, idx) => (
-            <ScrollReveal key={`${activeDay}-${idx}`} delay={idx * 100}>
-              <div
-                className={`event-card relative group cursor-pointer ${
-                  hoveredEvent === event.name ? 'z-20' : 'z-10'
-                }`}
-                onMouseEnter={() => setHoveredEvent(event.name)}
-                onMouseLeave={() => setHoveredEvent(null)}
-              >
-                <Card className="bg-white/90 backdrop-blur-md border border-gray-300 hover:border-crimson/50 overflow-hidden h-full shadow-lg">
-                  {/* Gradient Header */}
-                  <div className={`h-3 bg-gradient-to-r ${event.color}`}></div>
-                  
-                  <CardContent className="p-6 text-center relative">
-                    {/* Event Icon */}
-                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                      {event.icon}
-                    </div>
-                    
-                    {/* Event Name */}
-                    <h3 className="font-spartan font-bold text-xl text-gray-800 mb-3 group-hover:text-crimson transition-colors duration-300">
-                      {event.name}
-                    </h3>
-                    
-                    {/* Time */}
-                    <div className="flex items-center justify-center text-gray-600 mb-4">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span className="font-mono">{event.time}</span>
-                    </div>
-                    
-                    {/* Hover Effect */}
-                    {hoveredEvent === event.name && (
-                      <div className="absolute inset-0 bg-gradient-to-br from-crimson/10 to-purple-600/10 rounded-lg animate-pulse"></div>
-                    )}
-                    
-                    {/* Magic sparkle on hover */}
-                    <div className={`absolute top-2 right-2 transition-all duration-300 ${
-                      hoveredEvent === event.name ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-                    }`}>
-                      <Star className="w-6 h-6 text-yellow-500 animate-spin" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </ScrollReveal>
-          ))}
+        {/* Events Grid with TiltedCard Components */}
+        <div className={`events-container ${isTransitioning ? 'events-fade-out' : 'events-fade-in'}`}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+            {currentEvents.map((event, index) => (
+              <ScrollReveal key={`${activeDay}-${index}`} delay={isTransitioning ? 0 : index * 100}>
+                <div className="w-full max-w-[280px]">
+                  <TiltedCard
+                    imageSrc={event.image}
+                    altText={event.alt}
+                    captionText={`${event.name} - ${event.time}`}
+                    containerHeight="320px"
+                    containerWidth="100%"
+                    imageHeight="280px"
+                    imageWidth="280px"
+                    rotateAmplitude={12}
+                    scaleOnHover={1.15}
+                    showMobileWarning={false}
+                    showTooltip={false}
+                    displayOverlayContent={true}
+                    overlayContent={
+                      <div className="w-full h-full rounded-[15px] flex flex-col justify-end p-6 relative">
+                        {/* Dark overlay background */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent rounded-[15px]"></div>
+                        
+                        {/* Content */}
+                        <div className="relative z-10">
+                          <div className="bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 mb-2 inline-block">
+                            <h3 className="font-spartan font-bold text-white text-base">
+                              {event.name}
+                            </h3>
+                          </div>
+                          <div className="flex items-center text-gray-200 text-sm">
+                            <Clock className="w-4 h-4 mr-2" />
+                            <span className="font-mono">{event.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                  />
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
-
-        {/* Epic Footer */}
-        <ScrollReveal delay={800}>
-          <div className="mt-20 text-center">
-            <div className="bg-gradient-to-r from-white/80 via-crimson/10 to-white/80 backdrop-blur-md border border-gray-300 rounded-3xl p-12 shadow-xl">
-              <div className="flex items-center justify-center space-x-8 text-gray-700">
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-crimson mb-2">16</div>
-                  <div className="text-sm">Epic Events</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-yellow-500 mb-2">∞</div>
-                  <div className="text-sm">Inspiration</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-4xl font-bold text-purple-500 mb-2">2</div>
-                  <div className="text-sm">Legendary Days</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );

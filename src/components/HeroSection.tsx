@@ -5,6 +5,7 @@ import { useTypewriter } from '@/hooks/useTypewriter';
 import { openRegistrationForm } from '@/config/registration';
 import heroBg from '@/assets/book.svg';
 import TwinklingStars from './TwinklingStars';
+import ShinyText from '@/components/ui/shiny-text';
 
 const HeroSection = () => {
   const { displayText: typedText, isComplete } = useTypewriter({
@@ -15,7 +16,7 @@ const HeroSection = () => {
 
 
   // CSS variables
-  const bgColor = 'hsl(222, 47%, 4%)';
+  const bgColor = 'rgb(10,10,10)';
   const fgColor = 'hsl(210, 20%, 95%)';
   const crimson = 'hsl(348, 83%, 47%)';
   const secondaryText = 'hsl(215, 15%, 65%)';
@@ -159,12 +160,15 @@ const HeroSection = () => {
                 fontFamily: '"Playwrite US Trad", cursive',
                 fontWeight: 'bold',
                 fontSize: 'clamp(0.9rem, 2.5vw, 1.25rem)',
-                color: fgColor,
-                opacity: 0.8,
                 textAlign: 'center',
+                transform: 'translateX(clamp(0rem, 8vw, 11rem))', // Responsive positioning
               }}
             >
-              The 1st edition
+              <ShinyText 
+                text="The 1st edition" 
+                speed={3}
+                className="font-playwrite font-bold"
+              />
             </span>
           </ScrollReveal>
         </div>

@@ -8,7 +8,7 @@ import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen text-foreground overflow-x-hidden" style={{backgroundColor: 'rgb(10,10,10)'}}>
       {/* Navigation */}
       <Navigation />
       
@@ -27,7 +27,7 @@ const Index = () => {
       </main>
       
       {/* Footer */}
-      <footer className="relative z-10 py-12 px-6 border-t border-crimson/20">
+      <footer className="relative z-10 py-12 px-6 border-t border-crimson/20" style={{backgroundColor: 'rgb(10,10,10)'}}>
         <div className="container mx-auto text-center">
           <div className="font-spartan font-bold text-xl text-foreground mb-4">
             LITEROVIA

@@ -41,9 +41,12 @@ export default function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
         isScrolled 
-          ? 'bg-surface/95 backdrop-blur-md shadow-xl border-b border-crimson/20' 
-          : 'bg-transparent'
+          ? 'backdrop-blur-md shadow-xl border-b border-crimson/20' 
+          : ''
       }`}
+      style={{
+        backgroundColor: isScrolled ? 'rgba(10,10,10,0.95)' : 'rgba(10,10,10,0.3)'
+      }}
     >
       <style>{`
         /* Enhanced floating animations with staggered entrance */
