@@ -68,9 +68,15 @@ const ScheduleSection = () => {
           z-index: 2;
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           border-radius: 40px;
-          padding: 16px 32px;
+          padding: 12px 20px;
           font-weight: 700;
           backdrop-filter: blur(10px);
+        }
+        
+        @media (min-width: 640px) {
+          .day-button {
+            padding: 16px 32px;
+          }
         }
         
         .day-button.active {
@@ -125,11 +131,11 @@ const ScheduleSection = () => {
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Title */}
         <ScrollReveal>
-          <div className="text-center mb-20">
-            <h2 className="font-spartan font-bold text-4xl sm:text-5xl md:text-6xl tracking-wide uppercase text-white mb-8">
+          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+            <h2 className="font-spartan font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase text-white mb-4 sm:mb-6 lg:mb-8 px-4">
               EVENT SCHEDULE
             </h2>
-            <p className="font-source text-lg sm:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-8">
+            <p className="font-source text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6 lg:mb-8 px-4">
               full masti • September 8-9, 2025
             </p>
           </div>
@@ -137,8 +143,8 @@ const ScheduleSection = () => {
 
         {/* Enhanced Day Selector */}
         <ScrollReveal delay={200}>
-          <div className="flex justify-center mb-16">
-            <div className="day-toggle relative">
+          <div className="flex justify-center mb-12 sm:mb-16 px-4">
+            <div className="day-toggle relative w-full max-w-md">
               {/* Sliding background */}
               <div className={`day-slider ${activeDay === 2 ? 'slide-right' : ''}`}></div>
               
@@ -146,26 +152,26 @@ const ScheduleSection = () => {
               <div className="flex relative z-10">
                 <button
                   onClick={() => handleDayChange(1)}
-                  className={`day-button ${activeDay === 1 ? 'active' : 'inactive'}`}
+                  className={`day-button ${activeDay === 1 ? 'active' : 'inactive'} flex-1`}
                 >
                   <div className="flex items-center justify-center">
-                    <Calendar className="w-5 h-5 mr-2" />
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
                     <div>
-                      <div className="text-base sm:text-lg font-spartan font-bold">Day 1</div>
-                      <div className="text-xs mt-1 opacity-90">Sept 8</div>
+                      <div className="text-sm sm:text-base lg:text-lg font-spartan font-bold">Day 1</div>
+                      <div className="text-xs mt-1 opacity-90 hidden sm:block">Sept 8</div>
                     </div>
                   </div>
                 </button>
                 
                 <button
                   onClick={() => handleDayChange(2)}
-                  className={`day-button ${activeDay === 2 ? 'active' : 'inactive'}`}
+                  className={`day-button ${activeDay === 2 ? 'active' : 'inactive'} flex-1`}
                 >
                   <div className="flex items-center justify-center">
-                    <Calendar className="w-5 h-5 mr-2" />
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
                     <div>
-                      <div className="text-base sm:text-lg font-spartan font-bold">Day 2</div>
-                      <div className="text-xs mt-1 opacity-90">Sept 9</div>
+                      <div className="text-sm sm:text-base lg:text-lg font-spartan font-bold">Day 2</div>
+                      <div className="text-xs mt-1 opacity-90 hidden sm:block">Sept 9</div>
                     </div>
                   </div>
                 </button>
@@ -176,10 +182,10 @@ const ScheduleSection = () => {
 
         {/* Events Grid with TiltedCard Components */}
         <div className={`events-container ${isTransitioning ? 'events-fade-out' : 'events-fade-in'}`}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 justify-items-center px-4">
             {currentEvents.map((event, index) => (
               <ScrollReveal key={`${activeDay}-${index}`} delay={isTransitioning ? 0 : index * 100}>
-                <div className="w-full max-w-[280px]">
+                <div className="w-full max-w-[280px] sm:max-w-[320px]">
                   <TiltedCard
                     imageSrc={event.image}
                     altText={event.alt}
@@ -194,16 +200,16 @@ const ScheduleSection = () => {
                     showTooltip={false}
                     displayOverlayContent={true}
                     overlayContent={
-                      <div className="w-full h-full rounded-[15px] flex flex-col justify-start p-4 relative">
+                      <div className="w-full h-full rounded-[15px] flex flex-col justify-start p-3 sm:p-4 relative">
                         {/* Top overlay - using TiltedCard color scheme swapped */}
                         <div 
-                          className="rounded-2xl px-5 py-3 inline-block self-start"
+                          className="rounded-xl sm:rounded-2xl px-3 sm:px-5 py-2 sm:py-3 inline-block self-start"
                           style={{ 
                             backgroundColor: '#0006',
                             boxShadow: '0 5px 30px #06001059' 
                           }}
                         >
-                          <h3 className="font-spartan font-bold text-white text-sm tracking-wide">
+                          <h3 className="font-spartan font-bold text-white text-xs sm:text-sm tracking-wide">
                             {event.name}
                           </h3>
                         </div>

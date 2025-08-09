@@ -98,18 +98,18 @@ const AmazingRaceSection = () => {
               </Button>
             </div>
             
-            <div className="inline-flex items-center space-x-6 text-gray-300">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 text-gray-300 text-sm sm:text-base">
               <div className="flex items-center">
-                <Users className="w-5 h-5 mr-2 text-crimson" />
-                <span>2-person teams only</span>
+                <Users className="w-5 h-5 mr-2 text-crimson flex-shrink-0" />
+                <span className="whitespace-nowrap">2-person teams only</span>
               </div>
               <div className="flex items-center">
-                <Clock className="w-5 h-5 mr-2 text-yellow-400" />
-                <span>2 hours adrenaline rush</span>
+                <Clock className="w-5 h-5 mr-2 text-yellow-400 flex-shrink-0" />
+                <span className="whitespace-nowrap">2 hours adrenaline rush</span>
               </div>
               <div className="flex items-center">
-                <Trophy className="w-5 h-5 mr-2 text-blue-400" />
-                <span>KINGDOM movie tickets</span>
+                <Trophy className="w-5 h-5 mr-2 text-blue-400 flex-shrink-0" />
+                <span className="whitespace-nowrap">KINGDOM movie tickets</span>
               </div>
             </div>
           </div>
