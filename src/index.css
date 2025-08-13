@@ -1,4 +1,6 @@
 /* ========== CUSTOM FONTS (must go before all @import or @tailwind) ========== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
 @font-face {
   font-family: 'Sunday';
   src: url('/src/assets/fonts/Sunday-Regular.ttf') format('truetype');
@@ -158,6 +160,35 @@
 @keyframes wave-move {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(-50%); }
+}
+
+/* Flip Card Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.group:hover .group-hover\:rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.transition-transform {
+  transition-property: transform;
+}
+
+.duration-600 {
+  transition-duration: 600ms;
 }
 
 

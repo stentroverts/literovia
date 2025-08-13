@@ -43,7 +43,7 @@ const SponsorsSection = () => {
           <div className="text-center">
             <div className="bg-gradient-to-r from-crimson/10 via-crimson/5 to-crimson/10 backdrop-blur-md border border-crimson/20 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 mx-2 sm:mx-4 shadow-xl">
               <h3 className="font-spartan font-bold text-lg sm:text-xl md:text-2xl lg:text-3xl text-white mb-3 sm:mb-4">
-                Interested in <span className="text-crimson">Sponsoring?</span>
+                Interested in <span className="text-crimson">Supporting Us?</span>
               </h3>
               <p className="font-source text-gray-300 text-sm sm:text-base lg:text-lg mb-4 sm:mb-6 lg:mb-8 max-w-2xl mx-auto leading-relaxed px-2">
                 Join us in supporting literary culture and connect with passionate readers, writers, and storytellers
@@ -52,21 +52,21 @@ const SponsorsSection = () => {
               {/* Contact Information */}
               <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-6 lg:gap-8">
                 <a 
-                  href="mailto:stentorian@vnrvjiet.in"
+                  href="tel:+919912818640"
                   className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300 group"
                 >
-                  <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="font-mono text-xs sm:text-sm lg:text-base break-all">stentorian@vnrvjiet.in</span>
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="font-mono text-xs sm:text-sm lg:text-base">+91 99128 18640</span>
                 </a>
                 
                 <div className="hidden sm:block w-px h-4 sm:h-6 bg-gray-600"></div>
                 
                 <a 
-                  href="tel:+917396977130"
+                  href="tel:+916301130977"
                   className="flex items-center space-x-3 text-gray-300 hover:text-white transition-colors duration-300 group"
                 >
                   <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="font-mono text-xs sm:text-sm lg:text-base">+91 73969 77130</span>
+                  <span className="font-mono text-xs sm:text-sm lg:text-base">+91 6301 130 977</span>
                 </a>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import Navigation from '@/components/Navigation';
 import HeroSection from '@/components/HeroSection';
-import AmazingRaceSection from '@/components/AmazingRaceSection';
+import AboutSection from '@/components/AboutSection';
 import ScheduleSection from '@/components/ScheduleSection';
 import SponsorsSection from '@/components/SponsorsSection';
 import RegisterSection from '@/components/RegisterSection';
@@ -17,7 +17,7 @@ const Index = () => {
         <HeroSection />
         <div className="wave">
           <div className="paperback-bg">
-            <AmazingRaceSection />
+            <AboutSection />
             <ScheduleSection />
             <SponsorsSection />
             <RegisterSection />

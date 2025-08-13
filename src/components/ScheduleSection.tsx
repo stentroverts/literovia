@@ -1,28 +1,124 @@
 import React, { useState } from 'react';
 import ScrollReveal from './ScrollReveal';
-import TiltedCard from './ui/TiltedCard';
+import FlipCard from './ui/FlipCard';
 import { Calendar, Clock } from 'lucide-react';
 
 const day1Events = [
-  { name: 'Slam Poetry', time: '10:00 AM', image: '/events/slam-poetry.jpeg', alt: 'Slam Poetry Event' },
-  { name: 'Literary Auction', time: '11:30 AM', image: '/events/slam-poetry.jpeg', alt: 'Literary Auction Event' },
-  { name: 'Workshop', time: '1:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Writing Workshop Event' },
-  { name: 'BangJam', time: '2:30 PM', image: '/events/slam-poetry.jpeg', alt: 'BangJam Music Event' },
-  { name: 'Paperback Partners', time: '4:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Paperback Partners Event' },
-  { name: 'Performance', time: '5:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Performance Event' },
-  { name: 'GeoGuesser', time: '7:00 PM', image: '/events/slam-poetry.jpeg', alt: 'GeoGuesser Game Event' },
-  { name: 'NY Times Mini Games', time: '8:30 PM', image: '/events/slam-poetry.jpeg', alt: 'NY Times Mini Games Event' }
+  { 
+    name: 'Slam Poetry', 
+    time: '10:00 AM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Slam Poetry Event',
+    description: 'Experience the raw power of spoken word poetry as talented poets share their most compelling stories and emotions.'
+  },
+  { 
+    name: 'Literary Auction', 
+    time: '11:30 AM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Literary Auction Event',
+    description: 'Bid on rare books, signed manuscripts, and unique literary artifacts in this exciting auction event.'
+  },
+  { 
+    name: 'Workshop', 
+    time: '1:00 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Writing Workshop Event',
+    description: 'Join our interactive writing workshop and learn techniques from experienced authors and editors.'
+  },
+  { 
+    name: 'BangJam', 
+    time: '2:30 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'BangJam Music Event',
+    description: 'A fusion of music and literature where artists create live performances blending both art forms.'
+  },
+  { 
+    name: 'Paperback Partners', 
+    time: '4:00 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Paperback Partners Event',
+    description: 'Connect with fellow book lovers and find your perfect reading companion in this networking event.'
+  },
+  { 
+    name: 'Performance', 
+    time: '5:30 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Performance Event',
+    description: 'Watch dramatic interpretations of classic literature brought to life by talented performers.'
+  },
+  { 
+    name: 'GeoGuesser', 
+    time: '7:00 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'GeoGuesser Game Event',
+    description: 'Test your geographical knowledge in this fun, interactive game show format with literary themes.'
+  },
+  { 
+    name: 'NY Times Mini Games', 
+    time: '8:30 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'NY Times Mini Games Event',
+    description: 'Challenge yourself with crosswords, word games, and puzzles in this competitive gaming session.'
+  }
 ];
 
 const day2Events = [
-  { name: 'Poem Interpretation', time: '10:00 AM', image: '/events/slam-poetry.jpeg', alt: 'Poem Interpretation Event' },
-  { name: 'LoreWars', time: '11:30 AM', image: '/events/slam-poetry.jpeg', alt: 'LoreWars Battle Event' },
-  { name: 'Spockle', time: '1:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Spockle Game Event' },
-  { name: 'Theatre', time: '2:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Theatre Performance Event' },
-  { name: 'Solo Speaking', time: '4:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Solo Speaking Event' },
-  { name: 'Panel Discussion', time: '5:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Panel Discussion Event' },
-  { name: 'Change My Mind', time: '7:00 PM', image: '/events/slam-poetry.jpeg', alt: 'Change My Mind Debate Event' },
-  { name: 'Hot Takes Arena', time: '8:30 PM', image: '/events/slam-poetry.jpeg', alt: 'Hot Takes Arena Event' }
+  { 
+    name: 'Poem Interpretation', 
+    time: '10:00 AM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Poem Interpretation Event',
+    description: 'Dive deep into the meaning and context of classic and contemporary poems with expert analysis.'
+  },
+  { 
+    name: 'LoreWars', 
+    time: '11:30 AM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'LoreWars Battle Event',
+    description: 'Battle of knowledge as teams compete in literary trivia covering mythology, legends, and folklore.'
+  },
+  { 
+    name: 'Spockle', 
+    time: '1:00 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Spockle Game Event',
+    description: 'A unique word game that combines strategy, vocabulary, and literary knowledge in exciting matches.'
+  },
+  { 
+    name: 'Theatre', 
+    time: '2:30 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Theatre Performance Event',
+    description: 'Professional theatrical performances featuring scenes from beloved literary works and original plays.'
+  },
+  { 
+    name: 'Solo Speaking', 
+    time: '4:00 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Solo Speaking Event',
+    description: 'Individual presentations where speakers share their insights on literature, writing, and storytelling.'
+  },
+  { 
+    name: 'Panel Discussion', 
+    time: '5:30 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Panel Discussion Event',
+    description: 'Join industry experts as they discuss current trends in literature, publishing, and creative writing.'
+  },
+  { 
+    name: 'Change My Mind', 
+    time: '7:00 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Change My Mind Debate Event',
+    description: 'Engaging debates on controversial literary topics where participants try to change each other\'s perspectives.'
+  },
+  { 
+    name: 'Hot Takes Arena', 
+    time: '8:30 PM', 
+    image: '/events/slam-poetry.jpeg', 
+    alt: 'Hot Takes Arena Event',
+    description: 'Share and defend your most controversial opinions about books, authors, and literary trends.'
+  }
 ];
 
 const ScheduleSection = () => {
@@ -144,7 +240,7 @@ const ScheduleSection = () => {
         {/* Enhanced Day Selector */}
         <ScrollReveal delay={200}>
           <div className="flex justify-center mb-12 sm:mb-16 px-4">
-            <div className="day-toggle relative w-full max-w-md">
+            <div className="day-toggle relative w-full max-w-xs sm:max-w-md overflow-hidden">
               {/* Sliding background */}
               <div className={`day-slider ${activeDay === 2 ? 'slide-right' : ''}`}></div>
               
@@ -180,42 +276,64 @@ const ScheduleSection = () => {
           </div>
         </ScrollReveal>
 
-        {/* Events Grid with TiltedCard Components */}
+        {/* Events Grid with Simple Cards */}
         <div className={`events-container ${isTransitioning ? 'events-fade-out' : 'events-fade-in'}`}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 justify-items-center px-4">
             {currentEvents.map((event, index) => (
               <ScrollReveal key={`${activeDay}-${index}`} delay={isTransitioning ? 0 : index * 100}>
                 <div className="w-full max-w-[280px] sm:max-w-[320px]">
-                  <TiltedCard
-                    imageSrc={event.image}
-                    altText={event.alt}
-                    captionText={`${event.name} - ${event.time}`}
-                    containerHeight="320px"
-                    containerWidth="100%"
-                    imageHeight="280px"
-                    imageWidth="280px"
-                    rotateAmplitude={12}
-                    scaleOnHover={1.15}
-                    showMobileWarning={false}
-                    showTooltip={false}
-                    displayOverlayContent={true}
-                    overlayContent={
-                      <div className="w-full h-full rounded-[15px] flex flex-col justify-start p-3 sm:p-4 relative">
-                        {/* Top overlay - using TiltedCard color scheme swapped */}
-                        <div 
-                          className="rounded-xl sm:rounded-2xl px-3 sm:px-5 py-2 sm:py-3 inline-block self-start"
-                          style={{ 
-                            backgroundColor: '#0006',
-                            boxShadow: '0 5px 30px #06001059' 
-                          }}
-                        >
-                          <h3 className="font-spartan font-bold text-white text-xs sm:text-sm tracking-wide">
-                            {event.name}
-                          </h3>
+                  <div className="w-full h-80 sm:h-96 perspective-1000 cursor-pointer group">
+                    <div className="relative w-full h-full transform-style-preserve-3d group-hover:rotate-y-180 transition-transform duration-600">
+                      {/* Front of card */}
+                      <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg bg-gray-800">
+                        <div className="relative w-full h-full">
+                          {/* Fallback background in case image doesn't load */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900"></div>
+                          <img
+                            src={event.image}
+                            alt={event.alt}
+                            className="w-full h-full object-cover relative z-10"
+                            onError={(e) => {
+                              console.log('Image failed to load:', event.image);
+                              e.currentTarget.style.opacity = '0';
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-4 sm:p-6 z-20">
+                            <div className="bg-black/80 backdrop-blur-sm rounded-lg p-3 sm:p-4">
+                              <h3 className="font-spartan font-bold text-white text-lg sm:text-xl mb-2">
+                                {event.name}
+                              </h3>
+                              <div className="flex items-center text-gray-300 text-sm sm:text-base">
+                                <Clock className="w-4 h-4 mr-2" />
+                                {event.time}
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    }
-                  />
+
+                      {/* Back of card */}
+                      <div 
+                        className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg rotate-y-180"
+                        style={{ transform: 'rotateY(180deg)' }}
+                      >
+                        <div className="w-full h-full bg-gradient-to-br from-red-600 via-red-700 to-red-800 flex flex-col justify-center p-4 sm:p-6">
+                          <div className="text-center">
+                            <h3 className="font-spartan font-bold text-white text-xl sm:text-2xl mb-4">
+                              {event.name}
+                            </h3>
+                            <div className="flex items-center justify-center text-white/90 text-sm sm:text-base mb-4">
+                              <Clock className="w-4 h-4 mr-2" />
+                              {event.time}
+                            </div>
+                            <p className="font-source text-white/90 text-sm sm:text-base leading-relaxed">
+                              {event.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </ScrollReveal>
             ))}
