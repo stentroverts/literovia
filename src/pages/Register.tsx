@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { CheckCircle, Loader2 } from 'lucide-react';
-import Confetti from '@/components/Confetti';
 
 const RegistrationPage = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +16,6 @@ const RegistrationPage = () => {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [message, setMessage] = useState({ type: '', content: '' });
-  const [showConfetti, setShowConfetti] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -86,7 +84,6 @@ const RegistrationPage = () => {
 
       // Since we're using no-cors mode, we assume success if no error is thrown
       setMessage({ type: 'success', content: 'Registration successful! You will receive a confirmation email shortly.' });
-      setShowConfetti(true);
       setFormData({
         fullName: '',
         email: '',
@@ -96,9 +93,6 @@ const RegistrationPage = () => {
         course: '',
         events: []
       });
-      
-      // Hide confetti after animation completes
-      setTimeout(() => setShowConfetti(false), 4000);
     } catch (error) {
       console.error('Registration error:', error);
       setMessage({ type: 'error', content: 'There was an error submitting your registration. Please try again.' });
@@ -109,9 +103,6 @@ const RegistrationPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center py-12 px-4" style={{backgroundColor: 'rgb(10,10,10)'}}>
-      {/* Confetti Animation */}
-      <Confetti active={showConfetti} duration={3500} particleCount={200} />
-      
       <div className="max-w-2xl w-full">
         {/* Header */}
         <div className="text-center mb-8">

@@ -1,5 +1,6 @@
 /* ========== CUSTOM FONTS (must go before all @import or @tailwind) ========== */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Della+Respira&display=swap');
 
 @font-face {
   font-family: 'Sunday';
@@ -119,17 +120,6 @@
 
   body {
     @apply bg-background text-foreground;
-  }
-  
-  /* Hide default cursor only on non-touch devices */
-  @media (hover: hover) and (pointer: fine) {
-    body {
-      cursor: none;
-    }
-    
-    * {
-      cursor: none !important;
-    }
   }
 }
 

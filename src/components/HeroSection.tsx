@@ -9,7 +9,7 @@ import ShinyText from '@/components/ui/shiny-text';
 
 const HeroSection = () => {
   const { displayText: typedText, isComplete } = useTypewriter({
-    text: 'LITEROVIA',
+    text: 'Literovia',
     speed: 150,
     delay: 500,
   });
@@ -128,7 +128,7 @@ const HeroSection = () => {
         <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
           <h1
             style={{
-              fontFamily: 'Sunday, serif',
+              fontFamily: '"Della Respira", serif',
               margin: 0,
               fontSize: 'clamp(2.5rem, 12vw, 10rem)',
               color: crimson,
@@ -149,7 +149,7 @@ const HeroSection = () => {
           </h1>
 
           {/* Subtitle "The 1st edition" delayed */}
-          <ScrollReveal delay={1500}>
+          <ScrollReveal delay={1000}>
             <span
               style={{
                 position: 'relative',
@@ -165,7 +165,7 @@ const HeroSection = () => {
               }}
             >
               <ShinyText 
-                text="The 1st edition" 
+                text="1st edition" 
                 speed={3}
                 className="font-playwrite font-bold"
               />
@@ -174,7 +174,7 @@ const HeroSection = () => {
         </div>
 
         {/* "A Stentorian Odyssey" */}
-        <ScrollReveal delay={2000}>
+        <ScrollReveal delay={1500}>
           <h2
             style={{
               fontFamily: '"Homemade Apple", regular',
@@ -194,7 +194,7 @@ const HeroSection = () => {
         </ScrollReveal>
 
         {/* Call to Action */}
-        <ScrollReveal delay={4000}>
+        <ScrollReveal delay={1500}>
           <div style={{ 
             marginTop: 'clamp(1.5rem, 4vh, 2.5rem)',
             padding: '0 1rem',
@@ -211,13 +211,13 @@ const HeroSection = () => {
                 cursor: 'pointer',
               }}
             >
-              Register NOW
+              BUY PASS
             </Button>
           </div>
         </ScrollReveal>
 
         {/* Tagline */}
-        <ScrollReveal delay={4500}>
+        <ScrollReveal delay={1600}>
           <p
             style={{
               marginTop: 'clamp(1rem, 3vh, 1.5rem)',

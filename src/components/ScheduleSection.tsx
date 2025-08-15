@@ -1,120 +1,102 @@
 import React, { useState } from 'react';
-import ScrollReveal from './ScrollReveal';
-import FlipCard from './ui/FlipCard';
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 const day1Events = [
   { 
     name: 'Slam Poetry', 
-    time: '10:00 AM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Slam Poetry Event',
     description: 'Experience the raw power of spoken word poetry as talented poets share their most compelling stories and emotions.'
   },
   { 
     name: 'Literary Auction', 
-    time: '11:30 AM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Literary Auction Event',
     description: 'Bid on rare books, signed manuscripts, and unique literary artifacts in this exciting auction event.'
   },
   { 
     name: 'Workshop', 
-    time: '1:00 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Writing Workshop Event',
     description: 'Join our interactive writing workshop and learn techniques from experienced authors and editors.'
   },
   { 
     name: 'BangJam', 
-    time: '2:30 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'BangJam Music Event',
     description: 'A fusion of music and literature where artists create live performances blending both art forms.'
   },
   { 
     name: 'Paperback Partners', 
-    time: '4:00 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Paperback Partners Event',
     description: 'Connect with fellow book lovers and find your perfect reading companion in this networking event.'
   },
   { 
     name: 'Performance', 
-    time: '5:30 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Performance Event',
     description: 'Watch dramatic interpretations of classic literature brought to life by talented performers.'
   },
   { 
     name: 'GeoGuesser', 
-    time: '7:00 PM', 
     image: '/events/slam-poetry.jpeg', 
-    alt: 'GeoGuesser Game Event',
-    description: 'Test your geographical knowledge in this fun, interactive game show format with literary themes.'
+    alt: 'GeoGuesser Event',
+    description: 'Test your geographical knowledge in this fun and interactive quiz competition.'
   },
   { 
     name: 'NY Times Mini Games', 
-    time: '8:30 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'NY Times Mini Games Event',
-    description: 'Challenge yourself with crosswords, word games, and puzzles in this competitive gaming session.'
+    description: 'Challenge yourself with popular New York Times puzzle games and brain teasers.'
   }
 ];
 
 const day2Events = [
   { 
     name: 'Poem Interpretation', 
-    time: '10:00 AM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Poem Interpretation Event',
-    description: 'Dive deep into the meaning and context of classic and contemporary poems with expert analysis.'
+    description: 'Dive deep into the meaning and artistry of classic and contemporary poetry.'
   },
   { 
     name: 'LoreWars', 
-    time: '11:30 AM', 
     image: '/events/slam-poetry.jpeg', 
-    alt: 'LoreWars Battle Event',
-    description: 'Battle of knowledge as teams compete in literary trivia covering mythology, legends, and folklore.'
+    alt: 'LoreWars Event',
+    description: 'Battle it out in this epic competition of literary knowledge and storytelling prowess.'
   },
   { 
     name: 'Spockle', 
-    time: '1:00 PM', 
     image: '/events/slam-poetry.jpeg', 
-    alt: 'Spockle Game Event',
-    description: 'A unique word game that combines strategy, vocabulary, and literary knowledge in exciting matches.'
+    alt: 'Spockle Event',
+    description: 'A unique blend of spoken word and interactive storytelling that will captivate your imagination.'
   },
   { 
     name: 'Theatre', 
-    time: '2:30 PM', 
     image: '/events/slam-poetry.jpeg', 
-    alt: 'Theatre Performance Event',
-    description: 'Professional theatrical performances featuring scenes from beloved literary works and original plays.'
+    alt: 'Theatre Event',
+    description: 'Experience powerful theatrical performances bringing literature to life on stage.'
   },
   { 
-    name: 'Solo Speaking', 
-    time: '4:00 PM', 
+    name: 'After Dinner Speech', 
     image: '/events/slam-poetry.jpeg', 
-    alt: 'Solo Speaking Event',
-    description: 'Individual presentations where speakers share their insights on literature, writing, and storytelling.'
+    alt: 'After Dinner Speech Event',
+    description: 'Enjoy inspiring speeches and talks from renowned literary figures and industry experts.'
   },
   { 
     name: 'Panel Discussion', 
-    time: '5:30 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Panel Discussion Event',
     description: 'Join industry experts as they discuss current trends in literature, publishing, and creative writing.'
   },
   { 
     name: 'Change My Mind', 
-    time: '7:00 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Change My Mind Debate Event',
     description: 'Engaging debates on controversial literary topics where participants try to change each other\'s perspectives.'
   },
   { 
     name: 'Hot Takes Arena', 
-    time: '8:30 PM', 
     image: '/events/slam-poetry.jpeg', 
     alt: 'Hot Takes Arena Event',
     description: 'Share and defend your most controversial opinions about books, authors, and literary trends.'
@@ -145,8 +127,8 @@ const ScheduleSection = () => {
         backgroundColor: 'rgb(10,10,10)',
       }}
     >
-      {/* Enhanced CSS for smooth transitions */}
       <style>{`
+        /* Enhanced Day Toggle Styling */
         .day-toggle {
           position: relative;
           background: rgba(255, 255, 255, 0.1);
@@ -208,7 +190,102 @@ const ScheduleSection = () => {
         .day-slider.slide-right {
           transform: translateX(calc(100% + 6px));
         }
-        
+
+        /* Event Card Styling with your design */
+        .event-card {
+          position: relative;
+          width: 100%;
+          max-width: 300px;
+          height: 200px;
+          background-color: #1a1a1a;
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          perspective: 1000px;
+          box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.3);
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          cursor: pointer;
+        }
+
+        .event-card:hover {
+          transform: scale(1.05);
+          box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4);
+        }
+
+        .event-card__image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .event-card:hover .event-card__image {
+          scale: 0;
+          opacity: 0;
+        }
+
+        .event-card__content {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          padding: 20px;
+          box-sizing: border-box;
+          background: linear-gradient(135deg, hsl(348, 83%, 47%) 0%, hsl(348, 100%, 55%) 100%);
+          transform: rotateX(-90deg);
+          transform-origin: bottom;
+          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+
+        .event-card:hover .event-card__content {
+          transform: rotateX(0deg);
+        }
+
+        .event-card__title {
+          margin: 0 0 16px 0;
+          font-size: 22px;
+          color: white;
+          font-weight: 700;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .event-card__description {
+          margin: 0;
+          font-size: 13px;
+          color: rgba(255,255,255,0.9);
+          line-height: 1.5;
+          text-align: center;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+          .event-card {
+            height: 180px;
+            max-width: 280px;
+          }
+          
+          .event-card__content {
+            padding: 16px;
+          }
+          
+          .event-card__title {
+            font-size: 20px;
+            margin: 0 0 12px 0;
+          }
+          
+          .event-card__description {
+            font-size: 12px;
+          }
+        }
+
         .events-container {
           transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -226,116 +303,72 @@ const ScheduleSection = () => {
       
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Title */}
-        <ScrollReveal>
-          <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-            <h2 className="font-spartan font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase text-white mb-4 sm:mb-6 lg:mb-8 px-4">
-              EVENT SCHEDULE
-            </h2>
-            <p className="font-source text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6 lg:mb-8 px-4">
-              full masti • September 8-9, 2025
-            </p>
-          </div>
-        </ScrollReveal>
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <h2 className="font-spartan font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase text-white mb-4 sm:mb-6 lg:mb-8 px-4">
+            EVENT SCHEDULE
+          </h2>
+          <p className="font-source text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6 lg:mb-8 px-4">
+            full masti • September 8-9, 2025
+          </p>
+        </div>
 
         {/* Enhanced Day Selector */}
-        <ScrollReveal delay={200}>
-          <div className="flex justify-center mb-12 sm:mb-16 px-4">
-            <div className="day-toggle relative w-full max-w-xs sm:max-w-md overflow-hidden">
-              {/* Sliding background */}
-              <div className={`day-slider ${activeDay === 2 ? 'slide-right' : ''}`}></div>
+        <div className="flex justify-center mb-12 sm:mb-16 px-4">
+          <div className="day-toggle relative w-full max-w-xs sm:max-w-md overflow-hidden">
+            {/* Sliding background */}
+            <div className={`day-slider ${activeDay === 2 ? 'slide-right' : ''}`}></div>
+            
+            {/* Day buttons */}
+            <div className="flex relative z-10">
+              <button
+                onClick={() => handleDayChange(1)}
+                className={`day-button ${activeDay === 1 ? 'active' : 'inactive'} flex-1`}
+              >
+                <div className="flex items-center justify-center">
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                  <div>
+                    <div className="text-sm sm:text-base lg:text-lg font-spartan font-bold">Day 1</div>
+                    <div className="text-xs mt-1 opacity-90 hidden sm:block">Sept 8</div>
+                  </div>
+                </div>
+              </button>
               
-              {/* Day buttons */}
-              <div className="flex relative z-10">
-                <button
-                  onClick={() => handleDayChange(1)}
-                  className={`day-button ${activeDay === 1 ? 'active' : 'inactive'} flex-1`}
-                >
-                  <div className="flex items-center justify-center">
-                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
-                    <div>
-                      <div className="text-sm sm:text-base lg:text-lg font-spartan font-bold">Day 1</div>
-                      <div className="text-xs mt-1 opacity-90 hidden sm:block">Sept 8</div>
-                    </div>
+              <button
+                onClick={() => handleDayChange(2)}
+                className={`day-button ${activeDay === 2 ? 'active' : 'inactive'} flex-1`}
+              >
+                <div className="flex items-center justify-center">
+                  <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
+                  <div>
+                    <div className="text-sm sm:text-base lg:text-lg font-spartan font-bold">Day 2</div>
+                    <div className="text-xs mt-1 opacity-90 hidden sm:block">Sept 9</div>
                   </div>
-                </button>
-                
-                <button
-                  onClick={() => handleDayChange(2)}
-                  className={`day-button ${activeDay === 2 ? 'active' : 'inactive'} flex-1`}
-                >
-                  <div className="flex items-center justify-center">
-                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" />
-                    <div>
-                      <div className="text-sm sm:text-base lg:text-lg font-spartan font-bold">Day 2</div>
-                      <div className="text-xs mt-1 opacity-90 hidden sm:block">Sept 9</div>
-                    </div>
-                  </div>
-                </button>
-              </div>
+                </div>
+              </button>
             </div>
           </div>
-        </ScrollReveal>
+        </div>
 
-        {/* Events Grid with Simple Cards */}
+        {/* Events Grid */}
         <div className={`events-container ${isTransitioning ? 'events-fade-out' : 'events-fade-in'}`}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 justify-items-center px-4">
             {currentEvents.map((event, index) => (
-              <ScrollReveal key={`${activeDay}-${index}`} delay={isTransitioning ? 0 : index * 100}>
-                <div className="w-full max-w-[280px] sm:max-w-[320px]">
-                  <div className="w-full h-80 sm:h-96 perspective-1000 cursor-pointer group">
-                    <div className="relative w-full h-full transform-style-preserve-3d group-hover:rotate-y-180 transition-transform duration-600">
-                      {/* Front of card */}
-                      <div className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg bg-gray-800">
-                        <div className="relative w-full h-full">
-                          {/* Fallback background in case image doesn't load */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-900"></div>
-                          <img
-                            src={event.image}
-                            alt={event.alt}
-                            className="w-full h-full object-cover relative z-10"
-                            onError={(e) => {
-                              console.log('Image failed to load:', event.image);
-                              e.currentTarget.style.opacity = '0';
-                            }}
-                          />
-                          <div className="absolute inset-0 bg-black/40 flex flex-col justify-end p-4 sm:p-6 z-20">
-                            <div className="bg-black/80 backdrop-blur-sm rounded-lg p-3 sm:p-4">
-                              <h3 className="font-spartan font-bold text-white text-lg sm:text-xl mb-2">
-                                {event.name}
-                              </h3>
-                              <div className="flex items-center text-gray-300 text-sm sm:text-base">
-                                <Clock className="w-4 h-4 mr-2" />
-                                {event.time}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Back of card */}
-                      <div 
-                        className="absolute inset-0 backface-hidden rounded-xl overflow-hidden shadow-lg rotate-y-180"
-                        style={{ transform: 'rotateY(180deg)' }}
-                      >
-                        <div className="w-full h-full bg-gradient-to-br from-red-600 via-red-700 to-red-800 flex flex-col justify-center p-4 sm:p-6">
-                          <div className="text-center">
-                            <h3 className="font-spartan font-bold text-white text-xl sm:text-2xl mb-4">
-                              {event.name}
-                            </h3>
-                            <div className="flex items-center justify-center text-white/90 text-sm sm:text-base mb-4">
-                              <Clock className="w-4 h-4 mr-2" />
-                              {event.time}
-                            </div>
-                            <p className="font-source text-white/90 text-sm sm:text-base leading-relaxed">
-                              {event.description}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div key={`${activeDay}-${index}`} className="event-card">
+                <img
+                  src={event.image}
+                  alt={event.alt}
+                  className="event-card__image"
+                  onError={(e) => {
+                    // Fallback to a solid color background if image fails
+                    e.currentTarget.style.display = 'none';
+                    e.currentTarget.parentElement.style.background = 'linear-gradient(135deg, #374151 0%, #1f2937 100%)';
+                  }}
+                />
+                <div className="event-card__content">
+                  <p className="event-card__title">{event.name}</p>
+                  <p className="event-card__description">{event.description}</p>
                 </div>
-              </ScrollReveal>
+              </div>
             ))}
           </div>
         </div>
