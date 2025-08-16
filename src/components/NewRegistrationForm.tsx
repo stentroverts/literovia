@@ -223,30 +223,32 @@ const RegistrationForm: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center p-4">
-        <Card className="w-full max-w-md bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-          <CardContent className="pt-6">
-            <div className="text-center space-y-4">
-              <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-              <h2 className="text-2xl font-bold text-white">Registration Successful!</h2>
-              <p className="text-gray-300">
-                Thank you for registering for Literovia 2025. We'll contact you soon with further details.
-              </p>
-              <Button 
-                onClick={() => window.location.reload()} 
-                className="bg-red-600 hover:bg-red-700"
-              >
-                Register Another Person
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black p-4 pt-20">
+        <div className="max-w-md mx-auto">
+          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+            <CardContent className="pt-6">
+              <div className="text-center space-y-4">
+                <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
+                <h2 className="text-2xl font-bold text-white">Registration Successful!</h2>
+                <p className="text-gray-300">
+                  Thank you for registering for Literovia 2025. We'll contact you soon with further details.
+                </p>
+                <Button 
+                  onClick={() => window.location.reload()} 
+                  className="bg-red-600 hover:bg-red-700"
+                >
+                  Register Another Person
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black py-8 px-4">
+    <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-8 px-4 pt-20 min-h-screen">
       <div className="max-w-2xl mx-auto">
         <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm shadow-2xl">
           <CardHeader className="text-center space-y-2">

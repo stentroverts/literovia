@@ -8,7 +8,7 @@ import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen text-foreground overflow-x-hidden" style={{backgroundColor: 'rgb(10,10,10)'}}>
+    <div className="text-foreground overflow-x-hidden relative" style={{backgroundColor: 'rgb(10,10,10)'}}>
       {/* Navigation */}
       <Navigation />
       

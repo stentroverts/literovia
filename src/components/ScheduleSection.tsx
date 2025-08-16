@@ -1,113 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
-
-const day1Events = [
-  { 
-    name: 'Slam Poetry', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Slam Poetry Event',
-    description: 'Experience the raw power of spoken word poetry as talented poets share their most compelling stories and emotions.'
-  },
-  { 
-    name: 'Literary Auction', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Literary Auction Event',
-    description: 'Bid on rare books, signed manuscripts, and unique literary artifacts in this exciting auction event.'
-  },
-  { 
-    name: 'Workshop', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Writing Workshop Event',
-    description: 'Join our interactive writing workshop and learn techniques from experienced authors and editors.'
-  },
-  { 
-    name: 'BangJam', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'BangJam Music Event',
-    description: 'A fusion of music and literature where artists create live performances blending both art forms.'
-  },
-  { 
-    name: 'Paperback Partners', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Paperback Partners Event',
-    description: 'Connect with fellow book lovers and find your perfect reading companion in this networking event.'
-  },
-  { 
-    name: 'Performance', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Performance Event',
-    description: 'Watch dramatic interpretations of classic literature brought to life by talented performers.'
-  },
-  { 
-    name: 'GeoGuesser', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'GeoGuesser Event',
-    description: 'Test your geographical knowledge in this fun and interactive quiz competition.'
-  },
-  { 
-    name: 'NY Times Mini Games', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'NY Times Mini Games Event',
-    description: 'Challenge yourself with popular New York Times puzzle games and brain teasers.'
-  }
-];
-
-const day2Events = [
-  { 
-    name: 'Poem Interpretation', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Poem Interpretation Event',
-    description: 'Dive deep into the meaning and artistry of classic and contemporary poetry.'
-  },
-  { 
-    name: 'LoreWars', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'LoreWars Event',
-    description: 'Battle it out in this epic competition of literary knowledge and storytelling prowess.'
-  },
-  { 
-    name: 'Spockle', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Spockle Event',
-    description: 'A unique blend of spoken word and interactive storytelling that will captivate your imagination.'
-  },
-  { 
-    name: 'Theatre', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Theatre Event',
-    description: 'Experience powerful theatrical performances bringing literature to life on stage.'
-  },
-  { 
-    name: 'After Dinner Speech', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'After Dinner Speech Event',
-    description: 'Enjoy inspiring speeches and talks from renowned literary figures and industry experts.'
-  },
-  { 
-    name: 'Panel Discussion', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Panel Discussion Event',
-    description: 'Join industry experts as they discuss current trends in literature, publishing, and creative writing.'
-  },
-  { 
-    name: 'Change My Mind', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Change My Mind Debate Event',
-    description: 'Engaging debates on controversial literary topics where participants try to change each other\'s perspectives.'
-  },
-  { 
-    name: 'Hot Takes Arena', 
-    image: '/events/slam-poetry.jpeg', 
-    alt: 'Hot Takes Arena Event',
-    description: 'Share and defend your most controversial opinions about books, authors, and literary trends.'
-  }
-];
+import { getEventsByDay, Event } from '@/data/eventsData';
 
 const ScheduleSection = () => {
+  const navigate = useNavigate();
   const [activeDay, setActiveDay] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const currentEvents = activeDay === 1 ? day1Events : day2Events;
+  const currentEvents = getEventsByDay(activeDay as 1 | 2);
 
   const handleDayChange = (day: number) => {
     if (day === activeDay) return;
@@ -117,6 +18,10 @@ const ScheduleSection = () => {
       setActiveDay(day);
       setIsTransitioning(false);
     }, 150);
+  };
+
+  const handleEventClick = (eventId: string) => {
+    navigate(`/event/${eventId}`);
   };
 
   return (
@@ -353,20 +258,24 @@ const ScheduleSection = () => {
         <div className={`events-container ${isTransitioning ? 'events-fade-out' : 'events-fade-in'}`}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 justify-items-center px-4">
             {currentEvents.map((event, index) => (
-              <div key={`${activeDay}-${index}`} className="event-card">
+              <div 
+                key={`${activeDay}-${event.id}`} 
+                className="event-card"
+                onClick={() => handleEventClick(event.id)}
+              >
                 <img
                   src={event.image}
-                  alt={event.alt}
+                  alt={`${event.name} Event`}
                   className="event-card__image"
                   onError={(e) => {
                     // Fallback to a solid color background if image fails
                     e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement.style.background = 'linear-gradient(135deg, #374151 0%, #1f2937 100%)';
+                    e.currentTarget.parentElement!.style.background = 'linear-gradient(135deg, #374151 0%, #1f2937 100%)';
                   }}
                 />
                 <div className="event-card__content">
                   <p className="event-card__title">{event.name}</p>
-                  <p className="event-card__description">{event.description}</p>
+                  <p className="event-card__description">{event.fullDescription.slice(0, 150)}...</p>
                 </div>
               </div>
             ))}

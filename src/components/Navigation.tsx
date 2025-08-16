@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';  // Hamburger & close icons
 import logoSvg from '@/assets/nav.svg';   // <-- your logo here
@@ -18,6 +19,8 @@ export default function Navigation() {
   const [isScrolled, setIsScrolled]       = useState(false);
   const [isMobileMenuOpen, setMobileOpen] = useState(false);
   const [isLoaded, setIsLoaded]           = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 50);
@@ -30,11 +33,29 @@ export default function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
+    if (id === 'register') {
+      navigate('/register');
+      setMobileOpen(false);
+      return;
+    }
+    
+    // If we're not on the home page, navigate to home first
+    if (location.pathname !== '/') {
+      navigate(`/#${id}`);
+      setMobileOpen(false);
+      return;
+    }
+    
+    // If we're on the home page, scroll to the section
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
       setMobileOpen(false);
     }
+  };
+
+  const goToHome = () => {
+    navigate('/');
   };
 
   return (
@@ -161,7 +182,7 @@ export default function Navigation() {
           className={`flex items-center gap-3 cursor-pointer transition-all duration-300 hover:scale-105 ${
             isLoaded ? 'float-in-1 logo-float' : ''
           }`}
-          onClick={() => scrollToSection('hero')}
+          onClick={goToHome}
         >
           <div className="relative">
             <img 
