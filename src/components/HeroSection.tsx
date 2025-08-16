@@ -2,17 +2,21 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import ScrollReveal from './ScrollReveal';
 import { useTypewriter } from '@/hooks/useTypewriter';
-import { openRegistrationForm } from '@/config/registration';
+import { useNavigate } from 'react-router-dom';
 import heroBg from '@/assets/book.svg';
-import TwinklingStars from './TwinklingStars';
 import ShinyText from '@/components/ui/shiny-text';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   const { displayText: typedText, isComplete } = useTypewriter({
     text: 'Literovia',
     speed: 150,
     delay: 500,
   });
+
+  const openRegistrationForm = () => {
+    navigate('/register');
+  };
 
 
   // CSS variables
@@ -59,9 +63,6 @@ const HeroSection = () => {
           }}
         />
       </div>
-
-      {/* Twinkling Stars */}
-      <TwinklingStars />
 
 
 
@@ -229,10 +230,32 @@ const HeroSection = () => {
               marginRight: 'auto',
               padding: '0 1rem',
               lineHeight: 1.4,
+              textAlign: 'center',
             }}
           >
             come join us plsokthnx
           </p>
+          
+          {/* Event Dates */}
+          <div
+            style={{
+              marginTop: 'clamp(0.75rem, 2vh, 1rem)',
+              textAlign: 'center',
+            }}
+          >
+            <p
+              style={{
+                fontFamily: '"Source Serif Pro", serif',
+                fontSize: 'clamp(1.1rem, 3vw, 1.5rem)',
+                fontWeight: 'bold',
+                color: crimson,
+                textShadow: `0 0 20px ${crimson}40`,
+                letterSpacing: '0.05em',
+              }}
+            >
+              September 8-9, 2025
+            </p>
+          </div>
         </ScrollReveal>
       </div>
     </section>

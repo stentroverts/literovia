@@ -1,10 +1,16 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import ScrollReveal from './ScrollReveal';
-import { openRegistrationForm } from '@/config/registration';
+import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 
 const RegisterSection = () => {
+  const navigate = useNavigate();
+
+  const openRegistrationForm = () => {
+    navigate('/register');
+  };
+
   return (
     <section
       id="register"
@@ -23,7 +29,7 @@ const RegisterSection = () => {
                 </h2>
               </div>
               <p className="font-source text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                Be part of an unforgettable literary journey. Register now for two days of creativity, 
+                Be part of an unforgettable literary journey. Buy your pass now for two days of creativity, 
                 collaboration, and literary excellence.
               </p>
             </div>
@@ -36,7 +42,7 @@ const RegisterSection = () => {
                 onClick={openRegistrationForm}
               >
                 <CheckCircle className="w-6 h-6 mr-3" />
-                Register Now
+                Buy Pass
               </Button>
             </div>
 
