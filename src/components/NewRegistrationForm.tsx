@@ -142,6 +142,8 @@ const RegistrationForm: React.FC = () => {
       
       if (result.success) {
         setSubmitted(true);
+        // Scroll to top when success page is shown
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         console.log('Registration submitted successfully:', result);
       } else {
         setErrors({ submit: result.message });
@@ -196,22 +198,48 @@ const RegistrationForm: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="bg-gradient-to-br from-gray-900 via-gray-800 to-black p-4 pt-20">
-        <div className="max-w-md mx-auto">
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-            <CardContent className="pt-6">
-              <div className="text-center space-y-4">
-                <CheckCircle className="w-16 h-16 text-green-500 mx-auto" />
-                <h2 className="text-2xl font-bold text-white">Registration Successful!</h2>
-                <p className="text-gray-300">
-                  Thank you for registering for Literovia 2025. We'll contact you soon with further details.
-                </p>
-                <Button 
-                  onClick={() => window.location.reload()} 
-                  className="bg-red-600 hover:bg-red-700"
-                >
-                  Register Another Person
-                </Button>
+      <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center p-4 pt-16">
+        <div className="w-full max-w-lg mx-auto -mt-16">
+          <Card className="bg-gray-800/60 border-gray-700 backdrop-blur-sm shadow-2xl">
+            <CardContent className="p-8">
+              <div className="text-center space-y-6">
+                <div className="space-y-4">
+                  <CheckCircle className="w-20 h-20 text-green-500 mx-auto" />
+                  <h2 className="text-3xl font-bold text-white">Registration Successful!</h2>
+                </div>
+                
+                <div className="space-y-4 text-gray-300">
+                  <p className="text-lg leading-relaxed">
+                    Thank you for registering for Literovia 2025! We have sent you a confirmation email with all the details.
+                  </p>
+                  <p className="text-base text-gray-400">
+                    Follow us on social media for more updates and exciting announcements!
+                  </p>
+                </div>
+                
+                <div className="space-y-4 pt-4">
+                  <Button 
+                    onClick={() => window.location.reload()} 
+                    className="w-full bg-red-600 hover:bg-red-700 text-white py-3 text-lg font-medium transition-colors duration-200"
+                  >
+                    Register Another Person
+                  </Button>
+                  
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button 
+                      onClick={() => window.location.href = '/'} 
+                      className="flex-1 bg-gray-600 hover:bg-gray-500 text-white py-3 text-base font-medium transition-colors duration-200"
+                    >
+                      Go Back to Home
+                    </Button>
+                    <Button 
+                      onClick={() => window.location.href = '/#schedule'} 
+                      className="flex-1 bg-crimson hover:bg-crimson-bright text-white py-3 text-base font-medium transition-colors duration-200"
+                    >
+                      View More Events
+                    </Button>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
