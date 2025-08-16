@@ -94,8 +94,25 @@ const EventDetail = () => {
                   </div>
                 </div>
               </Card>
+            </div>
 
-              {/* Quick Info Cards */}
+            {/* Event Details */}
+            <div className="space-y-8">
+              <div>
+                <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+                  {event.name}
+                </h1>
+                <div className="flex items-center space-x-2 mb-6">
+                  <Badge className={getCategoryColor(event.category)}>
+                    {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+                  </Badge>
+                  <Badge variant="outline" className="border-gray-600 text-gray-300">
+                    Day {event.day}
+                  </Badge>
+                </div>
+              </div>
+
+              {/* Date and Time Cards on Right Side */}
               <div className="grid grid-cols-2 gap-4">
                 <Card className="bg-gray-800/30 border-gray-700">
                   <CardContent className="p-4">
@@ -120,23 +137,6 @@ const EventDetail = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
-            </div>
-
-            {/* Event Details */}
-            <div className="space-y-8">
-              <div>
-                <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
-                  {event.name}
-                </h1>
-                <div className="flex items-center space-x-2 mb-6">
-                  <Badge className={getCategoryColor(event.category)}>
-                    {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
-                  </Badge>
-                  <Badge variant="outline" className="border-gray-600 text-gray-300">
-                    Day {event.day}
-                  </Badge>
-                </div>
               </div>
 
               {/* Event Info Grid */}
