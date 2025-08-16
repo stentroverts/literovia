@@ -56,6 +56,11 @@ const RegistrationForm: React.FC = () => {
       console.error('Payment failed:', error);
       setErrors({ submit: 'Payment failed. Please try again.' });
       setIsSubmitting(false);
+    },
+    onDismiss: () => {
+      console.log('Payment dismissed by user');
+      setErrors({ submit: 'Payment was cancelled. Please try again if you want to complete your registration.' });
+      setIsSubmitting(false);
     }
   });
 
@@ -186,7 +191,7 @@ const RegistrationForm: React.FC = () => {
     }
 
     setIsSubmitting(true);
-    setErrors({});
+    setErrors({}); // Clear any previous errors
 
     try {
       // Initialize Razorpay payment

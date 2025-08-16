@@ -4,9 +4,10 @@ import { RAZORPAY_CONFIG, type PaymentOptions, type RazorpayPaymentData } from '
 interface UseRazorpayProps {
   onSuccess: (paymentData: RazorpayPaymentData) => void;
   onError: (error: any) => void;
+  onDismiss?: () => void;
 }
 
-export const useRazorpay = ({ onSuccess, onError }: UseRazorpayProps) => {
+export const useRazorpay = ({ onSuccess, onError, onDismiss }: UseRazorpayProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const loadRazorpayScript = useCallback(() => {
@@ -60,8 +61,11 @@ export const useRazorpay = ({ onSuccess, onError }: UseRazorpayProps) => {
         },
         modal: {
           ondismiss: () => {
-            console.log('Payment modal closed');
+            console.log('Payment modal closed/dismissed by user');
             setIsLoading(false);
+            if (onDismiss) {
+              onDismiss();
+            }
           },
         },
       };
@@ -70,6 +74,7 @@ export const useRazorpay = ({ onSuccess, onError }: UseRazorpayProps) => {
       const razorpayInstance = new window.Razorpay(options);
       razorpayInstance.on('payment.failed', (response: any) => {
         console.error('Payment failed:', response);
+        setIsLoading(false);
         onError(response.error);
       });
       
@@ -77,11 +82,10 @@ export const useRazorpay = ({ onSuccess, onError }: UseRazorpayProps) => {
 
     } catch (error) {
       console.error('Error initializing payment:', error);
-      onError(error);
-    } finally {
       setIsLoading(false);
+      onError(error);
     }
-  }, [loadRazorpayScript, onSuccess, onError]);
+  }, [loadRazorpayScript, onSuccess, onError, onDismiss]);
 
   return {
     initializePayment,
