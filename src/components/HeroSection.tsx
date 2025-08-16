@@ -212,7 +212,7 @@ const HeroSection = () => {
                 cursor: 'pointer',
               }}
             >
-              PAY ₹149 & REGISTER
+              REGISTER
             </Button>
           </div>
         </ScrollReveal>
@@ -233,7 +233,7 @@ const HeroSection = () => {
               textAlign: 'center',
             }}
           >
-            come join us plsokthnx
+            come join us on
           </p>
           
           {/* Event Dates */}

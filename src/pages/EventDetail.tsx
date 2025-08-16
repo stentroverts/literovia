@@ -172,7 +172,7 @@ const EventDetail = () => {
                   Register for Literovia 2025
                 </Button>
                 <p className="text-center text-gray-400 text-sm">
-                  Single registration gives access to all events • ₹149 only
+                  Single registration gives access to all events
                 </p>
               </div>
             </div>

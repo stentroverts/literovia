@@ -56,6 +56,55 @@ const ContactSection = () => {
           </div>
         </ScrollReveal>
 
+        {/* Contact Numbers */}
+        <ScrollReveal delay={100}>
+          <div className="mb-8 sm:mb-12">
+            <h3 className="font-spartan font-semibold text-xl sm:text-2xl md:text-3xl text-white mb-6 sm:mb-8">
+              Get in Touch
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto">
+              {/* Abdul Majed */}
+              <div className="bg-white/5 border border-gray-700/50 rounded-xl p-4 sm:p-6 hover:bg-white/10 transition-colors duration-300">
+                <h4 className="font-spartan font-semibold text-white text-base sm:text-lg mb-2">
+                  Abdul Majed
+                </h4>
+                <a 
+                  href="tel:+917396977130"
+                  className="text-crimson text-sm sm:text-base hover:text-crimson-light transition-colors duration-300"
+                >
+                  +91 73969 77130
+                </a>
+              </div>
+
+              {/* Sameer Ahmed */}
+              <div className="bg-white/5 border border-gray-700/50 rounded-xl p-4 sm:p-6 hover:bg-white/10 transition-colors duration-300">
+                <h4 className="font-spartan font-semibold text-white text-base sm:text-lg mb-2">
+                  Sameer Ahmed
+                </h4>
+                <a 
+                  href="tel:+919912818640"
+                  className="text-crimson text-sm sm:text-base hover:text-crimson-light transition-colors duration-300"
+                >
+                  +91 99128 18640
+                </a>
+              </div>
+
+              {/* Akshaya B */}
+              <div className="bg-white/5 border border-gray-700/50 rounded-xl p-4 sm:p-6 hover:bg-white/10 transition-colors duration-300 sm:col-span-2 lg:col-span-1 sm:mx-auto lg:mx-0 max-w-sm sm:max-w-none">
+                <h4 className="font-spartan font-semibold text-white text-base sm:text-lg mb-2">
+                  Akshaya B
+                </h4>
+                <a 
+                  href="tel:+919502270341"
+                  className="text-crimson text-sm sm:text-base hover:text-crimson-light transition-colors duration-300"
+                >
+                  +91 95022 70341
+                </a>
+              </div>
+            </div>
+          </div>
+        </ScrollReveal>
+
         {/* Social Media Links */}
         <ScrollReveal delay={200}>
           <div className="flex flex-col lg:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 px-2">

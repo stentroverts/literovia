@@ -15,66 +15,66 @@ const RegisterSection = () => {
   return (
     <section
       id="register"
-      className="relative py-20 px-6"
+      className="relative py-12 sm:py-20 px-4 sm:px-6"
       style={{
         backgroundColor: 'rgb(10,10,10)',
       }}
     >
       <div className="container mx-auto max-w-4xl relative z-10">
         <ScrollReveal>
-          <div className="bg-white backdrop-blur-md border border-gray-200 rounded-3xl p-8 sm:p-12 text-center hover:shadow-2xl transition-all duration-500 shadow-lg">
-            <div className="mb-12">
-              <div className="flex items-center justify-center mb-6">
-                <h2 className="font-spartan font-bold text-3xl md:text-4xl uppercase text-gray-800">
+          <div className="bg-white backdrop-blur-md border border-gray-200 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center hover:shadow-2xl transition-all duration-500 shadow-lg">
+            <div className="mb-8 sm:mb-12">
+              <div className="flex items-center justify-center mb-4 sm:mb-6">
+                <h2 className="font-spartan font-bold text-2xl sm:text-3xl md:text-4xl uppercase text-gray-800 leading-tight">
                   Join the <span className="text-crimson">Literary Fest</span>
                 </h2>
               </div>
               
               {/* Pricing Display */}
-              <div className="mb-8">
-                <div className="inline-flex items-center bg-gradient-to-r from-crimson/10 to-crimson-bright/10 border-2 border-crimson/20 rounded-2xl px-8 py-4 mb-6">
-                  <IndianRupee className="w-8 h-8 text-crimson mr-2" />
-                  <span className="text-4xl font-bold text-crimson">
+              <div className="mb-6 sm:mb-8">
+                <div className="inline-flex items-center bg-gradient-to-r from-crimson/10 to-crimson-bright/10 border-2 border-crimson/20 rounded-xl sm:rounded-2xl px-4 sm:px-8 py-3 sm:py-4 mb-4 sm:mb-6 max-w-full">
+                  <IndianRupee className="w-6 h-6 sm:w-8 sm:h-8 text-crimson mr-2 flex-shrink-0" />
+                  <span className="text-3xl sm:text-4xl font-bold text-crimson">
                     {RAZORPAY_CONFIG.PASS_AMOUNT / 100}
                   </span>
-                  <span className="text-lg text-gray-600 ml-3">per pass</span>
+                  <span className="text-base sm:text-lg text-gray-600 ml-2 sm:ml-3">per pass</span>
                 </div>
               </div>
               
-              <p className="font-source text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
+              <p className="font-source text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto px-2">
                 Be part of an unforgettable literary journey. Buy your pass now for two days of creativity, 
                 collaboration, and literary excellence.
               </p>
             </div>
 
             {/* Registration Button */}
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <Button
-                className="bg-gradient-to-r from-crimson to-red-600 hover:scale-105 transition-all duration-300 w-full sm:w-auto min-w-[280px] text-white border-none font-bold text-xl px-12 py-6 rounded-xl shadow-lg"
+                className="bg-gradient-to-r from-crimson to-red-600 hover:scale-105 transition-all duration-300 w-full sm:w-auto sm:min-w-[280px] text-white border-none font-bold text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-6 rounded-xl shadow-lg"
                 size="xl"
                 onClick={openRegistrationForm}
               >
-                <CreditCard className="w-6 h-6 mr-3" />
-                Pay ₹{RAZORPAY_CONFIG.PASS_AMOUNT / 100} & Register
+                <CreditCard className="w-5 h-5 sm:w-6 sm:h-6 mr-2 sm:mr-3 flex-shrink-0" />
+                <span className="truncate">Register Now</span>
               </Button>
             </div>
 
             {/* Simple Info */}
             <div className="text-center">
-              <p className="font-source text-sm md:text-base text-gray-600 mb-4">
+              <p className="font-source text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
                 September 8-9, 2025 • Limited spots available
               </p>
-              <div className="inline-flex items-center space-x-4 text-xs text-gray-500">
-                <div className="flex items-center">
-                  <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
+              <div className="flex flex-col sm:flex-row sm:justify-center sm:items-center sm:space-x-4 space-y-2 sm:space-y-0 text-xs text-gray-500">
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
                   <span>Secure payment via Razorpay</span>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
                   <span>Instant confirmation</span>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
+                <div className="flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-1 flex-shrink-0" />
                   <span>Multiple payment options</span>
                 </div>
               </div>

@@ -213,7 +213,7 @@ const ScheduleSection = () => {
             EVENT SCHEDULE
           </h2>
           <p className="font-source text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6 lg:mb-8 px-4">
-            full masti • September 8-9, 2025
+            September 8-9, 2025
           </p>
         </div>
 

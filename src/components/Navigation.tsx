@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';  // Hamburger & close icons
-import logoSvg from '@/assets/nav.svg';   // <-- your logo here
+import logoSvg from '@/assets/logo.svg';   // <-- your logo here
 import registerIcon from '@/assets/register.svg';
 import eventsIcon   from '@/assets/events.svg';
 import aboutIcon    from '@/assets/about.svg';
@@ -177,22 +177,25 @@ export default function Navigation() {
       `}</style>
 
       <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        {/* Logo with enhanced float animation */}
+        {/* Logo */}
         <div
-          className={`flex items-center gap-3 cursor-pointer transition-all duration-300 hover:scale-105 ${
-            isLoaded ? 'float-in-1 logo-float' : ''
-          }`}
+          className="flex items-center gap-3 cursor-pointer"
           onClick={goToHome}
         >
-          <div className="relative">
+          <div>
             <img 
               src={logoSvg} 
               alt="Literovia Logo" 
-              className="w-10 h-10 transition-transform duration-300 hover:rotate-12" 
+              className="w-10 h-10" 
             />
-            <div className="absolute inset-0 w-10 h-10 bg-crimson/20 rounded-full blur-xl opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
           </div>
-          <span className="font-spartan font-bold text-lg text-foreground hover:text-crimson transition-colors duration-300">
+          <span 
+            style={{ 
+              fontFamily: '"Della Respira", serif',
+              color: 'hsl(348, 83%, 47%)'
+            }}
+            className="font-bold text-lg"
+          >
             Literovia
           </span>
         </div>
