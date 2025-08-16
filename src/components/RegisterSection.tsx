@@ -2,7 +2,8 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import ScrollReveal from './ScrollReveal';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, IndianRupee, CreditCard } from 'lucide-react';
+import { RAZORPAY_CONFIG } from '@/config/razorpay';
 
 const RegisterSection = () => {
   const navigate = useNavigate();
@@ -28,6 +29,18 @@ const RegisterSection = () => {
                   Join the <span className="text-crimson">Literary Fest</span>
                 </h2>
               </div>
+              
+              {/* Pricing Display */}
+              <div className="mb-8">
+                <div className="inline-flex items-center bg-gradient-to-r from-crimson/10 to-crimson-bright/10 border-2 border-crimson/20 rounded-2xl px-8 py-4 mb-6">
+                  <IndianRupee className="w-8 h-8 text-crimson mr-2" />
+                  <span className="text-4xl font-bold text-crimson">
+                    {RAZORPAY_CONFIG.PASS_AMOUNT / 100}
+                  </span>
+                  <span className="text-lg text-gray-600 ml-3">per pass</span>
+                </div>
+              </div>
+              
               <p className="font-source text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto">
                 Be part of an unforgettable literary journey. Buy your pass now for two days of creativity, 
                 collaboration, and literary excellence.
@@ -37,12 +50,12 @@ const RegisterSection = () => {
             {/* Registration Button */}
             <div className="mb-8">
               <Button
-                className="bg-gradient-to-r from-crimson to-red-600 hover:scale-105 transition-all duration-300 w-full sm:w-auto min-w-[240px] text-white border-none font-bold text-xl px-12 py-6 rounded-xl"
+                className="bg-gradient-to-r from-crimson to-red-600 hover:scale-105 transition-all duration-300 w-full sm:w-auto min-w-[280px] text-white border-none font-bold text-xl px-12 py-6 rounded-xl shadow-lg"
                 size="xl"
                 onClick={openRegistrationForm}
               >
-                <CheckCircle className="w-6 h-6 mr-3" />
-                Buy Pass
+                <CreditCard className="w-6 h-6 mr-3" />
+                Pay ₹{RAZORPAY_CONFIG.PASS_AMOUNT / 100} & Register
               </Button>
             </div>
 
@@ -54,11 +67,15 @@ const RegisterSection = () => {
               <div className="inline-flex items-center space-x-4 text-xs text-gray-500">
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
-                  <span>Secure payment</span>
+                  <span>Secure payment via Razorpay</span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
                   <span>Instant confirmation</span>
+                </div>
+                <div className="flex items-center">
+                  <CheckCircle className="w-4 h-4 text-green-500 mr-1" />
+                  <span>Multiple payment options</span>
                 </div>
               </div>
             </div>

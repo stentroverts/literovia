@@ -212,7 +212,7 @@ const HeroSection = () => {
                 cursor: 'pointer',
               }}
             >
-              BUY PASS
+              PAY ₹149 & REGISTER
             </Button>
           </div>
         </ScrollReveal>

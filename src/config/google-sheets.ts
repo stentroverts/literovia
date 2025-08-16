@@ -11,12 +11,15 @@ export interface RegistrationData {
   college: string;
   year: string;
   course: string;
-  screenshotLink: string;
+  paymentId?: string;
+  paymentAmount?: number;
+  paymentStatus?: 'pending' | 'completed' | 'failed';
+  screenshotLink?: string; // Made optional since we're using Razorpay now
 }
 
 export const submitRegistration = async (data: RegistrationData): Promise<{ success: boolean; message: string; registrationId?: string }> => {
   try {
-    console.log('🚀 Submitting registration...');
+    console.log('🚀 Submitting registration with data:', data);
     
     const formData = new FormData();
     formData.append('fullName', data.fullName);
@@ -25,15 +28,27 @@ export const submitRegistration = async (data: RegistrationData): Promise<{ succ
     formData.append('college', data.college);
     formData.append('year', data.year);
     formData.append('course', data.course);
-    formData.append('screenshotLink', data.screenshotLink);
+    formData.append('paymentId', data.paymentId || '');
+    formData.append('paymentAmount', data.paymentAmount?.toString() || '');
+    formData.append('paymentStatus', data.paymentStatus || 'pending');
+    formData.append('screenshotLink', data.screenshotLink || '');
+
+    console.log('📤 Form data being sent:');
+    for (let [key, value] of formData.entries()) {
+      console.log(`  ${key}: ${value}`);
+    }
 
     const response = await fetch(GOOGLE_SHEETS_CONFIG.SCRIPT_URL, {
       method: 'POST',
       body: formData
     });
 
+    console.log('📥 Response status:', response.status);
+    const responseText = await response.text();
+    console.log('📥 Response text:', responseText);
+
     if (response.ok) {
-      const result = await response.json();
+      const result = JSON.parse(responseText);
       console.log('✅ Success:', result);
       return {
         success: true,
@@ -41,7 +56,7 @@ export const submitRegistration = async (data: RegistrationData): Promise<{ succ
         registrationId: result.registrationId
       };
     } else {
-      throw new Error(`Server error: ${response.status}`);
+      throw new Error(`Server error: ${response.status} - ${responseText}`);
     }
   } catch (error) {
     console.error('❌ Registration failed:', error);

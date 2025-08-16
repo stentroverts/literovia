@@ -6,9 +6,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
-import { Eye, CheckCircle, AlertCircle } from 'lucide-react';
-import PaymentQR from './PaymentQR';
+import { CheckCircle, AlertCircle, CreditCard, IndianRupee } from 'lucide-react';
 import { submitRegistration, type RegistrationData } from '@/config/google-sheets';
+import { useRazorpay } from '@/hooks/useRazorpay';
+import { RAZORPAY_CONFIG } from '@/config/razorpay';
 
 interface FormData {
   fullName: string;
@@ -18,7 +19,6 @@ interface FormData {
   otherInstitution: string;
   year: string;
   course: string;
-  screenshotLink: string;
 }
 
 interface FormErrors {
@@ -33,14 +33,29 @@ const RegistrationForm: React.FC = () => {
     college: '',
     otherInstitution: '',
     year: '',
-    course: '',
-    screenshotLink: ''
+    course: ''
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showQR, setShowQR] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [paymentData, setPaymentData] = useState<any>(null);
+
+  // Razorpay integration
+  const { initializePayment, isLoading: isPaymentLoading } = useRazorpay({
+    onSuccess: async (razorpayResponse) => {
+      console.log('Payment successful:', razorpayResponse);
+      setPaymentData(razorpayResponse);
+      
+      // Submit registration with payment details
+      await submitRegistrationWithPayment(razorpayResponse);
+    },
+    onError: (error) => {
+      console.error('Payment failed:', error);
+      setErrors({ submit: 'Payment failed. Please try again.' });
+      setIsSubmitting(false);
+    }
+  });
 
   const collegeOptions = [
     { value: 'VNRVJIET', label: 'VNRVJIET' },
@@ -101,15 +116,43 @@ const RegistrationForm: React.FC = () => {
       newErrors.course = 'Course/Branch is required';
     }
 
-    // Payment screenshot validation
-    if (!formData.screenshotLink.trim()) {
-      newErrors.screenshotLink = 'Payment screenshot Google Drive link is required';
-    } else if (!formData.screenshotLink.includes('drive.google.com') && !formData.screenshotLink.includes('docs.google.com')) {
-      newErrors.screenshotLink = 'Please provide a valid Google Drive link';
-    }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const submitRegistrationWithPayment = async (razorpayResponse: any) => {
+    try {
+      setIsSubmitting(true);
+      
+      // Prepare registration data with payment info
+      const registrationData: RegistrationData = {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        college: formData.college === 'Others' ? formData.otherInstitution : formData.college,
+        year: formData.year,
+        course: formData.course,
+        paymentId: razorpayResponse.razorpay_payment_id,
+        paymentAmount: RAZORPAY_CONFIG.PASS_AMOUNT / 100, // Convert paise to rupees
+        paymentStatus: 'completed'
+      };
+
+      // Submit to Google Sheets
+      const result = await submitRegistration(registrationData);
+      
+      if (result.success) {
+        setSubmitted(true);
+        console.log('Registration submitted successfully:', result);
+      } else {
+        setErrors({ submit: result.message });
+      }
+      
+    } catch (error) {
+      console.error('Registration submission error:', error);
+      setErrors({ submit: 'Failed to submit registration. Please contact support.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: keyof FormData, value: string) => {
@@ -161,33 +204,19 @@ const RegistrationForm: React.FC = () => {
     }
 
     setIsSubmitting(true);
+    setErrors({});
 
     try {
-      // Prepare registration data
-      const registrationData: RegistrationData = {
-        fullName: formData.fullName,
+      // Initialize Razorpay payment
+      await initializePayment({
+        name: formData.fullName,
         email: formData.email,
         phone: formData.phone,
-        college: formData.college === 'Others' ? formData.otherInstitution : formData.college,
-        year: formData.year,
-        course: formData.course,
-        screenshotLink: formData.screenshotLink
-      };
-
-      // Submit to Google Sheets
-      const result = await submitRegistration(registrationData);
-      
-      if (result.success) {
-        setSubmitted(true);
-        console.log('Form submitted successfully:', result);
-      } else {
-        setErrors({ submit: result.message });
-      }
+      });
       
     } catch (error) {
-      console.error('Submission error:', error);
-      setErrors({ submit: 'Failed to submit registration. Please try again.' });
-    } finally {
+      console.error('Payment initialization error:', error);
+      setErrors({ submit: 'Failed to initialize payment. Please try again.' });
       setIsSubmitting(false);
     }
   };
@@ -396,73 +425,60 @@ const RegistrationForm: React.FC = () => {
                 )}
               </div>
 
-              {/* Payment Section */}
-              <div className="space-y-4 p-4 bg-gray-700/30 rounded-lg border border-gray-600">
-                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
-                  Payment Details
-                  <Badge variant="secondary" className="bg-red-600 text-white">Required</Badge>
+              {/* Payment Section - Razorpay Integration */}
+              <div className="space-y-4 p-6 bg-gradient-to-r from-crimson/10 via-crimson/5 to-crimson/10 backdrop-blur-md border border-crimson/20 rounded-xl shadow-lg">
+                <h3 className="text-xl font-semibold text-white flex items-center gap-3">
+                  <CreditCard className="w-6 h-6 text-crimson" />
+                  Registration Fee
+                  <Badge variant="secondary" className="bg-crimson text-white ml-auto">
+                    <IndianRupee className="w-4 h-4 mr-1" />
+                    {RAZORPAY_CONFIG.PASS_AMOUNT / 100}
+                  </Badge>
                 </h3>
                 
-                {/* QR Code Toggle */}
-                <Button
-                  type="button"
-                  onClick={() => setShowQR(true)}
-                  variant="outline"
-                  className="w-full bg-gray-600 border-gray-500 text-white hover:bg-gray-500"
-                >
-                  <Eye className="w-4 h-4 mr-2" />
-                  View Payment QR Code
-                </Button>
-
-
-
-                {/* Google Drive Link Input */}
-                <div className="space-y-3">
-                  <Label htmlFor="screenshotLink" className="text-white font-medium">
-                    Google Drive Link to Payment Screenshot <span className="text-red-400">*</span>
-                  </Label>
-                  <Input
-                    id="screenshotLink"
-                    type="url"
-                    placeholder="https://drive.google.com/file/d/..."
-                    value={formData.screenshotLink}
-                    onChange={(e) => handleInputChange('screenshotLink', e.target.value)}
-                    className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400"
-                  />
-                  <div className="bg-yellow-900/20 border border-yellow-600/30 rounded-lg p-3">
-                    <p className="text-yellow-400 text-sm font-medium">Important:</p>
-                    <p className="text-yellow-300 text-xs mt-1">
-                      • Upload your payment screenshot to Google Drive<br/>
-                      • Make sure the file is set to "Anyone with the link can view"<br/>
-                      • Copy and paste the shareable link here<br/>
-                      • Registrations with invalid/private links may be rejected
-                    </p>
+                <div className="bg-gray-800/50 border border-gray-600/50 rounded-lg p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-gray-300 font-medium">Literovia 2025 Pass</span>
+                    <span className="text-2xl font-bold text-crimson flex items-center">
+                      <IndianRupee className="w-5 h-5 mr-1" />
+                      {RAZORPAY_CONFIG.PASS_AMOUNT / 100}
+                    </span>
                   </div>
                   
-                  {errors.screenshotLink && (
-                    <div className="bg-red-900/20 border border-red-600/30 rounded-lg p-3">
-                      <p className="text-red-400 text-sm flex items-center gap-2">
-                        <AlertCircle className="w-4 h-4" />
-                        {errors.screenshotLink}
-                      </p>
-                    </div>
-                  )}
+                  <div className="text-sm text-gray-400 space-y-1">
+                    <p>• Access to all events on Sept 8-9, 2025</p>
+                    <p>• Digital certificate of participation</p>
+                    <p>• Networking opportunities with literary enthusiasts</p>
+                    <p>• Refreshments and materials included</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-900/20 border border-blue-600/30 rounded-lg p-4">
+                  <p className="text-blue-400 text-sm font-medium mb-2">🔒 Secure Payment via Razorpay</p>
+                  <p className="text-blue-300 text-xs">
+                    • Your payment is processed securely through Razorpay<br/>
+                    • Supports UPI, Card, Net Banking, and Wallet payments<br/>
+                    • You'll receive instant confirmation after successful payment
+                  </p>
                 </div>
               </div>
 
               {/* Submit Button */}
               <Button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-3 text-lg font-semibold transition-all duration-200 disabled:opacity-50"
+                disabled={isSubmitting || isPaymentLoading}
+                className="w-full bg-crimson hover:bg-crimson-bright text-white py-4 text-lg font-semibold transition-all duration-200 disabled:opacity-50 shadow-lg"
               >
-                {isSubmitting ? (
-                  <div className="flex items-center gap-2">
+                {isSubmitting || isPaymentLoading ? (
+                  <div className="flex items-center gap-3">
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    Processing Payment...
+                    {isPaymentLoading ? 'Opening Payment Gateway...' : 'Processing Registration...'}
                   </div>
                 ) : (
-                  'Buy Pass Now'
+                  <div className="flex items-center justify-center gap-2">
+                    <CreditCard className="w-5 h-5" />
+                    Pay ₹{RAZORPAY_CONFIG.PASS_AMOUNT / 100} & Register
+                  </div>
                 )}
               </Button>
 
@@ -476,9 +492,6 @@ const RegistrationForm: React.FC = () => {
           </CardContent>
         </Card>
       </div>
-      
-      {/* Payment QR Modal */}
-      {showQR && <PaymentQR onClose={() => setShowQR(false)} />}
     </div>
   );
 };
