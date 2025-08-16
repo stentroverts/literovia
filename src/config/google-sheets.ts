@@ -1,7 +1,7 @@
 // Simple Google Apps Script Configuration
 export const GOOGLE_SHEETS_CONFIG = {
-  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwT2wd8v2is-GvJrBbG7Vd6Hz8Mxr2a_XBZBSnOF1LzKrTlgPNMzBdj3kpxJR5Lgkgc/exec',
-  SHEET_ID: '1pJoqI0bF---YbTt3R2q6nA8TnftyvIYSndDF3xYGkPU'
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwsENMgHhZyn3oADsTF95de49FFUzUicck3UF14XKK5VOjsYXsDpit88IfTBro_jQnY/exec',
+  SHEET_ID: '1FJDyNld7pRob_D6kRqwRKSOxco8rdMEVRMyJH9u-sPk'
 };
 
 export interface RegistrationData {
@@ -14,7 +14,6 @@ export interface RegistrationData {
   paymentId?: string;
   paymentAmount?: number;
   paymentStatus?: 'pending' | 'completed' | 'failed';
-  screenshotLink?: string; // Made optional since we're using Razorpay now
 }
 
 export const submitRegistration = async (data: RegistrationData): Promise<{ success: boolean; message: string; registrationId?: string }> => {
@@ -31,7 +30,6 @@ export const submitRegistration = async (data: RegistrationData): Promise<{ succ
     formData.append('paymentId', data.paymentId || '');
     formData.append('paymentAmount', data.paymentAmount?.toString() || '');
     formData.append('paymentStatus', data.paymentStatus || 'pending');
-    formData.append('screenshotLink', data.screenshotLink || '');
 
     console.log('📤 Form data being sent:');
     for (let [key, value] of formData.entries()) {

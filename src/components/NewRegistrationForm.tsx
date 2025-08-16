@@ -169,33 +169,6 @@ const RegistrationForm: React.FC = () => {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      // Validate file type
-      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-      if (!allowedTypes.includes(file.type)) {
-        setErrors(prev => ({ 
-          ...prev, 
-          paymentScreenshot: 'Please upload a valid image file (JPEG, JPG, PNG, WEBP)' 
-        }));
-        return;
-      }
-
-      // Validate file size (max 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        setErrors(prev => ({ 
-          ...prev, 
-          paymentScreenshot: 'File size must be less than 5MB' 
-        }));
-        return;
-      }
-
-      setFormData(prev => ({ ...prev, paymentScreenshot: file }));
-      setErrors(prev => ({ ...prev, paymentScreenshot: '' }));
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
