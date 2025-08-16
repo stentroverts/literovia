@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
+import { Checkbox } from '@/components/ui/checkbox';
 import { CheckCircle, AlertCircle, CreditCard, IndianRupee } from 'lucide-react';
 import { submitRegistration, type RegistrationData } from '@/config/google-sheets';
 import { useRazorpay } from '@/hooks/useRazorpay';
@@ -40,6 +41,7 @@ const RegistrationForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [paymentData, setPaymentData] = useState<any>(null);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Razorpay integration
   const { initializePayment, isLoading: isPaymentLoading } = useRazorpay({
@@ -114,6 +116,11 @@ const RegistrationForm: React.FC = () => {
     // Course validation
     if (!formData.course.trim()) {
       newErrors.course = 'Course/Branch is required';
+    }
+
+    // Terms and conditions validation
+    if (!termsAccepted) {
+      newErrors.terms = 'You must accept the terms and conditions to proceed';
     }
 
     setErrors(newErrors);
@@ -466,10 +473,56 @@ const RegistrationForm: React.FC = () => {
                 </div>
               </div>
 
+              {/* Terms and Conditions */}
+              <div className="space-y-4 p-6 bg-gradient-to-r from-gray-800/50 via-gray-700/30 to-gray-800/50 backdrop-blur-md border border-gray-600/30 rounded-xl">
+                <div className="flex items-start space-x-3">
+                  <Checkbox
+                    id="terms"
+                    checked={termsAccepted}
+                    onCheckedChange={(checked) => {
+                      setTermsAccepted(checked as boolean);
+                      // Clear error when checkbox is checked
+                      if (checked && errors.terms) {
+                        setErrors(prev => ({ ...prev, terms: '' }));
+                      }
+                    }}
+                    className="mt-1 bg-gray-700/50 border-gray-500 data-[state=checked]:bg-crimson data-[state=checked]:border-crimson"
+                  />
+                  <div className="flex-1">
+                    <Label htmlFor="terms" className="text-white font-medium cursor-pointer">
+                      I accept all the{' '}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          // Create a link to download the PDF
+                          const link = document.createElement('a');
+                          link.href = '/Literovia-TC-and-privacy-policy.pdf';
+                          link.download = 'Literovia T&C and privacy policy.pdf';
+                          link.click();
+                        }}
+                        className="text-crimson hover:text-crimson-bright underline hover:no-underline transition-all duration-200"
+                      >
+                        Terms & Conditions
+                      </button>
+                      <span className="text-red-400 ml-1">*</span>
+                    </Label>
+                    <p className="text-gray-400 text-sm mt-1">
+                      Please read and accept our terms and conditions to proceed with registration.
+                    </p>
+                  </div>
+                </div>
+                {errors.terms && (
+                  <p className="text-red-400 text-sm flex items-center gap-1 ml-7">
+                    <AlertCircle className="w-4 h-4" />
+                    {errors.terms}
+                  </p>
+                )}
+              </div>
+
               {/* Submit Button */}
               <Button
                 type="submit"
-                disabled={isSubmitting || isPaymentLoading}
+                disabled={isSubmitting || isPaymentLoading || !termsAccepted}
                 className="w-full bg-crimson hover:bg-crimson-bright text-white py-4 text-lg font-semibold transition-all duration-200 disabled:opacity-50 shadow-lg"
               >
                 {isSubmitting || isPaymentLoading ? (

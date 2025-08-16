@@ -94,7 +94,7 @@ const Index = () => {
                 Featured Events
               </h3>
               <ul className="space-y-2">
-                {['Poetry Slam', 'Literary Auction', 'Metaphora', 'Spockle'].map((event) => (
+                {['Mimic and Mystify', 'Sign Language Workshop', 'Theatre', 'Panel Discussion'].map((event) => (
                   <li key={event}>
                     <span className="text-secondary-text text-sm">
                       {event}
