@@ -56,12 +56,10 @@ export const useRazorpay = ({ onSuccess, onError, onDismiss }: UseRazorpayProps)
           color: RAZORPAY_CONFIG.THEME_COLOR,
         },
         handler: (response: RazorpayPaymentData) => {
-          console.log('Payment successful:', response);
           onSuccess(response);
         },
         modal: {
           ondismiss: () => {
-            console.log('Payment modal closed/dismissed by user');
             setIsLoading(false);
             if (onDismiss) {
               onDismiss();

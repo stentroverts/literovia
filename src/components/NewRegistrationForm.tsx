@@ -46,7 +46,6 @@ const RegistrationForm: React.FC = () => {
   // Razorpay integration
   const { initializePayment, isLoading: isPaymentLoading } = useRazorpay({
     onSuccess: async (razorpayResponse) => {
-      console.log('Payment successful:', razorpayResponse);
       setPaymentData(razorpayResponse);
       
       // Submit registration with payment details
@@ -58,7 +57,6 @@ const RegistrationForm: React.FC = () => {
       setIsSubmitting(false);
     },
     onDismiss: () => {
-      console.log('Payment dismissed by user');
       setErrors({ submit: 'Payment was cancelled. Please try again if you want to complete your registration.' });
       setIsSubmitting(false);
     }
@@ -156,7 +154,6 @@ const RegistrationForm: React.FC = () => {
         setSubmitted(true);
         // Scroll to top when success page is shown
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        console.log('Registration submitted successfully:', result);
       } else {
         setErrors({ submit: result.message });
       }

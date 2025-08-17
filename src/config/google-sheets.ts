@@ -18,8 +18,6 @@ export interface RegistrationData {
 
 export const submitRegistration = async (data: RegistrationData): Promise<{ success: boolean; message: string; registrationId?: string }> => {
   try {
-    console.log('🚀 Submitting registration with data:', data);
-    
     const formData = new FormData();
     formData.append('fullName', data.fullName);
     formData.append('email', data.email);
@@ -31,23 +29,15 @@ export const submitRegistration = async (data: RegistrationData): Promise<{ succ
     formData.append('paymentAmount', data.paymentAmount?.toString() || '');
     formData.append('paymentStatus', data.paymentStatus || 'pending');
 
-    console.log('📤 Form data being sent:');
-    for (let [key, value] of formData.entries()) {
-      console.log(`  ${key}: ${value}`);
-    }
-
     const response = await fetch(GOOGLE_SHEETS_CONFIG.SCRIPT_URL, {
       method: 'POST',
       body: formData
     });
 
-    console.log('📥 Response status:', response.status);
     const responseText = await response.text();
-    console.log('📥 Response text:', responseText);
 
     if (response.ok) {
       const result = JSON.parse(responseText);
-      console.log('✅ Success:', result);
       return {
         success: true,
         message: result.message || 'Registration successful!',

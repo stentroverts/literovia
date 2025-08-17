@@ -7,11 +7,9 @@ const SHEET_ID = '1FJDyNld7pRob_D6kRqwRKSOxco8rdMEVRMyJH9u-sPk';
 
 function doPost(e) {
   try {
-    console.log('🚀 Registration started (Razorpay Only)');
-    
     // Check if we have request data
     if (!e || !e.parameter) {
-      console.log('❌ No request data received - this might be a manual test');
+      console.error('No request data received');
       return ContentService
         .createTextOutput(JSON.stringify({
           success: false,
@@ -22,8 +20,6 @@ function doPost(e) {
     
     // Get form data
     const data = e.parameter;
-    console.log('📋 Received data keys:', Object.keys(data));
-    console.log('📋 Full data:', JSON.stringify(data, null, 2));
     
     // Generate registration ID
     const regId = 'LIT' + Date.now().toString(36).toUpperCase();
@@ -33,18 +29,12 @@ function doPost(e) {
     let paymentId = 'NOT_PROVIDED';
     let paymentAmount = 149; // Default amount
     
-    console.log('🔍 Checking Razorpay payment data...');
-    console.log('paymentId:', data.paymentId);
-    console.log('paymentStatus:', data.paymentStatus);
-    console.log('paymentAmount:', data.paymentAmount);
-    
     if (data.paymentId && data.paymentId.trim() && data.paymentId !== 'undefined' && data.paymentId !== '') {
       paymentId = data.paymentId.trim();
       paymentStatus = data.paymentStatus || 'completed';
       paymentAmount = parseFloat(data.paymentAmount) || 149;
-      console.log('✅ Razorpay payment info found:', { paymentId, paymentStatus, paymentAmount });
     } else {
-      console.log('❌ No Razorpay payment information provided');
+      console.warn('No Razorpay payment information provided for registration:', regId);
       paymentStatus = 'no_payment';
       paymentId = 'NOT_PROVIDED';
     }
@@ -68,14 +58,9 @@ function doPost(e) {
       paymentAmount       // K: Payment Amount
     ]);
     
-    console.log('✅ Data saved to sheets');
-    
     // Send email confirmation for Razorpay payments only
     try {
-      console.log('📧 Starting email send process...');
       const subject = 'Literovia 2025 Registration Confirmed - ' + regId;
-      console.log('📧 Email subject:', subject);
-      console.log('📧 Recipient email:', data.email);
       
       // Create email content for Razorpay payment only
       let paymentSection = '';
@@ -421,26 +406,20 @@ function doPost(e) {
       // Get the events brochure PDF from Google Drive
       let attachments = [];
       try {
-        console.log('📎 Attempting to attach PDF...');
         // Events brochure PDF file ID from Google Drive
         const brochureFile = DriveApp.getFileById('1ari8T2ARbye9Ynixg9r47tSd1ALIJnSf');
-        console.log('📎 PDF file found:', brochureFile.getName());
         
         // Use the blob directly as attachment
         attachments.push(brochureFile.getBlob().setName('Literovia 2025 Events Brochure.pdf'));
-        console.log('📎 PDF attachment prepared successfully');
       } catch (attachmentError) {
         console.error('⚠️ Could not attach brochure PDF:', attachmentError);
-        console.log('⚠️ Continuing without PDF attachment...');
       }
       
-      console.log('📧 Sending email...');
       // Send HTML email with attachment
       GmailApp.sendEmail(data.email, subject, '', {
         htmlBody: htmlBody,
         attachments: attachments
       });
-      console.log('✅ Email sent successfully with payment status:', paymentStatus);
     } catch (emailError) {
       console.error('❌ Email failed:', emailError);
     }
