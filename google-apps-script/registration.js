@@ -97,7 +97,7 @@ function doPost(e) {
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://raw.githubusercontent.com/stentroverts/literovia/main/public/email-header.png" alt="Literovia 2025 - A Stentorian Odyssey - Registration Confirmation" />
+            <img src="https://github.com/stentroverts/literovia/blob/main/public/email-header.png" alt="Literovia 2025 - A Stentorian Odyssey - Registration Confirmation" />
         </div>
         
         <div class="content">
