@@ -9,6 +9,17 @@ function doPost(e) {
   try {
     console.log('🚀 Registration started (Razorpay Only)');
     
+    // Check if we have request data
+    if (!e || !e.parameter) {
+      console.log('❌ No request data received - this might be a manual test');
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: false,
+          message: 'No form data received. This endpoint expects POST data.'
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
     // Get form data
     const data = e.parameter;
     console.log('📋 Received data keys:', Object.keys(data));
@@ -61,7 +72,10 @@ function doPost(e) {
     
     // Send email confirmation for Razorpay payments only
     try {
+      console.log('📧 Starting email send process...');
       const subject = 'Literovia 2025 Registration Confirmed - ' + regId;
+      console.log('📧 Email subject:', subject);
+      console.log('📧 Recipient email:', data.email);
       
       // Create email content for Razorpay payment only
       let paymentSection = '';
@@ -97,7 +111,7 @@ function doPost(e) {
 <body>
     <div class="container">
         <div class="header">
-            <img src="https://github.com/stentroverts/literovia/blob/main/public/email-header.png" alt="Literovia 2025 - A Stentorian Odyssey - Registration Confirmation" />
+            <img src="https://raw.githubusercontent.com/stentroverts/literovia/main/public/email-header.png" alt="Literovia 2025 - A Stentorian Odyssey - Registration Confirmation" />
         </div>
         
         <div class="content">
@@ -156,23 +170,26 @@ function doPost(e) {
       // Get the events brochure PDF from Google Drive
       let attachments = [];
       try {
+        console.log('📎 Attempting to attach PDF...');
         // Events brochure PDF file ID from Google Drive
         const brochureFile = DriveApp.getFileById('1ari8T2ARbye9Ynixg9r47tSd1ALIJnSf');
-        attachments.push({
-          fileName: 'Literovia 2025 Events Brochure.pdf',
-          content: brochureFile.getBlob(),
-          mimeType: 'application/pdf'
-        });
+        console.log('📎 PDF file found:', brochureFile.getName());
+        
+        // Use the blob directly as attachment
+        attachments.push(brochureFile.getBlob().setName('Literovia 2025 Events Brochure.pdf'));
+        console.log('📎 PDF attachment prepared successfully');
       } catch (attachmentError) {
-        console.log('⚠️ Could not attach brochure PDF:', attachmentError);
+        console.error('⚠️ Could not attach brochure PDF:', attachmentError);
+        console.log('⚠️ Continuing without PDF attachment...');
       }
       
+      console.log('📧 Sending email...');
       // Send HTML email with attachment
       GmailApp.sendEmail(data.email, subject, '', {
         htmlBody: htmlBody,
         attachments: attachments
       });
-      console.log('Email sent with payment status:', paymentStatus);
+      console.log('✅ Email sent successfully with payment status:', paymentStatus);
     } catch (emailError) {
       console.error('❌ Email failed:', emailError);
     }
