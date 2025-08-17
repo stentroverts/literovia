@@ -33,30 +33,57 @@ export default function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
+    setMobileOpen(false);
+    
     if (id === 'register') {
       navigate('/register');
-      setMobileOpen(false);
       return;
     }
     
-    // If we're not on the home page, navigate to home first
+    // If we're not on the home page, navigate to home first with hash
     if (location.pathname !== '/') {
-      navigate(`/#${id}`);
-      setMobileOpen(false);
+      navigate('/', { replace: false });
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
       return;
     }
     
-    // If we're on the home page, scroll to the section
+    // If we're on the home page, scroll to the section immediately
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setMobileOpen(false);
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   const goToHome = () => {
-    navigate('/');
+    navigate('/', { replace: false });
+    // Ensure we scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 50);
   };
+
+  // Handle hash navigation after route changes
+  useEffect(() => {
+    // Only handle hash if we're on the home page
+    if (location.pathname === '/') {
+      const hash = location.hash.replace('#', '');
+      if (hash) {
+        // Wait a bit for the page to render
+        setTimeout(() => {
+          const element = document.getElementById(hash);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 300);
+      }
+    }
+  }, [location.pathname, location.hash]);
 
   return (
     <nav

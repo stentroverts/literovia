@@ -247,7 +247,7 @@ const HeroSection = () => {
               textAlign: 'center',
             }}
           >
-            come join us on
+            Come join us on
           </p>
           
           {/* Event Dates */}

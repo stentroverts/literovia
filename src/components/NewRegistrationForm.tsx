@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -28,6 +29,7 @@ interface FormErrors {
 
 const RegistrationForm: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
+  const navigate = useNavigate();
   
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
@@ -299,7 +301,15 @@ const RegistrationForm: React.FC = () => {
                       Go Back to Home
                     </Button>
                     <Button 
-                      onClick={() => window.location.href = '/#schedule'} 
+                      onClick={() => {
+                        navigate('/');
+                        setTimeout(() => {
+                          const scheduleElement = document.getElementById('schedule');
+                          if (scheduleElement) {
+                            scheduleElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                          }
+                        }, 100);
+                      }}
                       className="flex-1 bg-crimson hover:bg-crimson-bright text-white py-3 text-base font-medium transition-colors duration-200"
                     >
                       View More Events

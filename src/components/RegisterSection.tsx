@@ -49,15 +49,15 @@ const RegisterSection = () => {
                 <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-gray-600">
                   <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
                     <span className="w-2 h-2 bg-crimson rounded-full mr-2"></span>
-                    Creative Workshops
+                    15+ events
                   </div>
                   <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
                     <span className="w-2 h-2 bg-crimson rounded-full mr-2"></span>
-                    Literary Competitions
+                    Fun Stalls
                   </div>
                   <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
                     <span className="w-2 h-2 bg-crimson rounded-full mr-2"></span>
-                    Networking Events
+                    2 days of Unbridled Joy
                   </div>
                 </div>
               </div>
