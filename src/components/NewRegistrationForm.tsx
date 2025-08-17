@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,6 +27,8 @@ interface FormErrors {
 }
 
 const RegistrationForm: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     email: '',
@@ -55,10 +57,26 @@ const RegistrationForm: React.FC = () => {
       console.error('Payment failed:', error);
       setErrors({ submit: 'Payment failed. Please try again.' });
       setIsSubmitting(false);
+      
+      // Scroll to top to show the error message
+      setTimeout(() => {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: 'smooth' 
+        });
+      }, 100);
     },
     onDismiss: () => {
       setErrors({ submit: 'Payment was cancelled. Please try again if you want to complete your registration.' });
       setIsSubmitting(false);
+      
+      // Scroll to top to show the error message
+      setTimeout(() => {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: 'smooth' 
+        });
+      }, 100);
     }
   });
 
@@ -156,11 +174,26 @@ const RegistrationForm: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         setErrors({ submit: result.message });
+        // Scroll to top to show the error message
+        setTimeout(() => {
+          window.scrollTo({ 
+            top: 0, 
+            behavior: 'smooth' 
+          });
+        }, 100);
       }
       
     } catch (error) {
       console.error('Registration submission error:', error);
       setErrors({ submit: 'Failed to submit registration. Please contact support.' });
+      
+      // Scroll to top to show the error message
+      setTimeout(() => {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: 'smooth' 
+        });
+      }, 100);
     } finally {
       setIsSubmitting(false);
     }
@@ -184,6 +217,22 @@ const RegistrationForm: React.FC = () => {
     e.preventDefault();
     
     if (!validateForm()) {
+      // Small delay to ensure error messages are rendered
+      setTimeout(() => {
+        // Scroll to top of the form when there are validation errors
+        if (formRef.current) {
+          formRef.current.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+        } else {
+          // Fallback to scrolling to top of page
+          window.scrollTo({ 
+            top: 0, 
+            behavior: 'smooth' 
+          });
+        }
+      }, 100);
       return;
     }
 
@@ -202,6 +251,14 @@ const RegistrationForm: React.FC = () => {
       console.error('Payment initialization error:', error);
       setErrors({ submit: 'Failed to initialize payment. Please try again.' });
       setIsSubmitting(false);
+      
+      // Scroll to top to show the error message
+      setTimeout(() => {
+        window.scrollTo({ 
+          top: 0, 
+          behavior: 'smooth' 
+        });
+      }, 100);
     }
   };
 
@@ -271,7 +328,26 @@ const RegistrationForm: React.FC = () => {
           </CardHeader>
 
           <CardContent className="space-y-6">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* General Validation Error Alert */}
+            {Object.keys(errors).length > 0 && !errors.submit && (
+              <Alert className="bg-red-500/10 border-red-500 text-red-400">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription>
+                  Please correct the following errors to continue:
+                  <ul className="list-disc list-inside mt-2 space-y-1">
+                    {Object.entries(errors).map(([field, message]) => (
+                      field !== 'submit' && (
+                        <li key={field} className="text-sm">
+                          {message}
+                        </li>
+                      )
+                    ))}
+                  </ul>
+                </AlertDescription>
+              </Alert>
+            )}
+
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               {/* Full Name */}
               <div className="space-y-2">
                 <Label htmlFor="fullName" className="text-white font-medium">
