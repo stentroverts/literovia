@@ -80,9 +80,8 @@ function doPost(e) {
     <style>
         body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
         .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
-        .header { background: linear-gradient(135deg, #dc2626, #b91c1c); color: white; padding: 30px 20px; text-align: center; }
-        .header h1 { margin: 0; font-size: 28px; }
-        .header p { margin: 10px 0 0 0; font-size: 16px; opacity: 0.9; }
+        .header { padding: 0; text-align: center; }
+        .header img { width: 100%; max-width: 600px; height: auto; display: block; }
         .content { padding: 30px 20px; }
         .section { margin-bottom: 25px; }
         .section h2 { color: #dc2626; margin-bottom: 10px; font-size: 18px; border-bottom: 2px solid #dc2626; padding-bottom: 5px; }
@@ -98,9 +97,7 @@ function doPost(e) {
 <body>
     <div class="container">
         <div class="header">
-            <h1>LITEROVIA 2025</h1>
-            <p>A Stentorian Odyssey</p>
-            <p>Registration Confirmation</p>
+            <img src="https://raw.githubusercontent.com/stentroverts/literovia/main/public/email-header.png" alt="Literovia 2025 - A Stentorian Odyssey - Registration Confirmation" />
         </div>
         
         <div class="content">
@@ -156,9 +153,24 @@ function doPost(e) {
 </body>
 </html>`;
       
-      // Send HTML email
+      // Get the events brochure PDF from Google Drive
+      let attachments = [];
+      try {
+        // Events brochure PDF file ID from Google Drive
+        const brochureFile = DriveApp.getFileById('1ari8T2ARbye9Ynixg9r47tSd1ALIJnSf');
+        attachments.push({
+          fileName: 'Literovia 2025 Events Brochure.pdf',
+          content: brochureFile.getBlob(),
+          mimeType: 'application/pdf'
+        });
+      } catch (attachmentError) {
+        console.log('⚠️ Could not attach brochure PDF:', attachmentError);
+      }
+      
+      // Send HTML email with attachment
       GmailApp.sendEmail(data.email, subject, '', {
-        htmlBody: htmlBody
+        htmlBody: htmlBody,
+        attachments: attachments
       });
       console.log('Email sent with payment status:', paymentStatus);
     } catch (emailError) {
