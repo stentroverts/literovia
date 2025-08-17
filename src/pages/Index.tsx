@@ -5,6 +5,7 @@ import ScheduleSection from '@/components/ScheduleSection';
 import SponsorsSection from '@/components/SponsorsSection';
 import RegisterSection from '@/components/RegisterSection';
 import ContactSection from '@/components/ContactSection';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
   return (
@@ -43,7 +44,7 @@ const Index = () => {
                 Where stories come alive and imagination knows no bounds. Join us for an unforgettable literary journey.
               </p>
               <div className="text-crimson text-sm font-medium">
-                The 1st Edition • 2025
+                1st Edition • 2025
               </div>
             </div>
 
@@ -94,11 +95,19 @@ const Index = () => {
                 Featured Events
               </h3>
               <ul className="space-y-2">
-                {['Mimic and Mystify', 'Sign Language Workshop', 'Theatre', 'Panel Discussion'].map((event) => (
-                  <li key={event}>
-                    <span className="text-secondary-text text-sm">
-                      {event}
-                    </span>
+                {[
+                  { name: 'Mimic and Mystify', id: 'performance-showcase' },
+                  { name: 'Sign Language Workshop', id: 'sign-language-workshop' },
+                  { name: 'Between Reality and Imagination', id: 'panel-discussion' },
+                  { name: 'Slam Poetry', id: 'slam-poetry' }
+                ].map((event) => (
+                  <li key={event.id}>
+                    <Link 
+                      to={`/event/${event.id}`}
+                      className="text-secondary-text hover:text-crimson transition-colors duration-300 text-sm block"
+                    >
+                      {event.name}
+                    </Link>
                   </li>
                 ))}
               </ul>

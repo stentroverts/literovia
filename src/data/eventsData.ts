@@ -10,6 +10,7 @@ export interface Event {
   image: string;
   category: 'literary' | 'creative' | 'interactive' | 'performance';
   venue?: string;
+  multiDay?: boolean; // New property to indicate events that span multiple days
 }
 
 export const eventsData: Event[] = [
@@ -146,6 +147,33 @@ export const eventsData: Event[] = [
     image: '/events/litnsociety.png',
     category: 'literary',
     venue: 'Conference Room'
+  },
+  // Arcade Event - Both Days
+  {
+    id: 'arcade',
+    name: 'Arcade',
+    shortDescription: 'Gaming extravaganza with classic and modern games for all skill levels.',
+    fullDescription: 'Step into our gaming paradise featuring a mix of classic arcade games, modern console gaming, and interactive challenges. Whether you\'re a casual gamer or a competitive player, join us for non-stop entertainment across both days of the festival.',
+    date: 'September 8-9, 2025',
+    time: '9:00 AM - 5:00 PM (Both Days)',
+    day: 1,
+    image: '/events/Arcade.png',
+    category: 'interactive',
+    venue: 'Gaming Zone',
+    multiDay: true
+  },
+  // Theater Event - Day 2
+  {
+    id: 'theater',
+    name: 'Theater',
+    shortDescription: 'Theatrical performances and drama showcase - details coming soon.',
+    fullDescription: 'An exciting theatrical event featuring drama performances and stage presentations. Stay tuned for more details about this captivating showcase of dramatic arts and storytelling through performance.',
+    date: 'September 9, 2025',
+    time: 'TBA',
+    day: 2,
+    image: '/events/placeholder.svg',
+    category: 'performance',
+    venue: 'Theater Hall'
   }
 ];
 
@@ -155,7 +183,7 @@ export const getEventById = (id: string): Event | undefined => {
 };
 
 export const getEventsByDay = (day: 1 | 2): Event[] => {
-  return eventsData.filter(event => event.day === day);
+  return eventsData.filter(event => event.day === day || event.multiDay === true);
 };
 
 export const getEventsByCategory = (category: Event['category']): Event[] => {
