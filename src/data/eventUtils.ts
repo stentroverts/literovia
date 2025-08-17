@@ -88,22 +88,51 @@ export const eventTemplate: Partial<Event> = {
   time: '10:00 AM - 12:00 PM',
   day: 1, // 1 or 2
   image: '/events/event-name.png', // Add your image to public/events/
-  category: 'literary', // 'literary' | 'creative' | 'interactive' | 'performance'
+  category: 'speaking', // 'speaking' | 'writing' | 'interactive' | 'workshop' | 'performance' | 'panel-discussion' | 'fun-events'
   venue: 'Event Venue'
 };
 
-// Quick reference for event categories
+// Quick reference for event categories with colors
 export const eventCategories = {
-  speaking: 'Oral presentations and speaking events',
-  reading: 'Reading competitions and literary appreciation', 
-  writing: 'Creative and academic writing activities',
-  performance: 'Stage performances and dramatic presentations',
-  fun: 'Interactive and entertaining literary activities'
+  speaking: {
+    description: 'Oral presentations and speaking events',
+    color: '#3B82F6' // Blue
+  },
+  writing: {
+    description: 'Creative and academic writing activities',
+    color: '#8B5CF6' // Purple
+  },
+  interactive: {
+    description: 'Interactive and engaging activities',
+    color: '#10B981' // Green
+  },
+  workshop: {
+    description: 'Educational workshops and skill-building sessions',
+    color: '#F59E0B' // Orange
+  },
+  performance: {
+    description: 'Stage performances and dramatic presentations',
+    color: '#EF4444' // Red
+  },
+  'panel-discussion': {
+    description: 'Panel discussions and intellectual conversations',
+    color: '#6B7280' // Gray
+  },
+  'fun-events': {
+    description: 'Fun and entertaining activities',
+    color: '#EC4899' // Pink
+  }
+};
+
+// Helper function to get category color
+export const getCategoryColor = (category: Event['category']): string => {
+  return eventCategories[category as keyof typeof eventCategories]?.color || '#6B7280';
 };
 
 export default {
   validateEvent,
   getValidatedEvents,
   eventTemplate,
-  eventCategories
+  eventCategories,
+  getCategoryColor
 };

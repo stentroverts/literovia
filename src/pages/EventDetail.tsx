@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Calendar, Clock, MapPin, CheckCircle } from 'lucide-react';
-import { getEventById, getEventsByDay } from '@/data/eventsData';
+import { getEventById, getEventsByDay, getCategoryColor } from '@/data/eventsData';
 import Navigation from '@/components/Navigation';
 
 const EventDetail = () => {
@@ -36,14 +36,22 @@ const EventDetail = () => {
 
   const otherEvents = getEventsByDay(event.day).filter(e => e.id !== event.id).slice(0, 3);
 
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'literary': return 'bg-blue-600/20 text-blue-400';
-      case 'creative': return 'bg-purple-600/20 text-purple-400';
-      case 'interactive': return 'bg-green-600/20 text-green-400';
-      case 'performance': return 'bg-crimson/20 text-crimson';
-      default: return 'bg-gray-600/20 text-gray-400';
-    }
+  // Helper function to convert hex color to Tailwind classes for badges
+  const getCategoryBadgeClass = (category: string) => {
+    const color = getCategoryColor(category as any);
+    
+    // Convert hex colors to appropriate Tailwind background and text classes
+    const colorMap: { [key: string]: string } = {
+      '#3B82F6': 'bg-blue-600/20 text-blue-400 border-blue-500/30', // Speaking - Blue
+      '#8B5CF6': 'bg-purple-600/20 text-purple-400 border-purple-500/30', // Writing - Purple
+      '#10B981': 'bg-green-600/20 text-green-400 border-green-500/30', // Interactive - Green
+      '#F59E0B': 'bg-orange-600/20 text-orange-400 border-orange-500/30', // Workshop - Orange
+      '#EF4444': 'bg-red-600/20 text-red-400 border-red-500/30', // Performance - Red
+      '#6B7280': 'bg-gray-600/20 text-gray-400 border-gray-500/30', // Panel Discussion - Gray
+      '#EC4899': 'bg-pink-600/20 text-pink-400 border-pink-500/30', // Fun Events - Pink
+    };
+    
+    return colorMap[color] || 'bg-gray-600/20 text-gray-400 border-gray-500/30';
   };
 
   return (
@@ -90,8 +98,8 @@ const EventDetail = () => {
                     }}
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className={getCategoryColor(event.category)}>
-                      {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+                    <Badge className={getCategoryBadgeClass(event.category)}>
+                      {event.category.charAt(0).toUpperCase() + event.category.slice(1).replace('-', ' ')}
                     </Badge>
                   </div>
                 </div>
@@ -106,8 +114,8 @@ const EventDetail = () => {
                   {event.name}
                 </h1>
                 <div className="flex items-center flex-wrap gap-2 mb-6">
-                  <Badge className={getCategoryColor(event.category)}>
-                    {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
+                  <Badge className={getCategoryBadgeClass(event.category)}>
+                    {event.category.charAt(0).toUpperCase() + event.category.slice(1).replace('-', ' ')}
                   </Badge>
                   <Badge variant="outline" className="border-gray-600 text-gray-300">
                     Day {event.day}
@@ -227,8 +235,8 @@ const EventDetail = () => {
                         }}
                       />
                       <div className="absolute top-3 left-3">
-                        <Badge className={getCategoryColor(otherEvent.category)}>
-                          {otherEvent.category}
+                        <Badge className={getCategoryBadgeClass(otherEvent.category)}>
+                          {otherEvent.category.charAt(0).toUpperCase() + otherEvent.category.slice(1).replace('-', ' ')}
                         </Badge>
                       </div>
                     </div>

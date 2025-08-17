@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Calendar } from 'lucide-react';
-import { getEventsByDay, Event } from '@/data/eventsData';
+import { getEventsByDay, Event, getCategoryColor } from '@/data/eventsData';
 
 const ScheduleSection = () => {
   const navigate = useNavigate();
@@ -9,6 +9,23 @@ const ScheduleSection = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
 
   const currentEvents = getEventsByDay(activeDay as 1 | 2);
+
+  // Helper function to lighten a hex color
+  const lightenColor = (hex: string, percent: number = 20): string => {
+    // Remove # if present
+    hex = hex.replace('#', '');
+    
+    // Convert to RGB
+    const num = parseInt(hex, 16);
+    const amt = Math.round(2.55 * percent);
+    const R = (num >> 16) + amt;
+    const G = ((num >> 8) & 0x00FF) + amt;
+    const B = (num & 0x0000FF) + amt;
+    
+    return '#' + (0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+      (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+      (B < 255 ? B < 1 ? 0 : B : 255)).toString(16).slice(1);
+  };
 
   const handleDayChange = (day: number) => {
     if (day === activeDay) return;
@@ -139,7 +156,7 @@ const ScheduleSection = () => {
           height: 100%;
           padding: 20px;
           box-sizing: border-box;
-          background: linear-gradient(135deg, hsl(348, 83%, 47%) 0%, hsl(348, 100%, 55%) 100%);
+          background: linear-gradient(135deg, var(--category-color, hsl(348, 83%, 47%)) 0%, var(--category-color-light, hsl(348, 100%, 55%)) 100%);
           transform: rotateX(-90deg);
           transform-origin: bottom;
           transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -256,29 +273,78 @@ const ScheduleSection = () => {
 
         {/* Events Grid */}
         <div className={`events-container ${isTransitioning ? 'events-fade-out' : 'events-fade-in'}`}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 justify-items-center px-4">
-            {currentEvents.map((event, index) => (
-              <div 
-                key={`${activeDay}-${event.id}`} 
-                className="event-card"
-                onClick={() => handleEventClick(event.id)}
-              >
-                <img
-                  src={event.image}
-                  alt={`${event.name} Event`}
-                  className="event-card__image"
-                  onError={(e) => {
-                    // Fallback to a solid color background if image fails
-                    e.currentTarget.style.display = 'none';
-                    e.currentTarget.parentElement!.style.background = 'linear-gradient(135deg, #374151 0%, #1f2937 100%)';
-                  }}
-                />
-                <div className="event-card__content">
-                  <p className="event-card__title">{event.name}</p>
-                  <p className="event-card__description">{event.fullDescription.slice(0, 150)}...</p>
-                </div>
+          <div className="space-y-8 px-4 max-w-[1600px] mx-auto">
+            {/* First Row - 4 Events */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center">
+              {currentEvents.slice(0, 4).map((event, index) => {
+                const categoryColor = getCategoryColor(event.category);
+                const categoryColorLight = lightenColor(categoryColor, 15);
+                
+                return (
+                  <div 
+                    key={`${activeDay}-${event.id}`} 
+                    className="event-card"
+                    onClick={() => handleEventClick(event.id)}
+                    style={{
+                      '--category-color': categoryColor,
+                      '--category-color-light': categoryColorLight,
+                    } as React.CSSProperties}
+                  >
+                    <img
+                      src={event.image}
+                      alt={`${event.name} Event`}
+                      className="event-card__image"
+                      onError={(e) => {
+                        // Fallback to a solid color background if image fails
+                        e.currentTarget.style.display = 'none';
+                        e.currentTarget.parentElement!.style.background = `linear-gradient(135deg, ${categoryColor} 0%, ${categoryColorLight} 100%)`;
+                      }}
+                    />
+                    <div className="event-card__content">
+                      <p className="event-card__title">{event.name}</p>
+                      <p className="event-card__description">{event.fullDescription.slice(0, 150)}...</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            
+            {/* Second Row - 3 Events Centered */}
+            {currentEvents.length > 4 && (
+              <div className="flex justify-center gap-6 sm:gap-8">
+                {currentEvents.slice(4, 7).map((event, index) => {
+                  const categoryColor = getCategoryColor(event.category);
+                  const categoryColorLight = lightenColor(categoryColor, 15);
+                  
+                  return (
+                    <div 
+                      key={`${activeDay}-${event.id}`} 
+                      className="event-card flex-shrink-0"
+                      onClick={() => handleEventClick(event.id)}
+                      style={{
+                        '--category-color': categoryColor,
+                        '--category-color-light': categoryColorLight,
+                      } as React.CSSProperties}
+                    >
+                      <img
+                        src={event.image}
+                        alt={`${event.name} Event`}
+                        className="event-card__image"
+                        onError={(e) => {
+                          // Fallback to a solid color background if image fails
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement!.style.background = `linear-gradient(135deg, ${categoryColor} 0%, ${categoryColorLight} 100%)`;
+                        }}
+                      />
+                      <div className="event-card__content">
+                        <p className="event-card__title">{event.name}</p>
+                        <p className="event-card__description">{event.fullDescription.slice(0, 150)}...</p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
+            )}
           </div>
         </div>
       </div>

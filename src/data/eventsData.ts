@@ -8,7 +8,7 @@ export interface Event {
   time: string;
   day: 1 | 2;
   image: string;
-  category: 'literary' | 'creative' | 'interactive' | 'performance';
+  category: 'speaking' | 'writing' | 'interactive' | 'workshop' | 'performance' | 'panel-discussion' | 'fun-events';
   venue?: string;
   multiDay?: boolean; // New property to indicate events that span multiple days
 }
@@ -24,7 +24,7 @@ export const eventsData: Event[] = [
     time: '10:00 AM - 12:00 PM',
     day: 1,
     image: '/events/slam-poetry.png',
-    category: 'performance',
+    category: 'speaking',
     venue: 'Main Auditorium'
   },
   {
@@ -36,7 +36,7 @@ export const eventsData: Event[] = [
     time: '2:00 PM - 4:00 PM',
     day: 1,
     image: '/events/literary-auction.png',
-    category: 'interactive',
+    category: 'writing',
     venue: 'Library Hall'
   },
   {
@@ -48,7 +48,7 @@ export const eventsData: Event[] = [
     time: '7:00 PM - 9:00 PM',
     day: 1,
     image: '/events/bang-jam.png',
-    category: 'performance',
+    category: 'speaking',
     venue: 'Open Stage Area'
   },
   {
@@ -72,7 +72,7 @@ export const eventsData: Event[] = [
     time: '11:00 AM - 12:30 PM',
     day: 1,
     image: '/events/signlanguage-workshop.png',
-    category: 'interactive',
+    category: 'workshop',
     venue: 'Workshop Room B'
   },
   {
@@ -97,7 +97,7 @@ export const eventsData: Event[] = [
     time: '7:00 PM - 8:30 PM',
     day: 2,
     image: '/events/post-supper.png',
-    category: 'literary',
+    category: 'speaking',
     venue: 'Banquet Hall'
   },
   {
@@ -109,7 +109,7 @@ export const eventsData: Event[] = [
     time: '2:00 PM - 4:00 PM',
     day: 2,
     image: '/events/lore-wars.png',
-    category: 'interactive',
+    category: 'writing',
     venue: 'Battle Arena (Main Hall)'
   },
   {
@@ -121,7 +121,7 @@ export const eventsData: Event[] = [
     time: '11:45 AM - 1:00 PM',
     day: 2,
     image: '/events/spockle.png',
-    category: 'creative',
+    category: 'speaking',
     venue: 'Story Circle'
   },
   {
@@ -133,7 +133,7 @@ export const eventsData: Event[] = [
     time: '10:00 AM - 11:30 AM',
     day: 2,
     image: '/events/metaphora.png',
-    category: 'literary',
+    category: 'writing',
     venue: 'Discussion Room B'
   },
   {
@@ -145,7 +145,7 @@ export const eventsData: Event[] = [
     time: '1:15 PM - 2:45 PM',
     day: 2,
     image: '/events/litnsociety.png',
-    category: 'literary',
+    category: 'panel-discussion',
     venue: 'Conference Room'
   },
   // Arcade Event - Both Days
@@ -158,7 +158,7 @@ export const eventsData: Event[] = [
     time: '9:00 AM - 5:00 PM (Both Days)',
     day: 1,
     image: '/events/Arcade.png',
-    category: 'interactive',
+    category: 'fun-events',
     venue: 'Gaming Zone',
     multiDay: true
   },
@@ -176,6 +176,21 @@ export const eventsData: Event[] = [
     venue: 'Theater Hall'
   }
 ];
+
+// Category color mapping
+export const getCategoryColor = (category: Event['category']): string => {
+  const categoryColors = {
+    'speaking': '#3B82F6',        // Blue - Professional and trustworthy
+    'writing': '#8B5CF6',         // Purple - Creative and imaginative  
+    'interactive': '#10B981',     // Green - Engaging and active
+    'workshop': '#F59E0B',        // Orange - Educational and warm
+    'performance': '#EF4444',     // Red - Energetic and exciting
+    'panel-discussion': '#6B7280', // Gray - Intellectual and formal
+    'fun-events': '#EC4899'       // Pink - Fun and playful
+  };
+  
+  return categoryColors[category] || '#6B7280'; // Default to gray
+};
 
 // Helper functions
 export const getEventById = (id: string): Event | undefined => {
