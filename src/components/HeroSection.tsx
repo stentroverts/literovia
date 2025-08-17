@@ -42,6 +42,7 @@ const HeroSection = () => {
     >
       {/* Fade-in Hero Image */}
       <div
+        className="hero-image-container"
         style={{
           position: 'absolute',
           inset: 0,
@@ -56,7 +57,7 @@ const HeroSection = () => {
           src={heroBg}
           alt="Literovia Book"
           style={{
-            width: 'clamp(280px, 70vw, 842px)',
+            width: 'clamp(360px, 80vw, 842px)',
             height: 'auto',
             opacity: 0,
             animation: 'fadeInSlow 3s cubic-bezier(0.4, 0, 0.2, 1) forwards',
@@ -111,15 +112,26 @@ const HeroSection = () => {
           will-change: transform, opacity;
           border: 1px solid #e2d6c2;
         }
+        
+        /* Mobile-specific positioning */
+        @media (max-width: 640px) {
+          .hero-text-container {
+            transform: translateY(5vh) !important;
+          }
+          .hero-image-container {
+            transform: translateY(-15vh) !important;
+          }
+        }
       `}</style>
 
       {/* Text Container */}
       <div
+        className="hero-text-container"
         style={{
           position: 'relative',
           textAlign: 'center',
           zIndex: 10,
-          transform: 'translateY(clamp(8vh, 15vh, 18vh))',
+          transform: 'translateY(clamp(-15vh, 15vh, 18vh))',
           maxWidth: '95vw',
           width: '100%',
           padding: '0 0.5rem',
@@ -131,7 +143,7 @@ const HeroSection = () => {
             style={{
               fontFamily: '"Della Respira", serif',
               margin: 0,
-              fontSize: 'clamp(2.5rem, 12vw, 10rem)',
+              fontSize: 'clamp(4.5rem, 18vw, 10rem)',
               color: crimson,
               letterSpacing: '-0.02em',
               lineHeight: 1,
@@ -155,12 +167,12 @@ const HeroSection = () => {
               style={{
                 position: 'relative',
                 display: 'block',
-                marginTop: 'clamp(1rem, 3vw, 2rem)',
+                marginTop: 'clamp(1rem, 5vw, 2rem)',
                 marginLeft: 'auto',
                 marginRight: 'auto',
                 fontFamily: '"Playwrite US Trad", cursive',
                 fontWeight: 'bold',
-                fontSize: 'clamp(0.9rem, 2.5vw, 1.25rem)',
+                fontSize: 'clamp(1.4rem, 4.5vw, 1.25rem)',
                 textAlign: 'center',
                 transform: 'translateX(clamp(0rem, 8vw, 11rem))', // Responsive positioning
               }}
@@ -179,8 +191,8 @@ const HeroSection = () => {
           <h2
             style={{
               fontFamily: '"Homemade Apple", regular',
-              fontSize: 'clamp(0.9rem, 3.5vw, 1.8rem)',
-              margin: 'clamp(2rem, 4vh, 3.5rem) 0 0 0',
+              fontSize: 'clamp(1.6rem, 5.5vw, 1.8rem)',
+              margin: 'clamp(1.5rem, 6vh, 3.5rem) 0 0 0',
               lineHeight: 1.2,
               maxWidth: '100%',
               wordBreak: 'break-word',
@@ -197,7 +209,7 @@ const HeroSection = () => {
         {/* Call to Action */}
         <ScrollReveal delay={1500}>
           <div style={{ 
-            marginTop: 'clamp(1.5rem, 4vh, 2.5rem)',
+            marginTop: 'clamp(1.5rem, 6vh, 2.5rem)',
             padding: '0 1rem',
           }}>
             <Button
@@ -205,9 +217,9 @@ const HeroSection = () => {
               size="xl"
               onClick={openRegistrationForm}
               style={{
-                fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-                padding: 'clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem)',
-                minHeight: '48px',
+                fontSize: 'clamp(1.4rem, 4vw, 1.25rem)',
+                padding: 'clamp(1.2rem, 3.5vw, 1rem) clamp(2.5rem, 6vw, 2rem)',
+                minHeight: '64px',
                 transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                 cursor: 'pointer',
               }}
@@ -221,9 +233,9 @@ const HeroSection = () => {
         <ScrollReveal delay={1600}>
           <p
             style={{
-              marginTop: 'clamp(1rem, 3vh, 1.5rem)',
+              marginTop: 'clamp(1rem, 5vh, 1.5rem)',
               fontFamily: '"Source Serif Pro", serif',
-              fontSize: 'clamp(0.9rem, 2.5vw, 1.25rem)',
+              fontSize: 'clamp(1.3rem, 4vw, 1.25rem)',
               color: secondaryText,
               maxWidth: 'min(90vw, 40rem)',
               marginLeft: 'auto',
@@ -239,14 +251,14 @@ const HeroSection = () => {
           {/* Event Dates */}
           <div
             style={{
-              marginTop: 'clamp(0.75rem, 2vh, 1rem)',
+              marginTop: 'clamp(0.5rem, 4vh, 1rem)',
               textAlign: 'center',
             }}
           >
             <p
               style={{
                 fontFamily: '"Source Serif Pro", serif',
-                fontSize: 'clamp(1.1rem, 3vw, 1.5rem)',
+                fontSize: 'clamp(1.6rem, 5vw, 1.5rem)',
                 fontWeight: 'bold',
                 color: crimson,
                 textShadow: `0 0 20px ${crimson}40`,
