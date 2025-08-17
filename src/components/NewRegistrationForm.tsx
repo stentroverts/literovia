@@ -572,11 +572,8 @@ const RegistrationForm: React.FC = () => {
                       <button
                         type="button"
                         onClick={() => {
-                          // Create a link to download the PDF
-                          const link = document.createElement('a');
-                          link.href = encodeURI('/Literovia T&C and privacy policy.pdf');
-                          link.download = 'Literovia T&C and privacy policy.pdf';
-                          link.click();
+                          // Open PDF in a new tab instead of direct download
+                          window.open('/Literovia%20T%26C%20and%20privacy%20policy.pdf', '_blank');
                         }}
                         className="text-crimson hover:text-crimson-bright underline hover:no-underline transition-all duration-200"
                       >
