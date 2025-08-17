@@ -78,7 +78,7 @@ const SponsorsSection = () => {
                   className="group"
                 >
                   <a 
-                    href="/Literovia Sponsorship Brochure.pdf" 
+                    href={encodeURI("/Literovia Sponsorship Brochure.pdf")} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center space-x-3"

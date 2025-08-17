@@ -574,7 +574,7 @@ const RegistrationForm: React.FC = () => {
                         onClick={() => {
                           // Create a link to download the PDF
                           const link = document.createElement('a');
-                          link.href = '/Literovia-TC-and-privacy-policy.pdf';
+                          link.href = encodeURI('/Literovia T&C and privacy policy.pdf');
                           link.download = 'Literovia T&C and privacy policy.pdf';
                           link.click();
                         }}
