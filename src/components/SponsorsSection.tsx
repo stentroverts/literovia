@@ -109,7 +109,7 @@ const SponsorsSection = () => {
                   >
                     <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                     <div className="text-left">
-                      <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Nehal</div>
+                      <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Nehal Reddy</div>
                       <div className="font-mono text-xs sm:text-sm lg:text-base text-gray-300">+91 6301 130 977</div>
                     </div>
                   </a>
@@ -120,7 +120,7 @@ const SponsorsSection = () => {
                   >
                     <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
                     <div className="text-left">
-                      <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Sameer</div>
+                      <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Sameer Ahmed</div>
                       <div className="font-mono text-xs sm:text-sm lg:text-base text-gray-300">+91 99128 18640</div>
                     </div>
                   </a>

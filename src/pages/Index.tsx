@@ -107,13 +107,18 @@ const Index = () => {
             {/* Contact & Social */}
             <div className="space-y-4">
               <h3 className="font-playfair text-lg font-semibold text-foreground">
-                Connect With Us
+                Locate Us
               </h3>
               <div className="space-y-3">
-                <div className="text-secondary-text text-sm">
+                <a
+                  href="https://maps.app.goo.gl/ALiVUqrHErw1W7kG7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-secondary-text hover:text-crimson transition-colors duration-300 text-sm block"
+                >
                   <div>VNR Vignana Jyothi</div>
                   <div>Institute of Engineering</div>
-                </div>
+                </a>
                 <div className="flex space-x-4">
                   {/* Social Media Icons */}
                   <a

@@ -200,6 +200,8 @@ const HeroSection = () => {
               textAlign: 'center',
               padding: '0 1rem',
               display: 'block',
+              letterSpacing: '0.08em',
+              wordSpacing: '0.2em',
             }}
           >
             -A Stentorian Odyssey
