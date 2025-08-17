@@ -367,7 +367,7 @@ function doPost(e) {
                     <h2>Payment Information</h2>
                     <div class="${paymentStatus === 'completed' && paymentId.startsWith('pay_') ? 'payment-confirmed' : 'payment-pending'}">
                         ${paymentStatus === 'completed' && paymentId.startsWith('pay_') ? 
-                            `<strong>&#127881; Payment Confirmed via Razorpay</strong><br><br>
+                            `<strong>Payment Confirmed via Razorpay</strong><br><br>
                              <strong>Payment ID:</strong> ${paymentId}<br>
                              <strong>Amount Paid:</strong> &#8377;${paymentAmount}<br>
                              <strong>Status:</strong> Successfully Completed<br>
@@ -400,7 +400,7 @@ function doPost(e) {
                 </div>
                 
                 <div class="closing-text">
-                    <p>&#11088; <strong>Thank you for joining us for this literary odyssey!</strong> We'll contact you soon with more details about the event schedule, venue information, and what to expect. Don't forget to check the attached brochure for all event details!</p>
+                    <p><strong>Thank you for joining us for this literary odyssey!</strong> We'll contact you soon with more details about the event schedule, venue information, and what to expect. Don't forget to check the attached brochure for all event details!</p>
                 </div>
                 
                 <div class="contact-info">
