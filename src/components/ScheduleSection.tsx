@@ -311,7 +311,7 @@ const ScheduleSection = () => {
             
             {/* Second Row - 3 Events Centered */}
             {currentEvents.length > 4 && (
-              <div className="flex justify-center gap-6 sm:gap-8">
+              <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-8">
                 {currentEvents.slice(4, 7).map((event, index) => {
                   const categoryColor = getCategoryColor(event.category);
                   const categoryColorLight = lightenColor(categoryColor, 15);
