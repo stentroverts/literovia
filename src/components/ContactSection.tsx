@@ -51,7 +51,7 @@ const ContactSection = () => {
               Connect With <span className="text-crimson">Stentorian</span>
             </h2>
             <p className="text-gray-300 text-sm sm:text-base lg:text-lg max-w-3xl mx-auto px-2 leading-relaxed">
-              Follow us on social media for updates about Literovia and other literary events
+              Follow us on social media for updates about Literovia and other exciting events
             </p>
           </div>
         </ScrollReveal>

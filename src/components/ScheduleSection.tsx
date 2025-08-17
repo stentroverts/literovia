@@ -44,7 +44,7 @@ const ScheduleSection = () => {
   return (
     <section
       id="schedule"
-      className="relative py-24 px-6"
+      className="relative py-16 px-6"
       style={{
         backgroundColor: 'rgb(10,10,10)',
       }}
@@ -225,7 +225,7 @@ const ScheduleSection = () => {
       
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Title */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
           <h2 className="font-spartan font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase text-white mb-4 sm:mb-6 lg:mb-8 px-4">
             EVENTS SCHEDULE
           </h2>

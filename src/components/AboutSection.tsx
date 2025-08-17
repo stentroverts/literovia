@@ -6,7 +6,7 @@ const AboutSection = () => {
   return (
     <section
       id="about"
-      className="relative py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8"
+      className="relative py-8 sm:py-10 md:py-12 lg:py-16 px-4 sm:px-6 lg:px-8"
       style={{
         backgroundColor: 'rgb(10,10,10)',
       }}
@@ -14,7 +14,7 @@ const AboutSection = () => {
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Title with Shiny Text */}
         <ScrollReveal>
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+          <div className="text-center mb-6 sm:mb-8 lg:mb-10">
             <h2 className="font-spartan font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl uppercase mb-6 sm:mb-8 px-2">
               <ShinyText 
                 text="About Literovia" 
@@ -29,7 +29,7 @@ const AboutSection = () => {
         <ScrollReveal delay={200}>
           <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
             <p className="font-source text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed px-2">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas maxime distinctio quibusdam architecto expedita fugit quia optio veritatis deleniti laudantium? Rerum illo quae quasi corrupti, provident ipsam amet nulla consectetur!
+              Literovia is a platform dedicated to empowering writers and readers by providing a vibrant space for sharing stories, discovering new voices, and fostering a creative community. Our mission is to make literature accessible and engaging for everyone, encouraging imagination and connection through the written word.
             </p>
           </div>
         </ScrollReveal>
