@@ -18,10 +18,9 @@ import { Event, eventsData } from './eventsData';
  *    - Update 'fullDescription' field
  * 
  * 3. EVENT TIMING:
- *    - Update 'date', 'time', and 'duration' fields
+ *    - Update 'date' and 'time' fields
  *    - Format: 'September 8, 2025' for date
  *    - Format: '10:00 AM - 12:00 PM' for time
- *    - Format: '2 hours' for duration
  * 
  * 4. VENUE INFORMATION:
  *    - Update 'venue' field with specific location
@@ -90,16 +89,16 @@ export const eventTemplate: Partial<Event> = {
   day: 1, // 1 or 2
   image: '/events/event-name.png', // Add your image to public/events/
   category: 'literary', // 'literary' | 'creative' | 'interactive' | 'performance'
-  venue: 'Event Venue',
-  duration: '2 hours'
+  venue: 'Event Venue'
 };
 
 // Quick reference for event categories
 export const eventCategories = {
-  literary: 'Academic and educational literary events',
-  creative: 'Creative and artistic expression events', 
-  interactive: 'Participatory and competitive events',
-  performance: 'Stage performances and presentations'
+  speaking: 'Oral presentations and speaking events',
+  reading: 'Reading competitions and literary appreciation', 
+  writing: 'Creative and academic writing activities',
+  performance: 'Stage performances and dramatic presentations',
+  fun: 'Interactive and entertaining literary activities'
 };
 
 export default {

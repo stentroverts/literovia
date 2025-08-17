@@ -19,8 +19,8 @@ const EventDetail = () => {
         <Navigation />
         <div className="pt-20 px-4">
           <div className="container mx-auto max-w-2xl text-center">
-            <h1 className="text-4xl font-bold mb-4 text-white">Event Not Found</h1>
-            <p className="text-xl text-gray-300 mb-6">Sorry, the event you're looking for doesn't exist.</p>
+            <h1 className="text-3xl font-bold mb-4 text-white">Event Not Found</h1>
+            <p className="text-lg text-gray-300 mb-6">Sorry, the event you're looking for doesn't exist.</p>
             <Button 
               onClick={() => navigate('/')} 
               className="bg-crimson hover:bg-crimson-bright text-white"
@@ -47,13 +47,13 @@ const EventDetail = () => {
   };
 
   return (
-    <div className="pb-12 relative w-full" style={{ backgroundColor: 'rgb(10,10,10)' }}>
+    <div className="pb-12 relative w-full min-h-screen" style={{ backgroundColor: 'rgb(10,10,10)' }}>
       {/* Navigation */}
       <Navigation />
       
       {/* Main Content */}
       <main className="pt-20 pb-12">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           {/* Back Button */}
           <div className="mb-8">
             <Button 
@@ -66,9 +66,11 @@ const EventDetail = () => {
             </Button>
           </div>
 
+          {/* Main Event Layout */}
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Event Image */}
-            <div className="space-y-6">
+            {/* Left Column - Event Image Only */}
+            <div>
+              {/* Event Image */}
               <Card className="bg-gray-800/50 border-gray-700 overflow-hidden">
                 <div className="aspect-[4/3] relative">
                   <img
@@ -96,13 +98,14 @@ const EventDetail = () => {
               </Card>
             </div>
 
-            {/* Event Details */}
-            <div className="space-y-8">
+            {/* Right Column - Event Details */}
+            <div className="space-y-6">
+              {/* Event Title and Category */}
               <div>
-                <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
+                <h1 className="text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
                   {event.name}
                 </h1>
-                <div className="flex items-center space-x-2 mb-6">
+                <div className="flex items-center flex-wrap gap-2 mb-6">
                   <Badge className={getCategoryColor(event.category)}>
                     {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
                   </Badge>
@@ -110,63 +113,59 @@ const EventDetail = () => {
                     Day {event.day}
                   </Badge>
                 </div>
-              </div>
-
-              {/* Date and Time Cards on Right Side */}
-              <div className="grid grid-cols-2 gap-4">
-                <Card className="bg-gray-800/30 border-gray-700">
-                  <CardContent className="p-4">
-                    <div className="flex items-center space-x-3">
-                      <Calendar className="w-5 h-5 text-crimson" />
-                      <div>
-                        <div className="text-white font-medium">Date</div>
-                        <div className="text-gray-300 text-sm">{event.date}</div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
                 
+                {/* Short Description */}
+                <p className="text-base text-gray-300 mb-6 leading-relaxed">
+                  {event.shortDescription}
+                </p>
+              </div>
+
+              {/* Event Info Cards */}
+              <div className="space-y-4">
                 <Card className="bg-gray-800/30 border-gray-700">
                   <CardContent className="p-4">
                     <div className="flex items-center space-x-3">
-                      <Clock className="w-5 h-5 text-crimson" />
+                      <Calendar className="w-5 h-5 text-crimson flex-shrink-0" />
                       <div>
-                        <div className="text-white font-medium">Time</div>
-                        <div className="text-gray-300 text-sm">{event.time}</div>
+                        <span className="text-gray-400">Date: </span>
+                        <span className="text-white font-medium">{event.date}</span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-              </div>
 
-              {/* Event Info Grid */}
-              <div className="grid gap-4">
+                <Card className="bg-gray-800/30 border-gray-700">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-3">
+                      <Clock className="w-5 h-5 text-crimson flex-shrink-0" />
+                      <div>
+                        <span className="text-gray-400">Time: </span>
+                        <span className="text-white font-medium">{event.time}</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
                 {event.venue && (
-                  <div className="flex items-center space-x-3 p-4 bg-gray-800/30 rounded-lg border border-gray-700">
-                    <MapPin className="w-5 h-5 text-crimson" />
-                    <div>
-                      <span className="text-gray-400">Venue: </span>
-                      <span className="text-white font-medium">{event.venue}</span>
-                    </div>
-                  </div>
-                )}
-
-                {event.duration && (
-                  <div className="flex items-center space-x-3 p-4 bg-gray-800/30 rounded-lg border border-gray-700">
-                    <Clock className="w-5 h-5 text-crimson" />
-                    <div>
-                      <span className="text-gray-400">Duration: </span>
-                      <span className="text-white font-medium">{event.duration}</span>
-                    </div>
-                  </div>
+                  <Card className="bg-gray-800/30 border-gray-700">
+                    <CardContent className="p-4">
+                      <div className="flex items-center space-x-3">
+                        <MapPin className="w-5 h-5 text-crimson flex-shrink-0" />
+                        <div>
+                          <span className="text-gray-400">Venue: </span>
+                          <span className="text-white font-medium">{event.venue}</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 )}
               </div>
 
               {/* Register Button */}
-              <div className="space-y-4">
+              <div className="space-y-4 pt-4">
                 <Button 
                   onClick={() => navigate('/register')}
-                  className="w-full bg-crimson hover:bg-crimson-bright text-white py-4 text-lg font-semibold"
+                  className="w-full bg-crimson hover:bg-crimson-bright text-white py-4 text-lg font-semibold transition-colors"
                 >
                   <CheckCircle className="w-5 h-5 mr-2" />
                   Register for Literovia 2025
@@ -178,13 +177,13 @@ const EventDetail = () => {
             </div>
           </div>
 
-          {/* Full Description */}
+          {/* Full Description Section */}
           <div className="mt-16">
             <Card className="bg-gray-800/30 border-gray-700">
               <CardContent className="p-8">
-                <h2 className="text-3xl font-bold text-white mb-6">About This Event</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">About This Event</h2>
                 <div className="prose prose-invert max-w-none">
-                  <p className="text-gray-300 text-lg leading-relaxed">
+                  <p className="text-gray-300 text-base leading-relaxed">
                     {event.fullDescription}
                   </p>
                 </div>
@@ -196,10 +195,10 @@ const EventDetail = () => {
           {otherEvents.length > 0 && (
             <div className="mt-16">
               <div className="text-center mb-12">
-                <h2 className="text-3xl font-bold text-white mb-4">
+                <h2 className="text-2xl font-bold text-white mb-4">
                   More Events on Day {event.day}
                 </h2>
-                <p className="text-gray-300 text-lg">
+                <p className="text-gray-300 text-base">
                   Check out other exciting events happening on {event.date}
                 </p>
               </div>
@@ -234,11 +233,11 @@ const EventDetail = () => {
                       </div>
                     </div>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-bold text-white mb-2 group-hover:text-crimson transition-colors">
+                      <h3 className="text-lg font-bold text-white mb-2 group-hover:text-crimson transition-colors">
                         {otherEvent.name}
                       </h3>
                       <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                        {otherEvent.fullDescription.slice(0, 100)}...
+                        {otherEvent.shortDescription}
                       </p>
                       <div className="flex items-center text-gray-400 text-sm">
                         <Clock className="w-4 h-4 mr-1" />
