@@ -41,10 +41,26 @@ const RegisterSection = () => {
                 </div>
               </div>
               
-              <p className="font-source text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto px-2">
-                Be part of an unforgettable literary journey. Buy your pass now for two days of creativity, 
-                collaboration, and literary excellence.
-              </p>
+              {/* Beautiful description with highlights */}
+              <div className="space-y-4 mb-8">
+                <p className="font-source text-lg md:text-xl text-gray-700 leading-relaxed max-w-2xl mx-auto">
+                  Join us for an <span className="text-crimson font-semibold">unforgettable literary journey</span>
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base text-gray-600">
+                  <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
+                    <span className="w-2 h-2 bg-crimson rounded-full mr-2"></span>
+                    Creative Workshops
+                  </div>
+                  <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
+                    <span className="w-2 h-2 bg-crimson rounded-full mr-2"></span>
+                    Literary Competitions
+                  </div>
+                  <div className="flex items-center bg-gray-50 px-3 py-2 rounded-full">
+                    <span className="w-2 h-2 bg-crimson rounded-full mr-2"></span>
+                    Networking Events
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Registration Button */}

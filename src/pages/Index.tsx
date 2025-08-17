@@ -126,7 +126,7 @@ const Index = () => {
                   className="text-secondary-text hover:text-crimson transition-colors duration-300 text-sm block"
                 >
                   <div>VNR Vignana Jyothi</div>
-                  <div>Institute of Engineering</div>
+                  <div>Institute of Engineering and Technology</div>
                 </a>
                 <div className="flex space-x-4">
                   {/* Social Media Icons */}
@@ -179,7 +179,7 @@ const Index = () => {
           <div className="container mx-auto px-6">
             <div className="text-center">
               <div className="text-secondary-text text-sm">
-                © 2025 Literovia. All rights reserved. Crafted with ❤️ by STENT Team.
+                © 2025 Literovia. All rights reserved. Crafted with ❤️ by Stentorian.
               </div>
             </div>
           </div>

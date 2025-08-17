@@ -31,16 +31,6 @@ const AboutSection = () => {
             <p className="font-source text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed px-2">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quas maxime distinctio quibusdam architecto expedita fugit quia optio veritatis deleniti laudantium? Rerum illo quae quasi corrupti, provident ipsam amet nulla consectetur!
             </p>
-        
-            
-            <div className="bg-gradient-to-r from-crimson/10 via-crimson/5 to-crimson/10 backdrop-blur-md border border-crimson/20 rounded-xl sm:rounded-2xl lg:rounded-3xl p-6 sm:p-8 lg:p-10 mx-2 sm:mx-4 shadow-xl mt-8 sm:mt-12">
-              <h3 className="font-spartan font-bold text-lg sm:text-xl md:text-2xl text-white mb-4 sm:mb-6">
-                A <span className="text-crimson">Stentorian</span> Odyssey
-              </h3>
-              <p className="font-source text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed">
-Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae, voluptates deserunt alias aliquid quasi ducimus perferendis eos repellendus optio recusandae voluptatum labore nihil laudantium excepturi tenetur possimus suscipit blanditiis corporis!
-              </p>
-            </div>
           </div>
         </ScrollReveal>
       </div>

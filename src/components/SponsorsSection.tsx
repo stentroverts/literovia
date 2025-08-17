@@ -31,25 +31,25 @@ const SponsorsSection = () => {
             <div className="bg-gradient-to-br from-crimson/10 to-crimson/5 backdrop-blur-md border border-crimson/20 rounded-xl p-4 sm:p-6 text-center group hover:border-crimson/40 transition-all duration-300">
               <Target className="w-8 h-8 text-crimson mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <h3 className="font-spartan font-bold text-white text-sm sm:text-base mb-2">Brand Visibility</h3>
-              <p className="text-gray-300 text-xs sm:text-sm">Reach passionate literary enthusiasts</p>
+              <p className="text-gray-300 text-xs sm:text-sm">Engage passionate audiences across different fields</p>
             </div>
             
             <div className="bg-gradient-to-br from-crimson/10 to-crimson/5 backdrop-blur-md border border-crimson/20 rounded-xl p-4 sm:p-6 text-center group hover:border-crimson/40 transition-all duration-300">
               <Users className="w-8 h-8 text-crimson mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <h3 className="font-spartan font-bold text-white text-sm sm:text-base mb-2">Community Impact</h3>
-              <p className="text-gray-300 text-xs sm:text-sm">Support emerging writers & readers</p>
+              <p className="text-gray-300 text-xs sm:text-sm">Bring together a space for creativity and expression</p>
             </div>
             
             <div className="bg-gradient-to-br from-crimson/10 to-crimson/5 backdrop-blur-md border border-crimson/20 rounded-xl p-4 sm:p-6 text-center group hover:border-crimson/40 transition-all duration-300">
               <Trophy className="w-8 h-8 text-crimson mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <h3 className="font-spartan font-bold text-white text-sm sm:text-base mb-2">Prestige Association</h3>
-              <p className="text-gray-300 text-xs sm:text-sm">Partner with premier literary event</p>
+              <p className="text-gray-300 text-xs sm:text-sm">Partner with a premier institute in South India</p>
             </div>
             
             <div className="bg-gradient-to-br from-crimson/10 to-crimson/5 backdrop-blur-md border border-crimson/20 rounded-xl p-4 sm:p-6 text-center group hover:border-crimson/40 transition-all duration-300">
               <Star className="w-8 h-8 text-crimson mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <h3 className="font-spartan font-bold text-white text-sm sm:text-base mb-2">Networking</h3>
-              <p className="text-gray-300 text-xs sm:text-sm">Connect with academic institutions</p>
+              <p className="text-gray-300 text-xs sm:text-sm"></p>Connect with the brightest minds on campus
             </div>
           </div>
         </ScrollReveal>
@@ -66,7 +66,7 @@ const SponsorsSection = () => {
                   Ready to <span className="text-crimson">Partner With Us?</span>
                 </h3>
                 <p className="font-source text-gray-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto mb-6 sm:mb-8">
-                  Discover how your organization can be part of Literovia's literary celebration. Download our comprehensive sponsorship brochure to explore partnership tiers and benefits.
+                  Join our vibrant community to celebrate creativity, expression, and collaboration. We bring together passionate minds, diverse voices, and shared experiences to create moments that inspire and connect us all.
                 </p>
               </div>
 
@@ -88,16 +88,6 @@ const SponsorsSection = () => {
                   </a>
                 </Button>
               </div>
-
-              <div className="text-center mb-6 sm:mb-8">
-                <p className="font-source text-xs sm:text-sm text-gray-400">
-                  PDF • Comprehensive details about partnership opportunities and benefits
-                </p>
-              </div>
-
-              <p className="font-source text-gray-300 text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 lg:mb-10 max-w-3xl mx-auto leading-relaxed text-center">
-                Let's discuss how we can create a meaningful partnership that celebrates literature and connects you with our vibrant community
-              </p>
               
               {/* Contact Information */}
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">

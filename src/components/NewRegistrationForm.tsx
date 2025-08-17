@@ -536,8 +536,6 @@ const RegistrationForm: React.FC = () => {
                   <div className="text-sm text-gray-400 space-y-1">
                     <p>• Access to all events on Sept 8-9, 2025</p>
                     <p>• Digital certificate of participation</p>
-                    <p>• Networking opportunities with literary enthusiasts</p>
-                    <p>• Refreshments and materials included</p>
                   </div>
                 </div>
 

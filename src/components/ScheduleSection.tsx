@@ -227,7 +227,7 @@ const ScheduleSection = () => {
         {/* Title */}
         <div className="text-center mb-12 sm:mb-16 lg:mb-20">
           <h2 className="font-spartan font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl tracking-wide uppercase text-white mb-4 sm:mb-6 lg:mb-8 px-4">
-            EVENT SCHEDULE
+            EVENTS SCHEDULE
           </h2>
           <p className="font-source text-base sm:text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-4 sm:mb-6 lg:mb-8 px-4">
             September 8-9, 2025
