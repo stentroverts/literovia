@@ -395,7 +395,7 @@ function doPost(e) {
             
             <div class="footer">
                 <p class="team-name">The Literovia Team</p>
-                <p><strong>Stentorians Club, VNRVJIET</strong></p>
+                <p><strong>Stentorian Club, VNRVJIET</strong></p>
                 <p><em>This is an automated confirmation email. Please keep this for your records.</em></p>
             </div>
         </div>

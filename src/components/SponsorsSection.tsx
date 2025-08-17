@@ -104,17 +104,6 @@ const SponsorsSection = () => {
                 {/* Phone Contacts */}
                 <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <a 
-                    href="tel:+919912818640"
-                    className="flex items-center space-x-4 bg-white/5 hover:bg-white/10 p-4 sm:p-5 rounded-xl border border-white/10 hover:border-crimson/30 text-gray-300 hover:text-white transition-all duration-300 group"
-                  >
-                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                    <div className="text-left">
-                      <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Sameer</div>
-                      <div className="font-mono text-xs sm:text-sm lg:text-base text-gray-300">+91 99128 18640</div>
-                    </div>
-                  </a>
-                  
-                  <a 
                     href="tel:+916301130977"
                     className="flex items-center space-x-4 bg-white/5 hover:bg-white/10 p-4 sm:p-5 rounded-xl border border-white/10 hover:border-crimson/30 text-gray-300 hover:text-white transition-all duration-300 group"
                   >
@@ -122,6 +111,17 @@ const SponsorsSection = () => {
                     <div className="text-left">
                       <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Nehal</div>
                       <div className="font-mono text-xs sm:text-sm lg:text-base text-gray-300">+91 6301 130 977</div>
+                    </div>
+                  </a>
+                  
+                  <a 
+                    href="tel:+919912818640"
+                    className="flex items-center space-x-4 bg-white/5 hover:bg-white/10 p-4 sm:p-5 rounded-xl border border-white/10 hover:border-crimson/30 text-gray-300 hover:text-white transition-all duration-300 group"
+                  >
+                    <Phone className="w-5 h-5 sm:w-6 sm:h-6 text-crimson flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
+                    <div className="text-left">
+                      <div className="font-semibold text-sm sm:text-base lg:text-lg text-white mb-1">Sameer</div>
+                      <div className="font-mono text-xs sm:text-sm lg:text-base text-gray-300">+91 99128 18640</div>
                     </div>
                   </a>
                 </div>
