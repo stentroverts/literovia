@@ -44,19 +44,16 @@ const RegistrationForm: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [paymentData, setPaymentData] = useState<any>(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Razorpay integration
   const { initializePayment, isLoading: isPaymentLoading } = useRazorpay({
     onSuccess: async (razorpayResponse) => {
-      setPaymentData(razorpayResponse);
-      
       // Submit registration with payment details
       await submitRegistrationWithPayment(razorpayResponse);
     },
-    onError: (error) => {
-      console.error('Payment failed:', error);
+    onError: () => {
+      // Payment failed
       setErrors({ submit: 'Payment failed. Please try again.' });
       setIsSubmitting(false);
       
@@ -150,7 +147,7 @@ const RegistrationForm: React.FC = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const submitRegistrationWithPayment = async (razorpayResponse: any) => {
+  const submitRegistrationWithPayment = async (razorpayResponse: { razorpay_payment_id: string }) => {
     try {
       setIsSubmitting(true);
       
@@ -185,8 +182,8 @@ const RegistrationForm: React.FC = () => {
         }, 100);
       }
       
-    } catch (error) {
-      console.error('Registration submission error:', error);
+    } catch {
+      // Registration submission error
       setErrors({ submit: 'Failed to submit registration. Please contact support.' });
       
       // Scroll to top to show the error message
@@ -249,8 +246,8 @@ const RegistrationForm: React.FC = () => {
         phone: formData.phone,
       });
       
-    } catch (error) {
-      console.error('Payment initialization error:', error);
+    } catch {
+      // Payment initialization error
       setErrors({ submit: 'Failed to initialize payment. Please try again.' });
       setIsSubmitting(false);
       
@@ -534,21 +531,6 @@ const RegistrationForm: React.FC = () => {
                   </Badge>
                 </h3>
                 
-                <div className="bg-gray-800/50 border border-gray-600/50 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-gray-300 font-medium">Literovia 2025 Pass</span>
-                    <span className="text-2xl font-bold text-crimson flex items-center">
-                      <IndianRupee className="w-5 h-5 mr-1" />
-                      {RAZORPAY_CONFIG.PASS_AMOUNT / 100}
-                    </span>
-                  </div>
-                  
-                  <div className="text-sm text-gray-400 space-y-1">
-                    <p>• Access to all events on Sept 8-9, 2025</p>
-                    <p>• Digital certificate of participation</p>
-                  </div>
-                </div>
-
                 <div className="bg-blue-900/20 border border-blue-600/30 rounded-lg p-4">
                   <p className="text-blue-400 text-sm font-medium mb-2">🔒 Secure Payment via Razorpay</p>
                   <p className="text-blue-300 text-xs">
