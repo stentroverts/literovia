@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace */
 import React from 'react';
 import ScrollReveal from './ScrollReveal';
 import { Mail, Phone, Download, FileText, Star, Target, Users, Trophy } from 'lucide-react';
