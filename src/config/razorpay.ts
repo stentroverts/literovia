@@ -43,6 +43,7 @@ declare global {
     Razorpay: {
       new (options: PaymentOptions): {
         open(): void;
+        on(event: string, handler: (response: { error: unknown }) => void): void;
       };
     };
   }
