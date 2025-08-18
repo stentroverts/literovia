@@ -44,8 +44,8 @@ To change the registration fee from ₹149:
    ```
 
 ## Razorpay API Keys
-- **Test Key ID**: `rzp_test_J2WMFtkzHidr8Y`
-- **Test Key Secret**: `SUCbeM387rMK70zNCoAKohKa`
+- **Live Key ID**: `rzp_live_gL3oQI27aXXDTl`
+- **Live Key Secret**: `[SECURE - Store on server side only]`
 - Location: `src/config/razorpay.ts`
 
 ⚠️ **Important**: For production, replace test keys with live Razorpay keys and ensure the key secret is stored securely on the server side.

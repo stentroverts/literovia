@@ -1,7 +1,7 @@
 // Razorpay Configuration
+// Note: Only KEY_ID should be used in frontend. KEY_SECRET must never be exposed in client-side code.
 export const RAZORPAY_CONFIG = {
-  KEY_ID: 'rzp_test_J2WMFtkzHidr8Y',
-  KEY_SECRET: 'SUCbeM387rMK70zNCoAKohKa', // Note: In production, this should be on server-side only
+  KEY_ID: 'rzp_live_gL3oQI27aXXDTl', // Live mode key for production
   CURRENCY: 'INR',
   // You can easily change the amount here
   PASS_AMOUNT: 14900, // Amount in paise (149 INR = 14900 paise)
@@ -40,6 +40,10 @@ export interface PaymentOptions {
 // Type declaration for Razorpay
 declare global {
   interface Window {
-    Razorpay: any;
+    Razorpay: {
+      new (options: PaymentOptions): {
+        open(): void;
+      };
+    };
   }
 }
