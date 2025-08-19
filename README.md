@@ -187,7 +187,7 @@ literovia/
 
 ```env
 # Razorpay Configuration
-VITE_RAZORPAY_KEY_ID=rzp_live_gL3oQI27aXXDTl
+VITE_RAZORPAY_KEY_ID=rzp_test_your_test_key_here
 VITE_RAZORPAY_CURRENCY=INR
 VITE_PASS_AMOUNT=14900  # ₹149 in paise
 ```
@@ -197,7 +197,7 @@ VITE_PASS_AMOUNT=14900  # ₹149 in paise
 ```typescript
 // src/config/razorpay.ts
 export const RAZORPAY_CONFIG = {
-  KEY_ID: 'rzp_live_gL3oQI27aXXDTl',
+  KEY_ID: 'rzp_test_your_test_key_here',
   CURRENCY: 'INR',
   PASS_AMOUNT: 14900, // ₹149 = 14900 paise
   COMPANY_NAME: 'Literovia 2025',
@@ -312,7 +312,7 @@ vercel --prod
    ```
 
 3. **Razorpay Configuration**
-   - Live Key ID: `rzp_live_gL3oQI27aXXDTl`
+   - Live Key ID: `rzp_test_your_test_key_here`
    - Update keys in `src/config/razorpay.ts`
 
 For detailed deployment instructions, see [DEPLOY.md](./DEPLOY.md).
