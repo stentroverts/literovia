@@ -54,17 +54,47 @@ export const submitRegistration = async (data: RegistrationData): Promise<Submis
         const timeoutId = setTimeout(() => controller.abort(), GOOGLE_SHEETS_CONFIG.TIMEOUT);
 
         try {
+          // Enhanced FormData preparation with validation
           const formData = new FormData();
-          formData.append('fullName', data.fullName.trim());
-          formData.append('email', data.email.trim().toLowerCase());
-          formData.append('phone', data.phone.replace(/\s/g, ''));
-          formData.append('college', data.college.trim());
-          formData.append('year', data.year);
-          formData.append('course', data.course.trim());
+          
+          // Add required fields with validation
+          const requiredFields = [
+            { key: 'fullName', value: data.fullName?.trim() },
+            { key: 'email', value: data.email?.trim().toLowerCase() },
+            { key: 'phone', value: data.phone?.replace(/\s/g, '') },
+            { key: 'college', value: data.college?.trim() },
+            { key: 'year', value: data.year },
+            { key: 'course', value: data.course?.trim() }
+          ];
+          
+          // Validate all required fields before sending
+          for (const field of requiredFields) {
+            if (!field.value || field.value === '') {
+              throw new Error(`Required field '${field.key}' is missing or empty`);
+            }
+            formData.append(field.key, field.value);
+          }
+          
+          // Add payment fields (optional)
           formData.append('paymentId', data.paymentId || '');
-          formData.append('paymentAmount', data.paymentAmount?.toString() || '');
+          formData.append('paymentAmount', data.paymentAmount?.toString() || '149');
           formData.append('paymentStatus', data.paymentStatus || 'pending');
           formData.append('timestamp', new Date().toISOString());
+          
+          // Add execution tracking ID
+          const executionId = `CLIENT_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+          formData.append('clientExecutionId', executionId);
+          
+          // Log the request for debugging
+          if (process.env.NODE_ENV === 'development') {
+            // eslint-disable-next-line no-console
+            console.log('🚀 Sending registration data:', {
+              executionId,
+              email: data.email,
+              paymentId: data.paymentId,
+              fieldsCount: Array.from(formData.entries()).length
+            });
+          }
 
           const response = await fetch(GOOGLE_SHEETS_CONFIG.SCRIPT_URL, {
             method: 'POST',
@@ -72,6 +102,7 @@ export const submitRegistration = async (data: RegistrationData): Promise<Submis
             signal: controller.signal,
             headers: {
               'Accept': 'application/json',
+              // Don't set Content-Type - let browser set it for FormData
             },
           });
 
@@ -85,22 +116,41 @@ export const submitRegistration = async (data: RegistrationData): Promise<Submis
           
           // Handle empty response
           if (!responseText.trim()) {
-            throw new Error('Empty response from server');
+            throw new Error('Empty response from server - data may not have been received');
           }
 
           try {
             const result = JSON.parse(responseText);
             
-            if (result.error) {
-              throw new Error(result.error);
+            // Enhanced error handling with execution ID tracking
+            if (!result.success) {
+              const errorMessage = result.message || 'Unknown error occurred';
+              if (result.retryable) {
+                throw new Error(`Retryable error: ${errorMessage} (Execution ID: ${result.executionId})`);
+              } else {
+                throw new Error(`Non-retryable error: ${errorMessage} (Execution ID: ${result.executionId})`);
+              }
+            }
+            
+            // Log successful response
+            if (process.env.NODE_ENV === 'development') {
+              // eslint-disable-next-line no-console
+              console.log('✅ Registration successful:', {
+                registrationId: result.registrationId,
+                executionId: result.executionId,
+                emailSent: result.emailSent
+              });
             }
             
             return {
               success: true,
               message: result.message || 'Registration successful!',
               registrationId: result.registrationId || result.id,
+              executionId: result.executionId,
+              emailSent: result.emailSent
             };
-          } catch {
+            
+          } catch (parseError) {
             // If JSON parsing fails, but response was successful, treat as success
             if (response.ok && responseText.includes('success')) {
               return {
@@ -109,7 +159,7 @@ export const submitRegistration = async (data: RegistrationData): Promise<Submis
                 registrationId: `REG_${Date.now()}`,
               };
             }
-            throw new Error(`Invalid response format: ${responseText.substring(0, 100)}`);
+            throw new Error(`Invalid response format: ${responseText.substring(0, 200)}... (Parse error: ${parseError instanceof Error ? parseError.message : 'Unknown'})`);
           }
         } finally {
           clearTimeout(timeoutId);
@@ -117,13 +167,22 @@ export const submitRegistration = async (data: RegistrationData): Promise<Submis
       },
       {
         maxRetries: GOOGLE_SHEETS_CONFIG.MAX_RETRIES,
-        delay: 1000,
+        delay: 2000, // Increased delay for better reliability
         backoff: true,
         retryCondition: (error) => {
           if (error instanceof Error) {
             // Don't retry on validation errors
-            if (error.message.includes('400') || error.message.includes('validation')) {
+            if (error.message.includes('Required field') || 
+                error.message.includes('400') || 
+                error.message.includes('validation') ||
+                error.message.includes('Non-retryable error')) {
               return false;
+            }
+            // Always retry on data transmission failures
+            if (error.message.includes('No request data received') ||
+                error.message.includes('Empty response') ||
+                error.message.includes('Retryable error')) {
+              return true;
             }
             // Retry on network, timeout, and server errors
             return error.message.includes('fetch') ||
@@ -141,10 +200,14 @@ export const submitRegistration = async (data: RegistrationData): Promise<Submis
     return result;
 
   } catch (error) {
-    // Log error for debugging (can be removed in production)
+    // Enhanced error logging for debugging
     if (process.env.NODE_ENV === 'development') {
       // eslint-disable-next-line no-console
-      console.error('❌ Registration submission failed:', error);
+      console.error('❌ Registration submission failed:', {
+        error: error instanceof Error ? error.message : error,
+        email: data.email,
+        paymentId: data.paymentId
+      });
     }
     
     let handledError;

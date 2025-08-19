@@ -191,9 +191,73 @@ const EnhancedRegistrationForm: React.FC = () => {
   };
 
   const submitRegistrationWithPayment = async (razorpayResponse: { razorpay_payment_id: string }) => {
+    const paymentId = razorpayResponse.razorpay_payment_id;
+    
+    // CRITICAL: Store payment data locally immediately for recovery
+    const recoveryData = {
+      paymentId: paymentId,
+      formData: formData,
+      timestamp: new Date().toISOString(),
+      status: 'processing',
+      error: undefined as string | undefined
+    };
+    
+    try {
+      localStorage.setItem(`literovia_recovery_${paymentId}`, JSON.stringify(recoveryData));
+    } catch (error) {
+      // If localStorage fails, continue anyway but log for debugging
+      if (process.env.NODE_ENV === 'development') {
+        // eslint-disable-next-line no-console
+        console.warn('Could not store recovery data:', error);
+      }
+    }
+    
+    // Show immediate feedback to user
+    const loadingMessage = document.createElement('div');
+    loadingMessage.innerHTML = `
+      <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                  background: rgba(0,0,0,0.9); color: white; padding: 20px; border-radius: 10px; 
+                  z-index: 9999; text-align: center;">
+        <div style="font-size: 18px; margin-bottom: 10px;">Payment Successful!</div>
+        <div style="font-size: 14px; margin-bottom: 15px;">Processing your registration...</div>
+        <div style="font-size: 12px; color: #ccc;">Payment ID: ${paymentId}</div>
+        <div style="font-size: 10px; color: #aaa; margin-top: 10px;">Please do not close this page</div>
+        <div style="margin-top: 15px;">
+          <div style="border: 2px solid #3498db; border-top: 2px solid transparent; 
+                      border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto;"></div>
+        </div>
+      </div>
+      <style>
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      </style>
+    `;
+    document.body.appendChild(loadingMessage);
+    
     try {
       setIsSubmitting(true);
       setCurrentError(null);
+      
+      // Remove loading message after processing (success or error)
+      const cleanupLoading = () => {
+        if (loadingMessage.parentNode) {
+          loadingMessage.parentNode.removeChild(loadingMessage);
+        }
+      };
+      
+      // Fallback cleanup after 45 seconds (increased timeout)
+      const timeoutCleanup = setTimeout(() => {
+        cleanupLoading();
+        // Show timeout message with recovery info
+        setCurrentError(ErrorHandler.createError(
+          'SUBMISSION',
+          'Registration is taking longer than expected',
+          {
+            retryable: true,
+            userFriendlyMessage: `Your payment (${paymentId}) was successful but registration is taking time. Please contact support with this Payment ID if you don't receive confirmation within 10 minutes.`
+          }
+        ));
+        scrollToTop();
+      }, 45000);
       
       // Prepare registration data with payment info
       const registrationData: RegistrationData = {
@@ -203,7 +267,7 @@ const EnhancedRegistrationForm: React.FC = () => {
         college: formData.college === 'Others' ? formData.otherInstitution.trim() : formData.college,
         year: formData.year,
         course: formData.course.trim(),
-        paymentId: razorpayResponse.razorpay_payment_id,
+        paymentId: paymentId,
         paymentAmount: RAZORPAY_CONFIG.PASS_AMOUNT / 100,
         paymentStatus: 'completed'
       };
@@ -211,6 +275,8 @@ const EnhancedRegistrationForm: React.FC = () => {
       // Validate data before submission
       const validation = validateRegistrationData(registrationData);
       if (!validation.isValid) {
+        clearTimeout(timeoutCleanup);
+        cleanupLoading();
         const error = ErrorHandler.handleValidationError('registration', validation.errors.join(', '));
         setCurrentError(error);
         setIsSubmitting(false);
@@ -221,29 +287,66 @@ const EnhancedRegistrationForm: React.FC = () => {
       // Submit to Google Sheets with enhanced error handling
       const result = await submitRegistration(registrationData);
       
+      // Clear loading message and timeout
+      clearTimeout(timeoutCleanup);
+      cleanupLoading();
+      
       if (result.success) {
+        // Mark recovery data as completed
+        try {
+          recoveryData.status = 'completed';
+          localStorage.setItem(`literovia_recovery_${paymentId}`, JSON.stringify(recoveryData));
+        } catch {
+          // Continue anyway - localStorage failure is not critical
+        }
+        
         setSubmitted(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
+        // Mark recovery data as failed for manual processing
+        try {
+          recoveryData.status = 'failed';
+          recoveryData.error = result.message;
+          localStorage.setItem(`literovia_recovery_${paymentId}`, JSON.stringify(recoveryData));
+        } catch {
+          // Continue anyway - localStorage failure is not critical
+        }
+        
         if (result.error) {
           const appError = ErrorHandler.createError(
             result.error.type as AppError['type'],
-            result.message,
+            result.message + ` (Payment ID: ${paymentId} - Please contact support with this ID)`,
             {
               retryable: result.error.retryable,
-              userFriendlyMessage: result.error.userMessage,
+              userFriendlyMessage: result.error.userMessage + ` Your payment was successful (${paymentId}). Please contact support.`,
             }
           );
           setCurrentError(appError);
         } else {
           const appError = ErrorHandler.handleSubmissionError(new Error(result.message));
+          appError.userFriendlyMessage += ` Your payment (${paymentId}) was successful. Please contact support.`;
           setCurrentError(appError);
         }
         scrollToTop();
       }
       
     } catch (error) {
+      // Mark recovery data as failed
+      try {
+        recoveryData.status = 'failed';
+        recoveryData.error = error instanceof Error ? error.message : 'Unknown error';
+        localStorage.setItem(`literovia_recovery_${paymentId}`, JSON.stringify(recoveryData));
+      } catch {
+        // Continue anyway - localStorage failure is not critical
+      }
+      
+      // Ensure loading message is removed on error
+      if (loadingMessage.parentNode) {
+        loadingMessage.parentNode.removeChild(loadingMessage);
+      }
+      
       const appError = ErrorHandler.handleSubmissionError(error);
+      appError.userFriendlyMessage += ` Your payment (${paymentId}) was successful. Please contact support with this Payment ID.`;
       setCurrentError(appError);
       scrollToTop();
     } finally {
