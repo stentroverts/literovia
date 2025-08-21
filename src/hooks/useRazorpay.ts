@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { RAZORPAY_CONFIG, type PaymentOptions, type RazorpayPaymentData } from '@/config/razorpay';
+import { createRazorpayOrder, type RazorpayOrderRequest } from '@/config/razorpay-orders';
 import { ErrorHandler, RetryHandler, NetworkChecker } from '@/lib/error-handling';
 
 interface UseRazorpayProps {
@@ -93,13 +94,35 @@ export const useRazorpay = ({ onSuccess, onError, onDismiss }: UseRazorpayProps)
         return;
       }
 
-      // Payment options with enhanced error handling
+      // Step 1: Create Razorpay Order first for auto-capture
+      const orderRequest: RazorpayOrderRequest = {
+        amount: RAZORPAY_CONFIG.PASS_AMOUNT,
+        currency: RAZORPAY_CONFIG.CURRENCY,
+        name: userDetails.name.trim(),
+        email: userDetails.email.trim().toLowerCase(),
+      };
+
+      const orderResponse = await createRazorpayOrder(orderRequest);
+      
+      if (!orderResponse.success || !orderResponse.order) {
+        const error = ErrorHandler.handlePaymentError(new Error(orderResponse.error || 'Failed to create payment order'));
+        onError({
+          type: error.type,
+          message: 'Unable to initialize payment. Please try again.',
+          retryable: true,
+        });
+        setIsLoading(false);
+        return;
+      }
+
+      // Step 2: Use the created order ID for payment options
       const options: PaymentOptions = {
         key: RAZORPAY_CONFIG.KEY_ID,
         amount: RAZORPAY_CONFIG.PASS_AMOUNT,
         currency: RAZORPAY_CONFIG.CURRENCY,
         name: RAZORPAY_CONFIG.COMPANY_NAME,
         description: RAZORPAY_CONFIG.DESCRIPTION,
+        order_id: orderResponse.order.id, // This enables auto-capture!
         prefill: {
           name: userDetails.name.trim(),
           email: userDetails.email.trim().toLowerCase(),

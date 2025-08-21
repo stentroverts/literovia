@@ -1,9 +1,93 @@
 /**
- * LITEROVIA REGISTRATION HANDLER WITH RAZORPAY INTEGRATION
- * Handles registration with Razorpay payment integration only
+ * LITEROVIA REGISTRATION HANDLER WITH RAZORPAY ORDERS API INTEGRATION
+ * Now creates proper Razorpay Orders for auto-capture functionality
  */
 
 const SHEET_ID = '1FJDyNld7pRob_D6kRqwRKSOxco8rdMEVRMyJH9u-sPk';
+
+// Razorpay API credentials - KEEP THESE SECURE!
+const RAZORPAY_KEY_ID = 'rzp_live_gL3oQI27aXXDTl';
+const RAZORPAY_KEY_SECRET = 'hZzzNORmqLe3AaVhLOTqMjvg'; // ✅ LIVE SECRET KEY ADDED
+
+/**
+ * Create a Razorpay Order with auto-capture enabled
+ */
+function createRazorpayOrder(amount, currency, receipt, userDetails) {
+  try {
+    const orderData = {
+      amount: amount, // Amount in paise
+      currency: currency,
+      receipt: receipt,
+      payment_capture: 1, // THIS IS THE KEY FIX - Auto capture payments
+      notes: {
+        customer_name: userDetails.name,
+        customer_email: userDetails.email,
+        event: 'Literovia 2025'
+      }
+    };
+
+    const credentials = Utilities.base64Encode(RAZORPAY_KEY_ID + ':' + RAZORPAY_KEY_SECRET);
+    
+    const options = {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Basic ' + credentials,
+        'Content-Type': 'application/json'
+      },
+      payload: JSON.stringify(orderData)
+    };
+
+    const response = UrlFetchApp.fetch('https://api.razorpay.com/v1/orders', options);
+    const responseData = JSON.parse(response.getContentText());
+
+    if (response.getResponseCode() !== 200) {
+      throw new Error('Failed to create order: ' + responseData.error.description);
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error('Error creating Razorpay order:', error);
+    throw error;
+  }
+}
+
+/**
+ * Handle order creation requests from frontend
+ */
+function doGet(e) {
+  try {
+    const action = e?.parameter?.action;
+    
+    if (action === 'create_order') {
+      const amount = parseInt(e.parameter.amount) || 14900; // Default ₹149
+      const currency = e.parameter.currency || 'INR';
+      const receipt = 'LIT_' + Date.now().toString(36).toUpperCase();
+      
+      const userDetails = {
+        name: e.parameter.name || 'Customer',
+        email: e.parameter.email || 'customer@email.com'
+      };
+
+      const order = createRazorpayOrder(amount, currency, receipt, userDetails);
+      
+      return ContentService
+        .createTextOutput(JSON.stringify({
+          success: true,
+          order: order
+        }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    return ContentService.createTextOutput('Literovia Registration API (with Razorpay Orders) is running!');
+  } catch (error) {
+    return ContentService
+      .createTextOutput(JSON.stringify({
+        success: false,
+        error: error.toString()
+      }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
 
 function doPost(e) {
   const executionId = 'EXEC_' + Date.now();
@@ -536,10 +620,6 @@ function createErrorResponse(message, executionId, options = {}) {
   return ContentService
     .createTextOutput(JSON.stringify(response))
     .setMimeType(ContentService.MimeType.JSON);
-}
-
-function doGet() {
-  return ContentService.createTextOutput('Literovia Registration API (Razorpay Only) is running!');
 }
 
 // RECOVERY FUNCTIONS - Add these to help recover missed payments
