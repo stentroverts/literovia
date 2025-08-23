@@ -21,11 +21,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Share your voice, presence, and truth through powerful original poems that move audiences.',
     fullDescription: 'Take the stage with your original poems, using voice and presence to share powerful messages and personal stories. This event encourages creativity, bold expression, and honest storytelling that connects deeply with audiences.',
     date: 'September 8, 2025',
-    time: '10:00 AM - 12:00 PM',
+    time: 'TBA',
     day: 1,
     image: '/events/slam-poetry.png',
     category: 'speaking',
-    venue: 'Main Auditorium'
+    venue: 'TBA'
   },
   {
     id: 'literary-auction',
@@ -33,11 +33,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Outbid your rivals for story elements, then spin the wildest tale on the spot.',
     fullDescription: 'Bid for fictional characters and plot elements, then craft imaginative stories using your winning items on the spot. The highest bidders walk away with bragging rights and the power to weave the most creative tales.',
     date: 'September 8, 2025',
-    time: '2:00 PM - 4:00 PM',
+    time: 'TBA',
     day: 1,
     image: '/events/literary-auction.png',
     category: 'writing',
-    venue: 'Library Hall'
+    venue: 'TBA'
   },
   {
     id: 'bang-jam',
@@ -45,11 +45,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Speak non-stop for a minute on random prompts in this lightning-fast mic challenge.',
     fullDescription: 'Speak continuously for one minute without pausing or hesitating on random prompts in this fast-paced speaking challenge. Test your quick thinking and sharp speaking skills as the mic passes between participants with a bang.',
     date: 'September 8, 2025',
-    time: '7:00 PM - 9:00 PM',
+    time: 'TBA',
     day: 1,
     image: '/events/bang-jam.png',
     category: 'speaking',
-    venue: 'Open Stage Area'
+    venue: 'TBA'
   },
   {
     id: 'paperback-partners',
@@ -57,11 +57,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Pair up with book lovers to chat, bond, and swap handmade bookmarks.',
     fullDescription: 'Get paired with fellow book lovers, share literary conversations, and create handmade bookmarks for each other. Everyone leaves with a handmade bookmark and wonderful memories of literary connection.',
     date: 'September 8, 2025',
-    time: '11:00 AM - 12:30 PM',
+    time: 'TBA',
     day: 1,
     image: '/events/paperback-partners.png',
     category: 'interactive',
-    venue: 'Social Hub'
+    venue: 'TBA'
   },
   {
     id: 'sign-language-workshop',
@@ -69,11 +69,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Learn the beauty of silent storytelling in this expressive sign language workshop.',
     fullDescription: 'In this introduction to sign language, discover how the loudest stories are sometimes told without sound, exploring new forms of expression. This workshop is perfect for those curious about new forms of communication, looking to pick up a unique skill, or wanting to explore the beauty of silent interaction.',
     date: 'September 8, 2025',
-    time: '11:00 AM - 12:30 PM',
+    time: 'TBA',
     day: 1,
     image: '/events/signlanguage-workshop.png',
     category: 'workshop',
-    venue: 'Workshop Room B'
+    venue: 'TBA'
   },
   {
     id: 'performance-showcase',
@@ -81,11 +81,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Laugh and gasp with mimicry legend Srinivos and illusionist Magician Ali.',
     fullDescription: 'Prepare to be mesmerized by the legendary Mimicry Srinivos, pioneer of sound illusion in India, showcasing unmatched   mimicry and ventriloquism. Joining him is the spellbinding Magician Ali, weaving mind-bending illusions and breathtaking tricks. Get ready for    laughs and wonder, capped off with a magical surprise.',
     date: 'September 8, 2025',
-    time: '1:00 PM - 2:30 PM',
+    time: 'TBA',
     day: 1,
     image: '/events/performance.png',
     category: 'performance',
-    venue: 'Theater Stage'
+    venue: 'TBA'
   },
   // Day 2 Events - September 9, 2025
   {
@@ -94,11 +94,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Deliver witty, theatrical after-dinner speeches with a dash of satire.',
     fullDescription: 'Take audiences on a whimsical ride of satire and storytelling with curated prompts. This British-style after-dinner speech format celebrates wit, theatrical flair, and creative reimagination.',
     date: 'September 9, 2025',
-    time: '7:00 PM - 8:30 PM',
+    time: 'TBA',
     day: 2,
     image: '/events/post-supper.png',
     category: 'speaking',
-    venue: 'Banquet Hall'
+    venue: 'TBA'
   },
   {
     id: 'lore-wars',
@@ -106,11 +106,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Duel in improvised storytelling using surprise characters, settings, and genres.',
     fullDescription: 'Battle in storytelling duels using assigned characters, settings, and genres to create original narratives. Perfect for quick thinkers, world-builders, and storytelling enthusiasts who love creative challenges.',
     date: 'September 9, 2025',
-    time: '2:00 PM - 4:00 PM',
+    time: 'TBA',
     day: 2,
     image: '/events/lore-wars.png',
     category: 'writing',
-    venue: 'Battle Arena (Main Hall)'
+    venue: 'TBA'
   },
   {
     id: 'spockle',
@@ -118,11 +118,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Debate absurd topics, then switch sides on command in this chaotic verbal battle.',
     fullDescription: 'Defend bizarre topics until "Switch!" forces you to argue the opposite stance in this chaotic debate format. Think fast and speak even faster in this unpredictable test of improvisation and persuasion.',
     date: 'September 9, 2025',
-    time: '11:45 AM - 1:00 PM',
+    time: 'TBA',
     day: 2,
     image: '/events/spockle.png',
     category: 'speaking',
-    venue: 'Story Circle'
+    venue: 'TBA'
   },
   {
     id: 'poem-interpretation',
@@ -130,11 +130,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Dive deep into poetry\'s meaning, emotion, and artistry through live interpretation.',
     fullDescription: 'Decode and present thoughtful interpretations of poetry, exploring meaning, emotions, and literary devices. This immersive event challenges participants to uncover the soul of poetry through expressive analysis.',
     date: 'September 9, 2025',
-    time: '10:00 AM - 11:30 AM',
+    time: 'TBA',
     day: 2,
     image: '/events/metaphora.png',
     category: 'writing',
-    venue: 'Discussion Room B'
+    venue: 'TBA'
   },
   {
     id: 'panel-discussion',
@@ -142,11 +142,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Explore how literature bridges truth and creativity to inspire change.',
     fullDescription: 'Distinguished speakers explore how literature exists in the fascinating space between truth and creativity, reflecting real social conditions while expanding our vision of what could be. This thoughtful exchange examines how storytelling bridges the factual and fictional, helping society see itself more clearly while inspiring meaningful change. Join us for an engaging conversation about literature\'s power to both mirror reality and reshape our imagination.',
     date: 'September 9, 2025',
-    time: '1:15 PM - 2:45 PM',
+    time: 'TBA',
     day: 2,
     image: '/events/litnsociety.png',
     category: 'panel-discussion',
-    venue: 'Conference Room'
+    venue: 'TBA'
   },
   // Arcade Event - Both Days
   {
@@ -155,11 +155,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Gaming extravaganza with classic and modern games for all skill levels.',
     fullDescription: 'Step into our gaming paradise featuring a mix of classic arcade games, modern console gaming, and interactive challenges. Whether you\'re a casual gamer or a competitive player, join us for non-stop entertainment across both days of the festival.',
     date: 'September 8-9, 2025',
-    time: '9:00 AM - 5:00 PM (Both Days)',
+    time: 'TBA',
     day: 1,
     image: '/events/Arcade.png',
     category: 'fun-events',
-    venue: 'Gaming Zone',
+    venue: 'TBA',
     multiDay: true
   },
   // Theater Event - Day 2
@@ -173,7 +173,7 @@ export const eventsData: Event[] = [
     day: 2,
     image: '/events/placeholder.svg',
     category: 'performance',
-    venue: 'Theater Hall'
+    venue: 'TBA'
   }
 ];
 
