@@ -50,7 +50,7 @@ const SponsorsSection = () => {
             <div className="bg-gradient-to-br from-crimson/10 to-crimson/5 backdrop-blur-md border border-crimson/20 rounded-xl p-4 sm:p-6 text-center group hover:border-crimson/40 transition-all duration-300">
               <Star className="w-8 h-8 text-crimson mx-auto mb-3 group-hover:scale-110 transition-transform duration-300" />
               <h3 className="font-spartan font-bold text-white text-sm sm:text-base mb-2">Networking</h3>
-              <p className="text-gray-300 text-xs sm:text-sm"></p>Connect with the brightest minds on campus
+              <p className="text-gray-300 text-xs sm:text-sm">Connect with the brightest minds on campus</p>
             </div>
           </div>
         </ScrollReveal>
