@@ -24,6 +24,7 @@ const AboutSection = () => {
             </h2>
           </div>
         </ScrollReveal>
+        
 
         {/* About Content */}
         <ScrollReveal delay={200}>
