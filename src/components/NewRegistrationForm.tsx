@@ -563,7 +563,7 @@ const RegistrationForm: React.FC = () => {
                         type="button"
                         onClick={() => {
                           // Open PDF in a new tab instead of direct download
-                          window.open('/terms-and-conditions.pdf', '_blank');
+                          window.open('/Literovia T&C and privacy policy.pdf', '_blank');
                         }}
                         className="text-crimson hover:text-crimson-bright underline hover:no-underline transition-all duration-200"
                       >

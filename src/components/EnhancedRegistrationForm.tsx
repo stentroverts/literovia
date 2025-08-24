@@ -734,7 +734,7 @@ const EnhancedRegistrationForm: React.FC = () => {
                       I accept all the{' '}
                       <button
                         type="button"
-                        onClick={() => window.open('/terms-and-conditions.pdf', '_blank')}
+                        onClick={() => window.open('/Literovia T&C and privacy policy.pdf', '_blank')}
                         className="text-crimson hover:text-crimson-bright underline hover:no-underline transition-all duration-200"
                         disabled={isSubmitting}
                       >
