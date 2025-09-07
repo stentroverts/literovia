@@ -461,6 +461,20 @@ const EnhancedRegistrationForm: React.FC = () => {
                   <p className="text-base text-gray-400">
                     Follow us on social media for more updates and exciting announcements!
                   </p>
+                  
+                  {/* WhatsApp Group Invitation */}
+                  <div className="bg-green-900/20 border border-green-600/30 rounded-lg p-4 mt-4">
+                    <p className="text-green-400 text-sm font-medium mb-2">🎉 Join our WhatsApp Group!</p>
+                    <p className="text-green-300 text-xs mb-3">
+                      Connect with fellow participants, get event updates, and stay in the loop!
+                    </p>
+                    <Button 
+                      onClick={() => window.open('https://chat.whatsapp.com/JopTgYvNPEz75HgAxtSIEA?mode=ems_wa_t', '_blank')}
+                      className="w-full bg-green-600 hover:bg-green-700 text-white py-2 text-sm font-medium transition-colors duration-200"
+                    >
+                      Join WhatsApp Group
+                    </Button>
+                  </div>
                 </div>
                 
                 <div className="space-y-4 pt-4">
