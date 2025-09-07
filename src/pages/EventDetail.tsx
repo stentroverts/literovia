@@ -120,6 +120,9 @@ const EventDetail = () => {
                   <Badge variant="outline" className="border-gray-600 text-gray-300">
                     Day {event.day}
                   </Badge>
+                  <Badge className="bg-blue-600/20 text-blue-400 border-blue-500/30">
+                    Team Size: {event.teamSize}
+                  </Badge>
                 </div>
                 
                 {/* Short Description */}

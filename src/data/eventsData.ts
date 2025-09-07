@@ -11,6 +11,7 @@ export interface Event {
   category: 'speaking' | 'writing' | 'interactive' | 'workshop' | 'performance' | 'panel-discussion' | 'fun-events';
   venue?: string;
   multiDay?: boolean; // New property to indicate events that span multiple days
+  teamSize: number; // Team size for the event
 }
 
 export const eventsData: Event[] = [
@@ -18,62 +19,67 @@ export const eventsData: Event[] = [
   {
     id: 'slam-poetry',
     name: 'Slam Poetry',
-    shortDescription: 'Share your voice, presence, and truth through powerful original poems that move audiences.',
-    fullDescription: 'Take the stage with your original poems, using voice and presence to share powerful messages and personal stories. This event encourages creativity, bold expression, and honest storytelling that connects deeply with audiences.',
+    shortDescription: 'Performance-based poetry event where participants present original poems expressing emotions and stories.',
+    fullDescription: 'Slam Poetry is a performance-based poetry event where participants present their own original poems on stage. It focuses on expressing strong emotions, personal stories, and powerful messages through voice and presence. Each performance is judged based on the poem\'s content, delivery, emotional impact, and how well it connects with the audience. This event encourages creativity, bold expression, and honest story telling.',
     date: 'September 8, 2025',
     time: '10:00 AM - 4:00 PM',
     day: 1,
     image: '/events/slam-poetry.png',
     category: 'speaking',
-    venue: 'A-013'
+    venue: 'A-013',
+    teamSize: 1
   },
   {
     id: 'literary-auction',
     name: 'Plot Bid',
-    shortDescription: 'Outbid your rivals for story elements, then spin the wildest tale on the spot.',
-    fullDescription: 'Bid for fictional characters and plot elements, then craft imaginative stories using your winning items on the spot. The highest bidders walk away with bragging rights and the power to weave the most creative tales.',
+    shortDescription: 'Bid for fictional characters, objects, and plot twists, then craft imaginative stories on the spot.',
+    fullDescription: 'In this one-of-a-kind auction, participants will bid for fictional characters, objects, and plot twists. Once the bids are in, it\'s time to craft a story using the elements you\'ve won. The highest bidders don\'t just walk away with bragging rights but with the power to weave the most imaginative tales on the spot.',
     date: 'September 8, 2025',
     time: '10:00 AM - 4:00 PM',
     day: 1,
     image: '/events/literary-auction.png',
     category: 'writing',
-    venue: 'E-219, E-239'
+    venue: 'E-219, E-239',
+    teamSize: 2
   },
   {
     id: 'bang-jam',
     name: 'Bang Jam',
-    shortDescription: 'Speak non-stop for a minute on random prompts in this lightning-fast mic challenge.',
-    fullDescription: 'Speak continuously for one minute without pausing or hesitating on random prompts in this fast-paced speaking challenge. Test your quick thinking and sharp speaking skills as the mic passes between participants with a bang.',
+    shortDescription: 'Speak continuously for one minute on random prompts without pausing or hesitating.',
+    fullDescription: 'The player will be given a random prompt and must speak continuously without pausing, hesitating, or making grammatical errors. The goal is to accumulate one full minute of uninterrupted speech. If the player slips up, the mic is immediately passed to the next participant, who picks up the challenge. It is fast-paced, unpredictable, and tests both quick thinking and sharp speaking.',
     date: 'September 8, 2025',
     time: '11:00 AM - 4:00 PM',
     day: 1,
     image: '/events/bang-jam.png',
     category: 'speaking',
-    venue: 'E-004'
+    venue: 'E-004',
+    teamSize: 1
   },
   {
     id: 'paperback-partners',
     name: 'Paperback Partners',
-    shortDescription: 'Pair up with book lovers to chat, bond, and swap handmade bookmarks.',
-    fullDescription: 'Get paired with fellow book lovers, share literary conversations, and create handmade bookmarks for each other. Everyone leaves with a handmade bookmark and wonderful memories of literary connection.',
+    shortDescription: 'Get paired based on favorite books to chat and make handmade bookmarks for each other.',
+    fullDescription: 'Paperback Partners is an event where students get paired up to talk about books and make bookmarks for each other. It is casual, fun, and full of conversations. People are matched based on the book they select as their favourite. Some people meet for the first time, some find common reads, and everyone leaves with a handmade bookmark and a good memory.',
     date: 'September 8, 2025',
     time: '11:00 AM - 4:00 PM',
     day: 1,
     image: '/events/paperback-partners.png',
     category: 'interactive',
-    venue: 'SAC Stage '
+    venue: 'SAC Stage ',
+    teamSize: 1
   },
   {
     id: 'sign-language-workshop',
     name: 'Sign Language',
-    shortDescription: 'Learn the beauty of silent storytelling in this expressive sign language workshop.',
-    fullDescription: 'In this introduction to sign language, discover how the loudest stories are sometimes told without sound, exploring new forms of expression. This workshop is perfect for those curious about new forms of communication, looking to pick up a unique skill, or wanting to explore the beauty of silent interaction.',
+    shortDescription: 'Learn to communicate through hands, expressions, and gestures in this silent storytelling workshop.',
+    fullDescription: 'Participants will be introduced to the basics of sign language and learn how to communicate using only their hands, expressions, and gestures. The workshop focuses on helping you understand how stories and emotions can be conveyed without spoken words. It\'s perfect for those curious about new forms of expression, looking to pick up a unique skill, or wanting to explore the beauty of silent communication. You\'ll leave knowing that sometimes, the loudest stories are the ones told without sound.',
     date: 'September 8, 2025',
     time: '10:00 AM - 1:00 PM',
     day: 1,
     image: '/events/signlanguage-workshop.png',
     category: 'workshop',
-    venue: 'B Block Seminar Hall'
+    venue: 'B Block Seminar Hall',
+    teamSize: 1
   },
   {
     id: 'performance-showcase',
@@ -85,82 +91,101 @@ export const eventsData: Event[] = [
     day: 1,
     image: '/events/performance.png',
     category: 'performance',
-    venue: 'KS Auditorium'
+    venue: 'KS Auditorium',
+    teamSize: 1
   },
   // Day 2 Events - September 9, 2025
   {
     id: 'after-dinner-speech',
     name: 'P.S (Post Supper)',
-    shortDescription: 'Deliver witty, theatrical after-dinner speeches with a dash of satire.',
-    fullDescription: 'Take audiences on a whimsical ride of satire and storytelling with curated prompts. This British-style after-dinner speech format celebrates wit, theatrical flair, and creative reimagination.',
+    shortDescription: 'Solo speaking event featuring witty reimagination with curated prompts and theatrical flair.',
+    fullDescription: 'This solo speaking event is all about the witty deliverance of reimagination. The participants pick a curated prompt along with a persona, and are given a constraint of time to prep before they take us on a whimsical ride of satire, storytelling, and theatrical flair. Whether the prompt is to imagine Oscar Wilde navigating online dating, or venting about the existential crisis of an unread book, the aim is to entertain, and exaggerate with a spark of originality, while being evaluated on the same.',
     date: 'September 9, 2025',
     time: '10:00 AM - 4:00 PM',
     day: 2,
     image: '/events/post-supper.png',
     category: 'speaking',
-    venue: 'E-219'
+    venue: 'E-219',
+    teamSize: 1
   },
   {
     id: 'lore-wars',
     name: 'Lore Wars',
-    shortDescription: 'Duel in improvised storytelling using surprise characters, settings, and genres.',
-    fullDescription: 'Battle in storytelling duels using assigned characters, settings, and genres to create original narratives. Perfect for quick thinkers, world-builders, and storytelling enthusiasts who love creative challenges.',
+    shortDescription: 'Create short stories using assigned characters, settings, and genres in head-to-head story battles.',
+    fullDescription: 'Participants will be given a set of characters, settings, and genres which are either chosen or assigned. Using these elements, each player must create a short story, weaving them together creatively and coherently. Players go head-to-head in a story-off, where their narratives are judged based on originality, consistency, adherence to given elements and delivery. Ideal for quick thinkers, world-builders, and storytelling enthusiasts.',
     date: 'September 9, 2025',
     time: '10:00 AM - 4:00 PM',
     day: 2,
     image: '/events/lore-wars.png',
     category: 'writing',
-    venue: 'A-013'
+    venue: 'A-013',
+    teamSize: 1
   },
   {
     id: 'spockle',
     name: 'Spockle',
-    shortDescription: 'Debate absurd topics, then switch sides on command in this chaotic verbal battle.',
-    fullDescription: 'Defend bizarre topics until "Switch!" forces you to argue the opposite stance in this chaotic debate format. Think fast and speak even faster in this unpredictable test of improvisation and persuasion.',
+    shortDescription: 'Argue bizarre topics, then switch sides or pass the mic on command in this chaotic debate.',
+    fullDescription: 'Players are handed a fun or bizarre topic and must argue either for or against it at the host\'s command. At any moment, the host can flip the stance or pass the mic to the next participant. When the host says "Switch!", the mic is then passed to the next player who continues this chaos. It is extremely fast-paced, unpredictable and chaotic. It is perfect for those who love improv, debates, or just making chaos sound convincing. The players need to speak fast, and think even faster.',
     date: 'September 9, 2025',
     time: 'TBA',
     day: 2,
     image: '/events/spockle.png',
     category: 'speaking',
-    venue: 'TBA'
+    venue: 'TBA',
+    teamSize: 1
   },
   {
     id: 'poem-interpretation',
     name: 'MetaphorA',
-    shortDescription: 'Dive deep into poetry\'s meaning, emotion, and artistry through live interpretation.',
-    fullDescription: 'Decode and present thoughtful interpretations of poetry, exploring meaning, emotions, and literary devices. This immersive event challenges participants to uncover the soul of poetry through expressive analysis.',
+    shortDescription: 'Decode and present thoughtful interpretations of poetry, exploring meaning and literary devices.',
+    fullDescription: 'Poem Interpretation is an immersive event that challenges participants to decode the soul of poetry. A place to express the meaning, emotions, and literary brilliance woven into each verse. Participants will select a poem (either provided on the spot or chosen in advance) and present a thoughtful, expressive interpretation that explores the poet\'s intent, emotional undertones, context, and literary devices. Judged on insight, clarity, emotional depth, and delivery, this event blends oration, literature, and critical thinking.',
     date: 'September 9, 2025',
     time: 'TBA',
     day: 2,
     image: '/events/metaphora.png',
     category: 'writing',
-    venue: 'TBA'
+    venue: 'TBA',
+    teamSize: 1
   },
   {
     id: 'panel-discussion',
     name: 'Between Reality and Imagination',
-    shortDescription: 'Explore how literature bridges truth and creativity to inspire change.',
-    fullDescription: 'Distinguished speakers explore how literature exists in the fascinating space between truth and creativity, reflecting real social conditions while expanding our vision of what could be. This thoughtful exchange examines how storytelling bridges the factual and fictional, helping society see itself more clearly while inspiring meaningful change. Join us for an engaging conversation about literature\'s power to both mirror reality and reshape our imagination.',
+    shortDescription: 'Distinguished speakers share perspectives on literature, writing styles, and Stentorian values.',
+    fullDescription: 'A distinguished panel of speakers will engage in a thoughtful exchange of ideas, sharing their perspectives on their favorite works of literature, writing styles, and everything else that defines Stentorian. The panelists include Venkatesh Maha and Jhilam Chattaraj.',
     date: 'September 9, 2025',
     time: '1:00 PM onwards',
     day: 2,
     image: '/events/litnsociety.png',
     category: 'panel-discussion',
-    venue: 'B Block Seminar Hall'
+    venue: 'B Block Seminar Hall',
+    teamSize: 1
   },
-  // Arcade Event - Both Days
+  // Arcade Events - Both Days (Separate Events)
   {
-    id: 'arcade',
+    id: 'arcade-day1',
     name: 'Arcade',
-    shortDescription: 'Gaming extravaganza with classic and modern games for all skill levels.',
-    fullDescription: 'Step into our gaming paradise featuring a mix of classic arcade games, modern console gaming, and interactive challenges. Whether you\'re a casual gamer or a competitive player, join us for non-stop entertainment across both days of the festival.',
-    date: 'September 8-9, 2025',
+    shortDescription: 'NY Times mini games and Jeopardy trivia challenges for puzzle lovers and word game fans.',
+    fullDescription: 'NY Times mini games - Players will participate in a series of small, fun sized challenges inspired by New York Times classics like Wordle, Spelling Bee, Connections, Mini Crossword, Tiles, and more. Each player will attempt the games, moving from one to the next as per the guidelines. Perfect for puzzle lovers, word game fans. Jeopardy- Jeopardy is a trivia game where participants answer questions from a wide range of topics such as movies, music, sports, history, science, pop culture, and more. Players earn points for every correct answer, and those who score 500 points get to play a one-minute rapid fire round for a final challenge.',
+    date: 'September 8, 2025',
     time: '9:00 AM - 4:40 PM',
     day: 1,
     image: '/events/Arcade.png',
     category: 'fun-events',
     venue: 'TBA',
-    multiDay: true
+    teamSize: 1
+  },
+  {
+    id: 'arcade-day2',
+    name: 'Arcade',
+    shortDescription: 'Change My Mind persuasion challenges and Eclectica word puzzles from art and pop culture.',
+    fullDescription: 'Change my mind - Change My Mind is not just to simply speak convincingly, but to take it a step further and have the OC exclaim that you have indeed changed his/her mind. It is to master the art of manipulation where you will be put to the test with a very quirky and controversial topic and you will have to be devil\'s advocate to change the OC\'s mind regarding the topic. Eclectica - Eclectica is a fun word game in which each player will be given a card, which has a quirky puzzle drawn from topics like art, pop culture, idioms, and more. The challenge is to solve the statements, rearrange the sounds and figure out the word before anyone else.',
+    date: 'September 9, 2025',
+    time: '9:00 AM - 4:40 PM',
+    day: 2,
+    image: '/events/Arcade.png',
+    category: 'fun-events',
+    venue: 'TBA',
+    teamSize: 1
   }
 ];
 
