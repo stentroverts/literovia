@@ -832,3 +832,314 @@ function testRecoveryProcess() {
     instructions: "Replace placeholder data in recoverRegistrationsFromPaymentData() and run it"
   };
 }
+
+/**
+ * SEND MISSED CONFIRMATION EMAILS
+ * Use this when registrations are already in the sheet but emails weren't sent
+ */
+function sendMissedConfirmationEmails() {
+  /**
+   * INSTRUCTIONS:
+   * 1. Replace the email list below with actual user details
+   * 2. Run this function from Google Apps Script
+   * 3. It will send confirmation emails to these users
+   */
+  
+  const missedUsers = [
+    {
+      email: 'ark.akshaya@gmail.com',
+      fullName: 'Akshaya',
+      phone: '9032346587',
+      college: 'NA', // College not specified
+      year: 'NA', // Year not specified
+      course: 'NA', // Course not specified
+      paymentId: 'NA', // Payment ID not available
+      registrationId: 'LITMAN001'
+    },
+    {
+      email: 'smeghanareddy05@gmail.com',
+      fullName: 'Meghana',
+      phone: '7675816234',
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN002'
+    },
+    {
+      email: 'saihiranmayee2008@gmail.com',
+      fullName: 'Hiranmayee',
+      phone: '8500565500',
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN003'
+    },
+    {
+      email: 'mdmuzammil.2275@gmail.com',
+      fullName: 'Muzammil',
+      phone: '7207632275',
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN004'
+    },
+    {
+      email: 'nihitaraj2008@gmail.com',
+      fullName: 'Nihita',
+      phone: 'NA', // Phone number not provided
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN005'
+    },
+    {
+      email: 'gvishalduttraju@gmail.com',
+      fullName: 'Vishal',
+      phone: '9989822699',
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN006'
+    },
+    {
+      email: 'akshayabanoth202187670@gmail.com',
+      fullName: 'Akshaya Banoth',
+      phone: 'NA', // Phone number not provided
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN007'
+    },
+    {
+      email: '24071a66e1@vnrvjiet.in',
+      fullName: 'Amreen',
+      phone: 'NA', // Phone number not provided
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN014'
+    },
+    {
+      email: 'papiniabhinav@gmail.com',
+      fullName: 'Papini Abhinav',
+      phone: '9032050633', // Corrected phone number
+      college: 'NA',
+      year: 'NA',
+      course: 'NA',
+      paymentId: 'NA',
+      registrationId: 'LITMAN015'
+    }
+  ];
+  
+  // Check for placeholder data
+  const hasPlaceholderData = missedUsers.some(user => 
+    user.email.includes('example.com') ||
+    user.fullName.includes('John Doe') ||
+    user.fullName.includes('Jane Smith')
+  );
+  
+  if (hasPlaceholderData) {
+    console.error('⚠️ Please replace all placeholder data with actual user details before running');
+    return {
+      success: false,
+      message: 'Placeholder data detected. Please update with actual user details.'
+    };
+  }
+  
+  const sentEmails = [];
+  const failedEmails = [];
+  
+  missedUsers.forEach((user, index) => {
+    try {
+      console.log(`📧 Sending email ${index + 1}/${missedUsers.length} to ${user.email}`);
+      
+      const subject = `Literovia 2025 - Registration Confirmation - ${user.registrationId}`;
+      
+      const htmlBody = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <style>
+                body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background: #f4f4f4; }
+                .email-wrapper { background: linear-gradient(135deg, #374151 0%, #1f2937 100%); padding: 20px 0; min-height: 100vh; }
+                .container { max-width: 650px; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); overflow: hidden; }
+                .header { padding: 0; text-align: center; position: relative; }
+                .header img { width: 100%; max-width: 650px; height: auto; display: block; border-radius: 12px 12px 0 0; }
+                .content { padding: 40px 30px; background: #ffffff; }
+                .greeting { font-size: 18px; margin-bottom: 20px; color: #2c3e50; }
+                .intro-text { font-size: 16px; margin-bottom: 30px; color: #34495e; line-height: 1.8; }
+                .section { margin-bottom: 35px; background: #f8f9fa; border-radius: 10px; padding: 25px; border-left: 5px solid #dc2626; }
+                .section h2 { color: #dc2626; margin: 0 0 20px 0; font-size: 20px; font-weight: 600; }
+                .payment-confirmed { background: linear-gradient(135deg, #d4f6d4 0%, #a7f3d0 100%); border: 2px solid #10b981; border-radius: 12px; padding: 20px; margin: 20px 0; }
+                .detail-grid { display: table; width: 100%; border-spacing: 0; }
+                .detail-item { display: table-row; margin: 0; }
+                .detail-label { font-weight: 600; color: #555; padding: 8px 20px 8px 0; display: table-cell; width: 30%; border-bottom: 1px solid #e9ecef; }
+                .detail-value { color: #2c3e50; padding: 8px 0; display: table-cell; border-bottom: 1px solid #e9ecef; }
+                .event-details { background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%); padding: 25px; border-radius: 12px; border: 2px solid #0284c7; margin: 20px 0; }
+                .closing-text { background: #f8f9fa; padding: 20px; border-radius: 10px; border-left: 5px solid #6366f1; margin: 30px 0; font-style: italic; color: #4f46e5; }
+                .contact-info { text-align: center; margin: 25px 0; padding: 15px; background: #f1f5f9; border-radius: 8px; }
+                .contact-info a { color: #dc2626; text-decoration: none; font-weight: 600; }
+                .footer { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); color: white; padding: 30px 20px; text-align: center; border-radius: 0 0 12px 12px; }
+                .footer .team-name { font-size: 18px; font-weight: 600; color: #fef3c7; margin-bottom: 10px; }
+                .divider { height: 3px; background: linear-gradient(90deg, #dc2626, #fbbf24, #10b981, #3b82f6); margin: 30px 0; border-radius: 2px; }
+            </style>
+        </head>
+        <body>
+            <div class="email-wrapper">
+                <div class="container">
+                    <div class="header">
+                        <img src="https://raw.githubusercontent.com/stentroverts/literovia/main/public/email-header.png" alt="Literovia 2025 - A Stentorian Odyssey - Registration Confirmation" />
+                    </div>
+                    
+                    <div class="content">
+                        <p class="greeting"><strong>Dear ${user.fullName},</strong></p>
+                        
+                        <p class="intro-text">&#127881; Congratulations! Your registration for Literovia 2025 has been successfully confirmed. We're excited to have you join us for this incredible literary journey!</p>
+                        
+                        <div class="divider"></div>
+                        
+                        <div class="section">
+                            <h2>Registration Details</h2>
+                            <div class="detail-grid">
+                                <div class="detail-item">
+                                    <div class="detail-label">Registration ID:</div>
+                                    <div class="detail-value">${user.registrationId}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Name:</div>
+                                    <div class="detail-value">${user.fullName}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Email:</div>
+                                    <div class="detail-value">${user.email}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Phone:</div>
+                                    <div class="detail-value">${user.phone}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">College:</div>
+                                    <div class="detail-value">${user.college}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Year:</div>
+                                    <div class="detail-value">${user.year}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-label">Course:</div>
+                                    <div class="detail-value">${user.course}</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h2>Payment Information</h2>
+                            <div class="payment-confirmed">
+                                <strong>Payment Confirmed &#10003;</strong><br><br>
+                                <strong>Payment ID:</strong> ${user.paymentId}<br>
+                                <strong>Amount Paid:</strong> &#8377;149<br>
+                                <strong>Status:</strong> Successfully Completed<br>
+                                <strong>Method:</strong> Secure Online Payment
+                            </div>
+                        </div>
+                        
+                        <div class="section">
+                            <h2>Event Details</h2>
+                            <div class="event-details">
+                                <div class="detail-grid">
+                                    <div class="detail-item">
+                                        <div class="detail-label">&#128218; Event:</div>
+                                        <div class="detail-value">Literovia 2025 - A Stentorian Odyssey</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">&#128197; Dates:</div>
+                                        <div class="detail-value">September 8-9, 2025</div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <div class="detail-label">&#128205; Venue:</div>
+                                        <div class="detail-value">VNRVJIET Campus</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="closing-text">
+                            <p><strong>Thank you for joining us for this literary odyssey!</strong> We'll contact you soon with more details about the event schedule, venue information, and what to expect.</p>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <p>&#128231; For any queries, contact us at <a href="mailto:stentorian@vnrvjiet.in">stentorian@vnrvjiet.in</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="footer">
+                        <p class="team-name">The Literovia Team</p>
+                        <p><strong>Stentorian - VNRVJIET</strong></p>
+                        <p><em>This is your registration confirmation email. Please keep this for your records.</em></p>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+      `;
+      
+      // Try to attach the brochure PDF if available
+      let attachments = [];
+      try {
+        const brochureFile = DriveApp.getFileById('1ari8T2ARbye9Ynixg9r47tSd1ALIJnSf');
+        attachments.push(brochureFile.getBlob().setName('Literovia 2025 Events Brochure.pdf'));
+      } catch (attachmentError) {
+        console.warn('⚠️ Could not attach brochure PDF:', attachmentError);
+      }
+      
+      // Send the email
+      GmailApp.sendEmail(user.email, subject, '', {
+        htmlBody: htmlBody,
+        attachments: attachments
+      });
+      
+      sentEmails.push({
+        email: user.email,
+        name: user.fullName,
+        registrationId: user.registrationId
+      });
+      
+      console.log(`✅ Email sent successfully to ${user.fullName} (${user.email})`);
+      
+      // Add a small delay to avoid hitting email limits
+      Utilities.sleep(500);
+      
+    } catch (error) {
+      console.error(`❌ Failed to send email to ${user.email}:`, error.toString());
+      failedEmails.push({
+        email: user.email,
+        name: user.fullName,
+        error: error.toString()
+      });
+    }
+  });
+  
+  console.log(`\n🎉 Email sending completed!`);
+  console.log(`✅ Successfully sent: ${sentEmails.length}`);
+  console.log(`❌ Failed to send: ${failedEmails.length}`);
+  
+  if (failedEmails.length > 0) {
+    console.log(`\nFailed emails:`, failedEmails);
+  }
+  
+  return {
+    success: true,
+    totalAttempted: missedUsers.length,
+    successfulSent: sentEmails.length,
+    failed: failedEmails.length,
+    sentEmails: sentEmails,
+    failedEmails: failedEmails
+  };
+}
