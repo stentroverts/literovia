@@ -69,11 +69,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Learn the beauty of silent storytelling in this expressive sign language workshop.',
     fullDescription: 'In this introduction to sign language, discover how the loudest stories are sometimes told without sound, exploring new forms of expression. This workshop is perfect for those curious about new forms of communication, looking to pick up a unique skill, or wanting to explore the beauty of silent interaction.',
     date: 'September 8, 2025',
-    time: 'TBA',
+    time: '10:00 AM - 1:00 PM',
     day: 1,
     image: '/events/signlanguage-workshop.png',
     category: 'workshop',
-    venue: 'TBA'
+    venue: 'B Block Seminar Hall'
   },
   {
     id: 'performance-showcase',
@@ -81,11 +81,11 @@ export const eventsData: Event[] = [
     shortDescription: 'Laugh and gasp with mimicry legend Srinivos and illusionist Magician Ali.',
     fullDescription: 'Prepare to be mesmerized by the legendary Mimicry Srinivos, pioneer of sound illusion in India, showcasing unmatched   mimicry and ventriloquism. Joining him is the spellbinding Magician Ali, weaving mind-bending illusions and breathtaking tricks. Get ready for    laughs and wonder, capped off with a magical surprise.',
     date: 'September 8, 2025',
-    time: 'TBA',
+    time: '1:40 PM - 4:40 PM',
     day: 1,
     image: '/events/performance.png',
     category: 'performance',
-    venue: 'TBA'
+    venue: 'KS Auditorium'
   },
   // Day 2 Events - September 9, 2025
   {
