@@ -84,8 +84,8 @@ export const eventsData: Event[] = [
   {
     id: 'performance-showcase',
     name: 'Mimic and Mystify',
-    shortDescription: 'Laugh and gasp with mimicry legend Srinivos and illusionist Magician Ali.',
-    fullDescription: 'Prepare to be mesmerized by the legendary Mimicry Srinivos, pioneer of sound illusion in India, showcasing unmatched   mimicry and ventriloquism. Joining him is the spellbinding Magician Ali, weaving mind-bending illusions and breathtaking tricks. Get ready for    laughs and wonder, capped off with a magical surprise.',
+    shortDescription: 'Unforgettable show featuring Mimicry Srinivos and Magician Abed with illusions and voices.',
+    fullDescription: 'Performance is an event that brings together two masters of their craft — Mimicry Srinivos and Magician Abed — in one unforgettable show. With dazzling illusions that play with reality and voices that bring characters to life, the stage transforms into a space of laughter, wonder, and surprise. It is an evening where imagination meets artistry, leaving the audience amazed, entertained, and inspired.',
     date: 'September 8, 2025',
     time: '1:40 PM - 4:40 PM',
     day: 1,
